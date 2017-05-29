@@ -1,0 +1,29 @@
+body{font-family: "宋体";
+}
+  .student_info{line-height:50px;margin-left: 30px;font-size: 18px;  }
+  .student_info input{padding-left: 3px;line-height: 20px; }
+  .student_info label{padding-left: 30px;}
+  .student_info select{line-height: 30px;width: 80px;font-size: 20px;text-align: center;}
+   #btn_sub{
+      width: 100px;border: 1px solid #5BC79D;background: #00AAEE;height: 40px;color: white;
+      font-size: 18px;cursor: pointer;margin-left: 100px
+    }
+    #btn_sub:hover{
+      background:  #1BD7AF
+    }
+    input:focus{ border:1px inset #FF000;border:1px outset #FF000;outline:solid 1px #93C0EB;}
+    
+    /**管理员页面*/   
+   table{
+     margin-left: 100px;
+   }
+   table  tr{
+     height: 80px;text-align: right;
+   }
+   table tr td:{
+    width: 300px;
+   }
+   input {
+	  height: 30px;
+   }
+}
