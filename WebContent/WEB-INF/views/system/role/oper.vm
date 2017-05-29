@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE></TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	 <style>
+        #treeDemo {
+        	float: left;
+        	margin-left: 10px;
+        	border: 1px solid #617775;
+        	background: #f0f6e4;
+        	width: 280px;
+        	height: 340px;
+        	overflow-y: scroll;
+        	overflow-x: auto;
+        }
+     </style>
+	<link rel="stylesheet" href="$BASE_PATH/resource/ztree/css/demo.css" type="text/css">
+	<link rel="stylesheet" href="$BASE_PATH/resource/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+	<script type="text/javascript" src="$BASE_PATH/resource/ztree/js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="$BASE_PATH/resource/ztree/js/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="$BASE_PATH/resource/ztree/js/jquery.ztree.excheck-3.5.js"></script>
+	<script type="text/javascript">
+		<!--
+		var setting = {
+			check: {
+				enable: true
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			}
+		};
+ 
+		var zNodes =$operList;
+		var code;
+		
+		function setCheck() {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			type = { "Y":"p" + "s", "N":"p" + "s"};
+			zTree.setting.check.chkboxType = type;
+			showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+		}
+		function showCode(str) {
+			if (!code) code = $("#code");
+			code.empty();
+			code.append("<li>"+str+"</li>");
+		}
+		
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			setCheck();
+		});
+		//-->
+	</script>
+</HEAD>
+
+<BODY>
+<div class="content_wrap" style="width: 310px;height: 340px;">
+	<div class="zTreeDemoBackground left">
+		<ul id="treeDemo" class="ztree"></ul>
+	</div>
+</div>
+</BODY>
+</HTML>

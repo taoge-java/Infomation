@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title></title>
+<link rel="stylesheet" href="$BASE_PATH/resource/css/index/pintuer.css">
+<link rel="stylesheet" href="$BASE_PATH/resource/css/index/admin.css">
+<link rel="stylesheet" href="$BASE_PATH/resource/css/my/add.css"> 
+<link rel="stylesheet" href="$BASE_PATH/resource/js/layui-v1.0.5/layui/css/layui.css">
+<link rel="stylesheet" href="$BASE_PATH/resource/css/index/layui.css">
+<script type="text/javascript" src="$BASE_PATH/resource/js/jquery/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="$BASE_PATH/resource/js/layer/layer.js"></script>
+<script type="text/javascript" src="$BASE_PATH/resource/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+</script>
+</head>
+<body>
+   <div class="panel admin-panel">
+	   <div class="panel-head"><strong><span class="icon-key">
+	       </span>管理员管理</strong>
+	   </div>
+	   <div class="body-content">
+		   <form method="post" class="form-x" id="addform" action="$BASE_PATH/system/admin/save"> 
+		     #parse("form.vm")
+		       <div class="student_info" style="margin-top: 15px;">
+		         <label> 
+		            <input type="button" value="添加管理员" id="btn_sub" onclick="create()">
+		         </label>
+               </div>
+		   </form>
+	   </div>
+   </div>
+</body>
+</html>
