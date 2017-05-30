@@ -82,18 +82,18 @@ public class LoginController extends BaseController{
 			renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
 			return;
 		}
-		if(admin.getInt("login_error")<=3&&StringUtils.isBlank(code)){
+		if(StringUtils.isBlank(code)){//如果用户没有输入验证码
 			   loginSrvice(admin,password);
-		}else{
+		}else{//出现验证码
 			if(code.equalsIgnoreCase(number)){
 		     	loginSrvice(admin,password);//验证码不区分大小写
 			}else{
-				admin.set("login_error", admin.getInt("login_error")+1);
-				admin.update();
+				//admin.set("login_error", admin.getInt("login_error")+1);
+				//admin.update();
 				Map<String,Object> map=new HashMap<String,Object>();
 				map.put("code", ResultCode.FAIL);
 				map.put("message", "验证码错误");
-				map.put("errorCount", admin.getInt("login_error"));
+				//map.put("errorCount", admin.getInt("login_error"));
 				LOG.error("验证码错误");
 				renderJson(map);
 				return;
@@ -145,6 +145,7 @@ public class LoginController extends BaseController{
 		if(!session.isSuperFlag()){
 			loadPermissions(admin);
 		}
+		systemLog(getCurrentUser().getLoginName()+"登录了系统",LogType.LOGIN.getValue());
 	}
 	/**
 	 * 用户注销
@@ -161,17 +162,17 @@ public class LoginController extends BaseController{
 	/**
 	 *获取用户登录错误次数，大于3次出现验证码
 	 */
-	public void getErrorCount(){
-		String userName=getPara("userName");
-		int error_count=0;
-		SystemAdmin systemAdmin=SystemAdmin.dao.findFirst("select login_error from system_admin where login_name=?",userName);
-		if(systemAdmin==null){
-			renderJson(new ResultCode(ResultCode.SUCCESS, "0"));
-		}else{
-			error_count=systemAdmin.getInt("login_error");
-			renderJson(new ResultCode(ResultCode.SUCCESS, error_count+""));
-		}
-	}
+//	public void getErrorCount(){
+//		String userName=getPara("userName");
+//		int error_count=0;
+//		SystemAdmin systemAdmin=SystemAdmin.dao.findFirst("select login_error from system_admin where login_name=?",userName);
+//		if(systemAdmin==null){
+//			renderJson(new ResultCode(ResultCode.SUCCESS, "0"));
+//		}else{
+//			error_count=systemAdmin.getInt("login_error");
+//			renderJson(new ResultCode(ResultCode.SUCCESS, error_count+""));
+//		}
+//	}
 	/**
 	 * 加载权限
 	 */

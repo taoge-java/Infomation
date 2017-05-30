@@ -48,8 +48,22 @@
 	}
  
 	function getOper(index,id){
-	   var nodes=zTree.getCheckedNodes();
-	   alert(nodes);
+	    var nodes=zTree.getCheckedNodes();
+	    var arr = new Array();
+    	for(var i =0; i<nodes.length; i++){
+    		if(nodes[i].code){
+    			arr.push(nodes[i].id);
+    		}
+    	}
+		layer.close(index);
+		//$.post("$BASE_PATH/system/role/doOper",{roleId:id,operIds:arr.toString()},function(){
+		//    if(data.code == 0) {
+		//		alert(data.message);
+		//	}else{
+			//	alert(data.message);
+			//}
+		//	layer.close(index);
+		//},"json");
 	}
 </script>
 </head>

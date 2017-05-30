@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>欢迎登录后台管理系统</title>
 <link href="$BASE_PATH/resource/css/style.css" rel="stylesheet" type="text/css" />
+<link type="image/x-icon" rel="shortcut icon" href="$BASE_PATH/resource/images/login.ico"/>
 <script src="$BASE_PATH/resource/js/jquery/jquery-3.1.0.min.js"></script>
 <script src="$BASE_PATH/resource/js/layer/layer.js"></script>
 <script src="$BASE_PATH/resource/js/cloud.js" type="text/javascript"></script>
@@ -41,6 +42,7 @@
 		 var image=document.getElementById("image");
 		 image.src=image.src+"?"+new Date().getTime();
     }
+	var　error_count=0;
 	function login(){
 	    if($(".loginuser").val()==""){
 		   layer.tips('请输入用户名', '.loginuser');
@@ -65,14 +67,16 @@
 				                 skin: 'layer-ext-moon',
 						  });
 						   setTimeout("window.location.href='$BASE_PATH/success'",1000);
+						   error_count=0;
 					}else{
 					      layer.alert(data.message, {
 				                 icon: 2,
 								 time: 2000,
 				                 skin: 'layer-ext-moon',
 						  });
+						  error_count++;
 						  //三次以上chuxianyanzheng
-						  if(data.errorCount>3){
+						  if(error_count>3){
 						      $(".yzm").css("display","block");
 						  }
 					}
@@ -112,6 +116,6 @@
            </div>
     </div>
     </form>
-    <div class="loginbm">版权所有  2017  <a href="http://www.taoge.com">技术支持:   涛哥JAVA开发工作室</a></div>
+    <div class="loginbm">版权所有  2017  <a href="http://www.taoge.com">技术支持:   小雪JAVA开发工作室</a></div>
 </body>
 </html>

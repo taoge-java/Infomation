@@ -75,10 +75,10 @@ public class SysConfig extends JFinalConfig{
 	    //配置缓存插件
 	    plugin.add(new EhCachePlugin());
 	    //配置redis插件
-	    RedisPlugin redis=new RedisPlugin("student", redisHost,6379,redisPassword);
-	    redis.getJedisPoolConfig().setMaxTotal(200);
-	    redis.getJedisPoolConfig().setMaxIdle(200);
-	    plugin.add(redis);
+//	    RedisPlugin redis=new RedisPlugin("student", redisHost,6379,redisPassword);
+//	    redis.getJedisPoolConfig().setMaxTotal(200);
+//	    redis.getJedisPoolConfig().setMaxIdle(200);
+	    //plugin.add(redis);
 	    plugin.add(new SpringPlugin(SpringBeanManger.getContext()));//集成spring
 	}
 

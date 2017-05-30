@@ -45,8 +45,8 @@ public class BaseController extends Controller{
 	public void systemLog(String oper_des,int type){
 		UserSession user=getCurrentUser();
 		SystemLog systemLog=new SystemLog();
-		systemLog.set("oper_user", user.getLoginName());
-		systemLog.set("user_id", user.getUserId());
+		systemLog.set("oper_name", user.getLoginName());
+		systemLog.set("admin_id", user.getUserId());
 		systemLog.set("oper_time", new DateUtil().getDate());
 		systemLog.set("oper_ip", IpUtils.getAddressIp(getRequest()));
 		systemLog.set("login_type",type);
