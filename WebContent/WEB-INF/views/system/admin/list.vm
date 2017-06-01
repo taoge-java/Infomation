@@ -1,44 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<style>
-  a:hover{
-    font-size: 18px;
-  }
-</style>
-<link rel="stylesheet" href="$BASE_PATH/resource/css/index/pintuer.css">
-<link rel="stylesheet" href="$BASE_PATH/resource/css/index/admin.css">
-<link rel="stylesheet" href="$BASE_PATH/resource/css/index/layui.css"> 
-<script type="text/javascript" src="$BASE_PATH/resource/js/jquery/jquery-3.1.0.min.js"></script>
-<script type="text/javascript" src="$BASE_PATH/resource/js/layer/layer.js"></script>
-<script type="text/javascript" src="$BASE_PATH/resource/js/My97DatePicker/WdatePicker.js"></script>
-<script src="$BASE_PATH/resource/js/jquery.js"></script>
-<script src="$BASE_PATH/resource/js/pintuer.js"></script>
-<script type="text/javascript">
-</script>
-</head>
-<body>
-<div class="panel admin-panel">
-  <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong></div>
-    <form action="$BASE_PATH/system/admin/Paginate" method="post" id="data-form">
-    <button class="button bg-yellow" type="button"  style="margin: 8px 0px 15px 15px;height: 40px;" id="add" onclick="create()">
-	       <span  class="icon-plus-circle">添加管理员</span>
-	</button>
-	<input type="text" placeholder="请输入登录名" name="admin.name" class="input" value="${login_name}"  style="width:250px; line-height:17px;display:inline-block" />
-     <button  class="button border-main icon-search"> 搜索</button>
-  <table class="table table-hover text-center">
-    <tr>
-      <th width="3%"><input type="checkbox" name="id"></th>
-      <th width="5%">id</th>
-      <th width="8%">登录名</th>
-      <th width="10%">手机号码</th>
-      <th width="5%">最后登录IP</th>
-      <th width="18%">最后登录时间</th>
-      <th width="10%">操作</th>
-    </tr>
-   #foreach($e in $page.getList())
+  #foreach($e in $page.getList())
     <tr>
       <td><input type="checkbox" name="all" value="${e.id}"></td>
       <td>${e.id}</td>
@@ -49,12 +9,8 @@
       <td>
         <div class="button-group"> 
            <a href="$BASE_PATH/system/admin/alert/${e.id}" name="update" ><span class="icon-pencil-square-o" style="color: blue;"></span></a>&nbsp;&nbsp;
-           <a href="javascript:void(0)" name="del" value="${e.id}"><span class="icon-trash-o" style="color: red;"></span></a>
+           <a href="javascript:void(0)" id="del" name="del" value="${e.id}"><span class="icon-trash-o" style="color: red;"></span></a>
          </div>
       </td>
      </tr>
-   #end
-  </table>
-  </form>
-</body>
-</html>
+  #end

@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style>
+  a:hover{
+    font-size: 18px;
+  }
+</style>
+<link rel="stylesheet" href="$BASE_PATH/resource/css/index/pintuer.css">
+<link rel="stylesheet" href="$BASE_PATH/resource/css/index/admin.css">
+<link rel="stylesheet" href="$BASE_PATH/resource/css/index/layui.css"> 
+<link rel="stylesheet" href="$BASE_PATH/resource/js/layui-v1.0.5/layui/css/layui.css"> 
+<script type="text/javascript" src="$BASE_PATH/resource/js/jquery/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="$BASE_PATH/resource/js/layer/layer.js"></script>
+<script src="$BASE_PATH/resource/js/global.js"></script>
+<script type="text/javascript" src="$BASE_PATH/resource/js/layui-v1.0.5/layui/layui.js"></script>
+<script type="text/javascript" src="$BASE_PATH/resource/js/My97DatePicker/WdatePicker.js"></script>
+<script src="$BASE_PATH/resource/js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head"><strong class="icon-reorder">管理员列表</strong></div>
+    <form id="data-form">
+        <button class="button bg-yellow" type="button"  style="margin: 8px 0px 15px 15px;height: 40px;" id="add" onclick="create()">
+    	    <span  class="icon-plus-circle">添加管理员</span>
+    	</button>
+	    <input type="text" placeholder="请输入登录名" id="name" class="input" style="width:250px; line-height:17px;display:inline-block" />
+        <button type="button"  class="button border-main icon-search" id="search"> 搜索</button>
+      <table class="table table-hover text-center">
+        <tr>
+          <th width="3%"><input type="checkbox" name="id"></th>
+          <th width="5%">id</th>
+          <th width="8%">登录名</th>
+          <th width="10%">手机号码</th>
+          <th width="5%">最后登录IP</th>
+          <th width="18%">最后登录时间</th>
+          <th width="10%">操作</th>
+        </tr>
+    	<tbody id="content">
+        </tbody>
+      </table>
+      <div class="panel-head" id="bottom">
+         <div id="demo"></div>
+    	 <ul id="biuuu_city_list"></ul> 
+      </div>
+   </form>
+</body>
+<script type="text/javascript">
+    var totalPage=${page.totalPage};
+    page("demo",totalPage,5,"$BASE_PATH/system/admin/list","content");
+     $(function(){
+          adminList();	
+		  $("#search").click(function(){
+		     var index = layer.load(1, {
+                shade: [0.1,'#fff'] //0.1透明度的白色背景
+             });
+		     if($("#name").val()=="")
+		         layer.tips('请输入管理员名称', '#name');
+		      $.post("$BASE_PATH/system/admin/list",{"name":$("#name").val()},
+		         function(data){
+		          $("#content").html(data);
+				 layer.close(index);
+		      },"html");
+		 });
+     });
+  
+  function adminList(){
+      $.ajax({
+		 url:"$BASE_PATH/system/admin/list",
+	     dataType:"html",
+		 data:{
+				"pageNumber":1
+		 },
+		 type:"post",
+		 success:function(data){
+			if(totalPage==1){
+				$("#bottom").hide();
+			}
+		    $("#content").html(data);
+			$("a[name='del']").on("click",function(){
+		       var id=$(this).attr("value");
+			   layer.confirm('确定删除吗？', {
+                  btn: ['删除','取消'] //按钮
+                  }, function(index){
+                     $.get("$BASE_PATH/system/admin/deleteById",{"id":id},"json",function(data){
+					     if(data.code==1){
+						    layer.alert(data.message, {
+				                 icon: 1,
+								 closeBtn: 0,
+								 time: 1000,
+				                 skin: 'layer-ext-moon',
+						     });
+							 layer.close(index);
+						 }else{
+						     layer.alert(data.message, {
+				                 icon: 2,
+								 closeBtn: 0,
+								 time: 1000,
+				                 skin: 'layer-ext-moon',
+						     });
+						 }
+					 })
+                  }, function(index){
+                      layer.close(index);
+                  });
+		    });
+	    }
+	 });
+  }
+</script>
+</html>

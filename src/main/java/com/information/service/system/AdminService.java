@@ -2,8 +2,6 @@ package com.information.service.system;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -14,24 +12,26 @@ import com.information.utils.Result;
 import com.information.utils.ResultCode;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
+
 @Service
 public class AdminService {
 	
-	
 	Logger log=Logger.getLogger(AdminService.class);
-	
 	
 	/**
 	 * 管理员列表
 	 */
-	public Page<SystemAdmin> getAdmin(String  login_name,int pageNumber){
+	public Result getAdmin(String  login_name,int pageNumber){
+		Result result=new Result();
 		StringBuilder context=new StringBuilder("from system_admin where 1=1");
 		List<Object> param=new ArrayList<Object>();
 		if(StringUtils.isNotEmpty(login_name)){
 			context.append(" and login_name=?");
 			param.add(login_name);
 		}
-		return SystemAdmin.dao.paginate(pageNumber, CommonConstant.pageSize, "select *", context.toString(),param.toArray());
+		Page<SystemAdmin> page= SystemAdmin.dao.paginate(pageNumber, CommonConstant.pageSize, "select *", context.toString(),param.toArray());
+		result.setObject(page);
+		return result;
 	}
 	/**
 	 * 保存管理员
