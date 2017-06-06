@@ -64,9 +64,9 @@ public class SysConfig extends JFinalConfig{
 				Properties p = new Properties();
 				p.load(inputStream);
 				VelocityRender.setProperties(p);
-			} catch (Exception e) {
+			 } catch (Exception e) {
 				e.printStackTrace();
-		}
+		 }
 	}
 	/**
 	 * 添加路由
