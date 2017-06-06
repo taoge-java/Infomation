@@ -3,15 +3,15 @@ package com.information.controller.system;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.information.common.BaseController;
 import com.information.constant.CommonEnum.LogType;
+import com.information.controller.base.BaseController;
 import com.information.model.system.SystemRole;
 import com.information.service.system.RoleService;
 import com.information.utils.Result;
 import com.information.utils.ResultCode;
 import com.jfinal.aop.Duang;
 import com.jfinal.ext.route.ControllerBind;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
 /**
  * 角色管理控制器
@@ -21,7 +21,7 @@ import com.jfinal.plugin.activerecord.Page;
 @ControllerBind(controllerKey="system/role")
 public class RoleController extends BaseController{
 	
-	private Logger log=Logger.getLogger(AdminController.class);
+	private Log log=Log.getLog(AdminController.class);
 	
 	private RoleService roleServices=Duang.duang(RoleService.class.getName(), RoleService.class);
 	

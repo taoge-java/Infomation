@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class UserSession {
 	
-    private int sessionId;//用户sessionId
+    private String sessionId;//用户sessionId
 	
 	private int userId;//用户id
 	
@@ -34,9 +34,18 @@ public class UserSession {
 	
 	private Set<String> operCode;//操作code
 	
+	private long heartTime; //心跳时间
 	
 	public String getLast_login_time() {
 		return last_login_time;
+	}
+
+	public long getHeartTime() {
+		return heartTime;
+	}
+
+	public void setHeartTime(long heartTime) {
+		this.heartTime = heartTime;
 	}
 
 	public void setLast_login_time(String last_login_time) {
@@ -60,14 +69,15 @@ public class UserSession {
 	 */
 	private Set<String> menuCodeSet = new HashSet<String>();
 	
-	public int getSessionId() {
+	
+	public String getSessionId() {
 		return sessionId;
 	}
-	
-	public void setSessionId(int sessionId) {
+
+	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
 	}
-	
+
 	public int getUserId() {
 		return userId;
 	}
@@ -176,4 +186,5 @@ public class UserSession {
     	}
     	return false;
     }
+
 }

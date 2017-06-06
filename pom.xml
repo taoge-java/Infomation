@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.student</groupId>
-  <artifactId>Student</artifactId>
-  <packaging>ejb</packaging>
+  <groupId>com.information</groupId>
+  <artifactId>Information</artifactId>
+  <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>Maven Maven Webapp</name>
+  <name>Information</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -14,15 +14,20 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+	    <groupId>com.thoughtworks.xstream</groupId>
+	    <artifactId>xstream</artifactId>
+	    <version>1.4.10</version>
+	</dependency>
 	<dependency>
 	    <groupId>com.jfinal</groupId>
-	    <artifactId>jfinal-ext</artifactId>
-	    <version>3.1.0</version>
+	    <artifactId>jfinal-ext2</artifactId>
+	    <version>2.0.8</version>
 	</dependency>
 	<dependency>
 	    <groupId>velocity</groupId>
 	    <artifactId>velocity-dep</artifactId>
-	    <version>1.4</version>
+	    <version>1.5</version>
 	</dependency>
 	<dependency>
 	    <groupId>com.google.code.gson</groupId>
@@ -117,10 +122,17 @@
 	    <artifactId>jstl</artifactId>
 	    <version>1.2</version>
 	</dependency>
+	<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+	<dependency>
+	    <groupId>org.apache.poi</groupId>
+	    <artifactId>poi</artifactId>
+	    <version>3.16</version>
+	</dependency>
+	
 	<dependency>
 	    <groupId>com.jfinal</groupId>
 	    <artifactId>jfinal</artifactId>
-	    <version>2.0</version>
+	    <version>3.1</version>
 	</dependency>
 	<dependency>
 	    <groupId>com.jfinal</groupId>
@@ -209,11 +221,25 @@
           <artifactId>org.apache.oltu.oauth2.resourceserver</artifactId>
           <version>1.0.0</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
+	<dependency>
+	    <groupId>org.apache.velocity</groupId>
+	    <artifactId>velocity</artifactId>
+	    <version>1.7</version>
+	</dependency>
+      
       <dependency>
           <groupId>org.apache.oltu.oauth2</groupId>
           <artifactId>org.apache.oltu.oauth2.resourceserver-filter</artifactId>
           <version>1.0.0</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/net.sf.ehcache/ehcache -->
+	<dependency>
+	    <groupId>net.sf.ehcache</groupId>
+	    <artifactId>ehcache</artifactId>
+	    <version>2.10.4</version>
+	</dependency>
+      
       <dependency>
           <groupId>org.apache.oltu.oauth2</groupId>
           <artifactId>org.apache.oltu.oauth2.client</artifactId>

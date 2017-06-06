@@ -4,6 +4,7 @@ import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Arrays;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -18,6 +19,9 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+
+import com.information.common.Constant;
+
 
 /**
  * 摘要算法工具类
@@ -186,6 +190,56 @@ public class EncryptUtil {
 			byte[] hmac=mac.doFinal(macStr.getBytes());
 			return Hex.encodeHexString(hmac);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * 参数校验
+	 * @param signature
+	 * @param timestamp
+	 * @param nonce
+	 * @return
+	 */
+	public  static String checkSignature(String timestamp,String nonce){
+		String str[]={Constant.TOKEN, timestamp, nonce};
+		Arrays.sort(str);
+		StringBuilder sb=new StringBuilder();
+		for(String s:str){
+			sb.append(s);
+		}
+		return getSHA1(sb.toString());
+	}
+	/**
+	 * SHA加密算法
+	 * @param key
+	 * @return
+	 */
+	public static String getSHA1(String key){
+		try {
+	      MessageDigest digest=MessageDigest.getInstance("SHA");
+	      byte[] bytes=digest.digest(key.getBytes());
+	      //将字节数组转换成16进制字符串
+	      return org.apache.commons.codec.binary.Hex.encodeHexString(bytes);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	/**
+	 * md5加密算法
+	 * @param key
+	 * @return
+	 */
+	public static String getMD5(String key){
+		try {
+		    MessageDigest digest=MessageDigest.getInstance("MD5");
+		    byte[] bytes=digest.digest(key.getBytes());
+		      //将字节数组转换成16进制字符串
+	        return org.apache.commons.codec.binary.Hex.encodeHexString(bytes);
+		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
 		return null;

@@ -1,6 +1,6 @@
 package com.information.controller.account;
 
-import com.information.common.BaseController;
+import com.information.controller.base.BaseController;
 import com.jfinal.ext.route.ControllerBind;
 /**
  * 忘记密码找回

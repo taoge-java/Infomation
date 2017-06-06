@@ -8,9 +8,11 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.information.common.BaseController;
 import com.information.constant.CommonConstant;
 import com.information.constant.CommonEnum.LogType;
+import com.information.controller.base.BaseController;
+import com.information.dao.OnlineManger;
+import com.information.dao.OnlineUser;
 import com.information.dao.UserSession;
 import com.information.model.system.SystemAdmin;
 import com.information.service.system.RoleService;
@@ -20,7 +22,7 @@ import com.information.utils.IpUtils;
 import com.information.utils.Md5Utils;
 import com.information.utils.ResultCode;
 import com.jfinal.ext.route.ControllerBind;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 
 /**
  * 用户登录
@@ -31,16 +33,17 @@ import com.jfinal.log.Logger;
 @ControllerBind(controllerKey="/account")
 public class LoginController extends BaseController{
 	
-	private static final Logger LOG=Logger.getLogger(LoginController.class);
+	private static final Log LOG=Log.getLog(LoginController.class);
 	
 	@Autowired
 	private RoleService roleService;
 	
+	@Autowired
+	private OnlineManger onlineManger;
 	/**
 	 * 用户登录页面
 	 */
 	public void index(){
-		roleService.findRoleById(1);
 		String userName=getCookie(CommonConstant.COOKIE_USERNAME);
 		String password=getCookie(CommonConstant.COOKIE_PASSWORD);
 		if(userName!=null&&password!=null){
@@ -108,6 +111,10 @@ public class LoginController extends BaseController{
 	 * @param number
 	 */
 	private void loginSrvice(SystemAdmin admin, String password) {
+		UserSession session=onlineManger.getUserSessionById(admin.getInt("id"));
+		    if(session!=null){//如果用户已经登录
+			   onlineManger.remove(session);
+		}
 		if(admin.getStr("password").equals(Md5Utils.getMd5(password, admin.getStr("encrypt")))){
 			if(admin.getBoolean("disabled_flag")){
 				renderJson(new ResultCode(ResultCode.FAIL, "用户已被禁用,请联系管理员"));
@@ -132,8 +139,11 @@ public class LoginController extends BaseController{
 		admin.set("last_login_ip",IpUtils.getAddressIp(getRequest()));
 		admin.set("login_count",admin.getInt("login_count"+1));
 		admin.update();
+		OnlineUser online=new OnlineUser();
 		UserSession session=new UserSession();
+		session.setSessionId(online.getSessionId());
 		session.setUserId(admin.getInt("id"));
+		session.setHeartTime(System.currentTimeMillis());
 		Date date=admin.getDate("last_login_time");
 		session.setLast_login_time(DateUtil.getStrDate(date));
 		session.setLoginName(admin.getStr("login_name"));
@@ -141,6 +151,7 @@ public class LoginController extends BaseController{
 		session.setNickName(admin.getStr("nickname"));
 		session.setMobile(admin.getStr("mobile"));
 		setSessionAttr(CommonConstant.SESSION_ID_KEY, session);
+		onlineManger.add(session);
 		//非超级管理员加载权限
 		if(!session.isSuperFlag()){
 			loadPermissions(admin);

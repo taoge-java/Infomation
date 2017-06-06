@@ -6,16 +6,16 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.information.annotation.Permission;
-import com.information.common.BaseController;
 import com.information.constant.CommonEnum.LogType;
 import com.information.constant.OperCode;
+import com.information.controller.base.BaseController;
 import com.information.model.system.SystemAdmin;
 import com.information.model.system.SystemRole;
 import com.information.service.system.AdminService;
 import com.information.utils.Result;
 import com.information.utils.ResultCode;
 import com.jfinal.ext.route.ControllerBind;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
 
 /***
@@ -27,7 +27,7 @@ public class AdminController extends BaseController{
 	@Autowired
 	private AdminService adminService;
 	
-	private Logger log=Logger.getLogger(AdminController.class);
+	private Log log=Log.getLog(AdminController.class);
 	/**
 	 * 管理员列表
 	 */

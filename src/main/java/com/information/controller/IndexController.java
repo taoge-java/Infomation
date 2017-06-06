@@ -1,6 +1,11 @@
 package com.information.controller;
 
-import com.information.common.BaseController;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.information.controller.base.BaseController;
+import com.information.dao.OnlineManger;
+import com.information.dao.UserSession;
+import com.information.utils.ResultCode;
 import com.jfinal.ext.route.ControllerBind;
 /**
  * 系统首页
@@ -11,6 +16,9 @@ import com.jfinal.ext.route.ControllerBind;
 @ControllerBind(controllerKey="/")
 public class IndexController extends BaseController{
 
+	@Autowired
+	private OnlineManger onlineManger;
+	
 	public void index(){
 		
 	}
@@ -41,5 +49,15 @@ public class IndexController extends BaseController{
 	
 	public void main(){
 		rendView("/main.vm");
+	}
+	
+	public void heart(){
+		UserSession session=getCurrentUser();
+		UserSession onlineUser=onlineManger.getUserSession(session.getSessionId());
+		if(onlineUser==null){
+			renderJson(new ResultCode(ResultCode.FAIL, "您的帐号已在别处登录，请重新登录！"));
+			return;
+		}
+		renderNull();
 	}
 }

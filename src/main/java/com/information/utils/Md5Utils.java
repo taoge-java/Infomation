@@ -2,6 +2,7 @@ package com.information.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -83,4 +84,9 @@ public class Md5Utils {
         String s = new String(a);  
         return s;  
     }  
+    
+    
+    public static String generatorKey(){
+    	return getMd5(UUID.randomUUID().toString());
+    }
 }

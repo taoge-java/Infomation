@@ -21,15 +21,15 @@
     	$(".loginbtn").mouseout(function(){
     		$(this).css("background","#77B621");
     	});
-		$(".loginuser").blur(function(){
-		   var count=0;
-		   $.post("$BASE_PATH/account/getErrorCount",{"userName":$('.loginuser').val()},function(data){
-		       count=parseInt(data.message);
-			   if(count>3){
-			      $(".yzm").css("display","block");
-			   }
-		   },"json");
-		});
+		//$(".loginuser").blur(function(){
+		//   var count=0;
+		//   $.post("$BASE_PATH/account/getErrorCount",{"userName":$('.loginuser').val()},function(data){
+		 //      count=parseInt(data.message);
+		//	   if(count>3){
+		//	      $(".yzm").css("display","block");
+		//	   }
+		 //  },"json");
+		//});
     });  
 	document.onkeydown = function (e) {
 	    var theEvent = window.event || e;

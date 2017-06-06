@@ -11,7 +11,7 @@ import com.jfinal.ext.kit.ClassSearcher;
 import com.jfinal.ext.plugin.tablebind.INameStyle;
 import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
 import com.jfinal.ext.plugin.tablebind.TableBind;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.IDataSourceProvider;
 import com.jfinal.plugin.activerecord.Model;
@@ -23,7 +23,7 @@ import com.jfinal.plugin.activerecord.Model;
  */
 public class AutoTableBindPlugin extends ActiveRecordPlugin{
 
-	protected final Logger log = Logger.getLogger(getClass());
+	protected final Log log = Log.getLog(getClass());
 
     @SuppressWarnings("rawtypes")
     private List<Class<? extends Model>> excludeClasses = Lists.newArrayList();
