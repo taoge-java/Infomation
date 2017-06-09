@@ -8,7 +8,6 @@
 <script src="$BASE_PATH/resource/js/layer/layer.js"></script>
 </head>
 <body>
-
 	<div class="place">
 	    <span>位置：</span>
 	    <ul class="placeul">
@@ -51,7 +50,7 @@
           <div class="xline"></div>
     
            <div class="uimakerinfo">
-           <b>查看Uimaker网站使用指南，您可以了解到多种风格的B/S后台管理界面,软件界面设计，图标设计，手机界面等相关信息。来源：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></b></div>
+        ##   <b>查看Uimaker网站使用指南，您可以了解到多种风格的B/S后台管理界面,软件界面设计，图标设计，手机界面等相关信息。来源：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></b></div>
 		    <ul class="umlist">
 			    <li><a href="#">如何发布文章</a></li>
 			    <li><a href="#">如何访问网站</a></li>
