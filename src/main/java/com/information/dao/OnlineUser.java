@@ -18,50 +18,14 @@ public class OnlineUser {
 	public static final String SESSION_ID_KEY="session_id_key";
 	
 	public OnlineUser(){
-		
+		setSessionAttr(SESSION_ID_KEY,Md5Utils.generatorKey());
 	}
 	
-	public void setSessionAttr(){
-		map.put(SESSION_ID_KEY, Md5Utils.generatorKey());
+	public void setSessionAttr(String key,String code){
+		map.put(key,code);
 	}
 	
 	public String getSessionId(){
 		return (String) map.get(SESSION_ID_KEY);
 	}
-//	/**
-//	 * 添加用户
-//	 * @param session
-//	 */
-//	public void add(String key,UserSession session){
-//         map.put(key, session);
-//	}
-//	
-//	/**
-//	 * 移除在线用户
-//	 * @param session
-//	 */
-//	public void remove(String key){
-//		map.remove(key);
-//	}
-//	
-//	/**
-//	 * 获取在线用户人数
-//	 * @return
-//	 */
-//	public int getOlineCount(){
-//		LOG.info("当前在线人数:"+map.size());
-//		return map.size();
-//	}
-//	
-//	/**
-//	 * 获取所有在线用户
-//	 * @return
-//	 */
-//	public List<UserSession> getAllUserSession(){
-//		return new ArrayList<UserSession>(map.values());
-//	}
-//	
-//	public UserSession getUserSessionByid(String key){
-//		return map.get(key);
-//	}
 }

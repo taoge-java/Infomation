@@ -41,14 +41,14 @@
         maxElementsInMemory="100"
         eternal="true"
         timeToIdleSeconds="100"
-        timeToLiveSeconds="48600"
+        timeToLiveSeconds="3600"
         overflowToDisk="true"
     />
-    <cache name="user.power"
+    <cache name="two.minute"
         maxElementsInMemory="100"
         eternal="true"
         timeToIdleSeconds="0"
-        timeToLiveSeconds="0"
+        timeToLiveSeconds="7200"
         overflowToDisk="true"
     />
 </ehcache>

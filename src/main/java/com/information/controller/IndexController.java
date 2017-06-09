@@ -51,6 +51,9 @@ public class IndexController extends BaseController{
 		rendView("/main.vm");
 	}
 	
+	/**
+	 * 客户端向服务器发送心跳包
+	 */
 	public void heart(){
 		UserSession session=getCurrentUser();
 		UserSession onlineUser=onlineManger.getUserSession(session.getSessionId());

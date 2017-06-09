@@ -1,5 +1,4 @@
 package com.information.controller.account;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -144,8 +143,7 @@ public class LoginController extends BaseController{
 		session.setSessionId(online.getSessionId());
 		session.setUserId(admin.getInt("id"));
 		session.setHeartTime(System.currentTimeMillis());
-		Date date=admin.getDate("last_login_time");
-		session.setLast_login_time(DateUtil.getStrDate(date));
+		session.setLast_login_time(DateUtil.getStrDate(admin.getDate("last_login_time")));
 		session.setLoginName(admin.getStr("login_name"));
 		session.setSuperFlag(admin.getBoolean("super_flag") ? true:false);
 		session.setNickName(admin.getStr("nickname"));
@@ -163,8 +161,11 @@ public class LoginController extends BaseController{
 	 */
 	public void exit(){		
 		if(getCurrentUser()!=null){
+			if(onlineManger.getUserSession(getCurrentUser().getSessionId()) != null){//移除sessionid
+				onlineManger.remove(getCurrentUser());
+        	}
 			systemLog(getCurrentUser().getLoginName()+"登出系统",LogType.LOGIN.getValue());
-			getRequest().getSession().removeAttribute("user");
+			getRequest().getSession().removeAttribute(CommonConstant.SESSION_ID_KEY);
 			getRequest().getSession().invalidate();//用户注销
 			redirect("/",false);
 		}

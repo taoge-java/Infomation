@@ -26,6 +26,9 @@ public class OnlineClearJob extends BaseJob{
 			throws JobExecutionException {
 		OnlineManger onlineManger=Duang.duang(OnlineManger.class);
 		List<UserSession> list=onlineManger.getAllUserSession();
+		/**
+		 * 30分钟无任何操作则剔除用户
+		 */
 		for(UserSession userSession:list){
 		   if(System.currentTimeMillis()-userSession.getHeartTime()>60*1000*30){
 			   onlineManger.remove(userSession);

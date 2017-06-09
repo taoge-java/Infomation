@@ -18,9 +18,11 @@ import com.information.controller.system.AdminController;
 import com.information.model.system.SystemMenu;
 import com.information.model.system.SystemOper;
 import com.information.model.system.SystemRole;
+import com.information.model.system.SystemRoleOperRef;
 import com.information.utils.Result;
 import com.information.utils.ResultCode;
 import com.jfinal.log.Logger;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 /**
  * 角色管理services
@@ -30,7 +32,7 @@ import com.jfinal.plugin.activerecord.Page;
 @Service
 public class RoleService {
 	
-	private Logger log=Logger.getLogger(AdminController.class);
+	private Logger LOG=Logger.getLogger(AdminController.class);
 	
 	/**
 	 * 根据角色获取操作权限列表
@@ -96,7 +98,7 @@ public class RoleService {
         	}
         }catch(Exception e){
             resultCode =new ResultCode(ResultCode.FAIL, "创建数据异常!");
-        	log.error("创建数据异常!");
+        	LOG.error("创建数据异常!");
         }
 		result.setResultCode(resultCode);
 		return result;
@@ -121,7 +123,7 @@ public class RoleService {
 			}
 		}catch(Exception e){
 			resultCode=new ResultCode(ResultCode.FAIL,"更新数据异常");
-			log.error("更新数据异常");
+			LOG.error("更新数据异常");
 		}
 		result.setResultCode(resultCode);
 		return result;
@@ -147,13 +149,18 @@ public class RoleService {
 				SystemRole.dao.deleteById(id);
 			}
 		}catch(Exception e){
-			log.error("删除数据异常....");
+			LOG.error("删除数据异常....");
 			resultCode=new ResultCode(ResultCode.FAIL, "删除数据异常");
 		}
 		result.setResultCode(resultCode);
 		return result;
 	}
 	
+	/**
+	 * 获取权限列表
+	 * @param role_id
+	 * @return
+	 */
 	public String getOperByRoId(int role_id){
 		HashSet<String> hasOper=new HashSet<String>();
 		List<SystemOper> operList=SystemOper.dao.find("select * from system_oper a,system_role_oper_ref b where a.id=b.oper_id and b.role_id=?",role_id);
@@ -194,5 +201,34 @@ public class RoleService {
 			}
 		}
 		return jsonarray.toString();
+	}
+	
+	/**
+	 * 保存权限
+	 * @param roleId
+	 * @param session
+	 * @param operIds
+	 */
+	public boolean saveOper(int roleId,String operIds){
+		try{
+			Db.update("delete from system_role_oper_ref where role_id="+ roleId);
+			if (StringUtils.isEmpty(operIds)) {
+				return true;
+			}
+			String[] opers = operIds.split(",");
+			SystemRoleOperRef roleOperRef = null;
+			for (String oper_id: opers) {
+				roleOperRef =  new SystemRoleOperRef();
+				roleOperRef.set("role_id", roleId);
+				roleOperRef.set("oper_id", Integer.parseInt(oper_id) );
+				roleOperRef.save();
+			}
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			LOG.error("保存权限异常", e);
+			return false;
+		}
+		
 	}
 }

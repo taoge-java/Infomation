@@ -22,6 +22,7 @@
     function add(){
 		location.href="$BASE_PATH/system/role/add";
 	}
+	
 	function operRole(id){
 	    $.ajax({
 		   url:"$BASE_PATH/system/role/operRole",
@@ -55,16 +56,28 @@
     			arr.push(nodes[i].id);
     		}
     	}
-		layer.close(index);
-		//$.post("$BASE_PATH/system/role/doOper",{roleId:id,operIds:arr.toString()},function(){
-		//    if(data.code == 0) {
-		//		alert(data.message);
-		//	}else{
-			//	alert(data.message);
-			//}
-		//	layer.close(index);
-		//},"json");
-	}
+		$.post("$BASE_PATH/system/role/saveOper",{roleId:id,operIds:arr.toString()},function(data){
+		   if(data.code == 1) {
+				layer.msg(data.message, {
+            	    skin: 'layui-layer-green',
+            	    closeBtn: 0,
+            	    time: 2000,
+            	    icon: 1,
+            	    shift: 0 //动画类型
+              	});
+			}else{
+				layer.alert(data.message, {
+            	    skin: 'layui-layer-green',
+            	    closeBtn: 0,
+            	    time: 2000,
+            	    icon: 2,
+            	    shift: 0 //动画类型
+            	});
+			}
+			layer.close(index);
+		},"json");
+		  setTimeout("location.reload()",1000);
+	 }
 </script>
 </head>
 <body>
@@ -91,9 +104,9 @@
       <td>$!{e.role_name}</td>
       <td>
         #if(${e.super_flag})
-                   是
+                        是
 	    #else
-                   否
+                        否
         #end
       </td>
       <td>

@@ -2,6 +2,7 @@ package com.information.config;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -19,6 +20,7 @@ import com.jfinal.config.Interceptors;
 import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
+import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.ext.route.AutoBindRoutes;
 import com.jfinal.kit.PathKit;
@@ -32,7 +34,12 @@ import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.VelocityRender;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
-
+/**
+ * Jfinal Aip引导式配置
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年6月8日 下午9:13:31
+ */
 
 @SuppressWarnings("unused")
 public class SysConfig extends JFinalConfig{
@@ -52,20 +59,28 @@ public class SysConfig extends JFinalConfig{
 	public void configConstant(Constants constants) {
 		 constants.setDevMode(true);
 		 constants.setViewType(ViewType.VELOCITY);
+		 constants.setEncoding("utf-8");
+		 JFinal.me().getConstants().setError404View(BASE_VIEW+"/common/404.vm");
+		 JFinal.me().getConstants().setError500View(BASE_VIEW+"/common/500.vm");
+		 constants.setError500View(BASE_VIEW+"/common/500.vm");
 		 PropKit.use("config.properties");
 		 redisPassword = PropKit.get("db.redis.password").trim();
 		 redisHost = PropKit.get("db.redis.host").trim();
 		 resourceUpload=PropKit.get("resource.upload.path").trim();
 		 resourceDown=PropKit.get("resource.upload.path").trim();
 		 constants.setBaseDownloadPath(resourceUpload);
+		 String fullFile = PathKit.getWebRootPath() + File.separator + "WEB-INF" + "/classes/velocity.properties";
+		 InputStream inputStream=null;
+		 /**
+		  * 加载Velocity配置文件
+		  */
 		 try {
-				String fullFile = PathKit.getWebRootPath() + File.separator + "WEB-INF" + "/classes/velocity.properties";
-				InputStream inputStream = new FileInputStream(new File(fullFile));
-				Properties p = new Properties();
-				p.load(inputStream);
-				VelocityRender.setProperties(p);
-			 } catch (Exception e) {
-				e.printStackTrace();
+			inputStream = new FileInputStream(new File(fullFile));
+			 Properties p = new Properties();
+			 p.load(inputStream);
+			 VelocityRender.setProperties(p);
+		 } catch (Exception e) {
+			e.printStackTrace();
 		 }
 	}
 	/**
@@ -91,10 +106,10 @@ public class SysConfig extends JFinalConfig{
 	    //配置缓存插件
 	    plugin.add(new EhCachePlugin());
 	    //配置redis插件
-//	    RedisPlugin redis=new RedisPlugin("student", redisHost,6379,redisPassword);
-//	    redis.getJedisPoolConfig().setMaxTotal(200);
-//	    redis.getJedisPoolConfig().setMaxIdle(200);
-	    //plugin.add(redis);
+	    RedisPlugin redis=new RedisPlugin("student", redisHost,6379,redisPassword);
+	    redis.getJedisPoolConfig().setMaxTotal(200);
+	    redis.getJedisPoolConfig().setMaxIdle(200);
+	    plugin.add(redis);
 	    plugin.add(new SpringPlugin(SpringBeanManger.getContext()));//集成spring
 	}
 
@@ -121,6 +136,7 @@ public class SysConfig extends JFinalConfig{
 		}).start();
 		LOG.info("数据初始化完毕");
 	}
+	
 	@Override
 	public void configEngine(Engine me) {
 		

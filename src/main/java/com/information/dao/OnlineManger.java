@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 /**
- * 在线用户·管理器
+ * 在线用户管理器
  * @author zengjintao
  * @version 1.0
  * @create_at 2017年6月4日 下午6:06:34
