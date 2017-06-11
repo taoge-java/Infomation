@@ -176,8 +176,8 @@ public class RoleService {
 			JSONObject jsonObject=null;
 			for(SystemMenu menu:menuList){
 				jsonObject=new JSONObject();
-				jsonObject.put("id", menu.getInt("id"));
-				jsonObject.put("pId", menu.get("parent_id")==null?menu.getInt("id"):menu.getInt("parent_id"));
+				jsonObject.put("id", "menu_"+menu.getInt("id"));
+				jsonObject.put("pId", menu.get("parent_id")==null?"menu_"+menu.getInt("id"):"menu_"+menu.getInt("parent_id"));
 				jsonObject.put("name", menu.getStr("menu_name"));
 				jsonObject.put("open", false);
 				jsonarray.add(jsonObject);
@@ -189,9 +189,9 @@ public class RoleService {
 			JSONObject jsonObject=null;
 			for(SystemOper oper:allOperList){
 				jsonObject=new JSONObject();
-				jsonObject.put("id", oper.getInt("id")+"11");
+				jsonObject.put("id", oper.getInt("id"));
 				jsonObject.put("name", oper.getStr("oper_name"));
-				jsonObject.put("pId", oper.getInt("menu_id"));
+				jsonObject.put("pId", "menu_"+oper.getInt("menu_id"));
 				jsonObject.put("code",oper.getStr("oper_code"));
 				if(hasOper.contains(oper.getStr("oper_code"))){
 					jsonObject.put("checked", true);
