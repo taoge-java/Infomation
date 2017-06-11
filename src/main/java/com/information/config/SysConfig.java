@@ -62,8 +62,7 @@ public class SysConfig extends JFinalConfig{
 		 constants.setEncoding("utf-8");
 		 JFinal.me().getConstants().setError404View(BASE_VIEW+"/common/404.vm");
 		 JFinal.me().getConstants().setError500View(BASE_VIEW+"/common/500.vm");
-		 constants.setError500View(BASE_VIEW+"/common/500.vm");
-		 PropKit.use("config.properties");
+		 PropKit.use("config.properties");//加载配置文件
 		 redisPassword = PropKit.get("db.redis.password").trim();
 		 redisHost = PropKit.get("db.redis.host").trim();
 		 resourceUpload=PropKit.get("resource.upload.path").trim();
@@ -75,7 +74,7 @@ public class SysConfig extends JFinalConfig{
 		  * 加载Velocity配置文件
 		  */
 		 try {
-			inputStream = new FileInputStream(new File(fullFile));
+		     inputStream = new FileInputStream(new File(fullFile));
 			 Properties p = new Properties();
 			 p.load(inputStream);
 			 VelocityRender.setProperties(p);
