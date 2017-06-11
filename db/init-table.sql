@@ -63,6 +63,7 @@ create table system_role_oper_ref(
    primary key(id)
 )engine=innodb charset=utf8 collate=utf8_general_ci;
 
+-- 系统日志表
 drop table if exists system_log;
 create table system_log(
    id int not null auto_increment,
@@ -72,6 +73,18 @@ create table system_log(
    oper_desc varchar(1024) default null,
    oper_time datetime default null,
    login_type tinyint(2) default 1,
+   primary key(id)
+)engine=innodb charset=utf8 collate=utf8_general_ci;
+
+-- 微信用户表
+drop table  if exists weixin_user;
+create table weixin_user(
+   id int not null auto_increment,
+   openid varchar(100) default null,
+   nickname varchar(100) default null,
+   sex tinyint(2) not null,
+   city varchar(100) default null,
+   province varchar(100) default null,
    primary key(id)
 )engine=innodb charset=utf8 collate=utf8_general_ci;
 

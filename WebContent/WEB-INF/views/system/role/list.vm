@@ -19,7 +19,7 @@
 	/**
 	 * 添加角色
 	 */
-    function add(){
+    function addRole(){
 		location.href="$BASE_PATH/system/role/add";
 	}
 	
@@ -56,7 +56,7 @@
     			arr.push(nodes[i].id);
     		}
     	}
-		$.post("$BASE_PATH/system/role/saveOper",{roleId:id,operIds:arr.toString()},function(data){
+		$.post("$BASE_PATH/system/role/saveOper",{"roleId":id,"operIds":arr.toString()},function(data){
 		   if(data.code == 1) {
 				layer.msg(data.message, {
             	    skin: 'layui-layer-green',
@@ -76,7 +76,7 @@
 			}
 			layer.close(index);
 		},"json");
-		  setTimeout("location.reload()",1000);
+		setTimeout("location.reload()",800);
 	 }
 </script>
 </head>
@@ -84,10 +84,10 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong class="icon-reorder"> 内容列表</strong></div>
  <form action="$BASE_PATH/system/admin/Paginate" method="post" id="data-form">
-    <button class="button bg-yellow" type="button"  style="margin: 8px 0px 15px 15px;height: 40px;" id="add" onclick="create()">
+    <button class="button bg-yellow" type="button"  style="margin: 8px 0px 15px 15px;height: 40px;" id="add" onclick="addRole()">
 	       <span  class="icon-plus-circle">添加角色</span>
 	</button>
-	<input type="text" placeholder="请输入角色名" name="role.name" class="input" value="${login_name}"  style="width:250px; line-height:17px;display:inline-block" />
+	<input type="text" placeholder="请输入角色名" name="role.name" class="input" value="$!{login_name}"  style="width:250px; line-height:17px;display:inline-block" />
      <button  class="button border-main icon-search"> 搜索</button>
   <table class="table table-hover text-center">
     <tr>

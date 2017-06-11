@@ -7,8 +7,8 @@
   </div>
     <div class="layui-form-item" style="margin-left: 30px;">
 	    <label class="layui-form-label">是否系统管理员:</label>
-	    <input type="radio" <c:if test="${role.flag==1}">checked="checked"</c:if>  name="admin" checked="checked" value="1" style="margin-left: 20px;margin-top: 10px;">是
-	    <input type="radio" <c:if test="${role.flag==0}">checked="checked"</c:if>  name="admin" value="0" style="margin-left: 40px;">否
+	    <input type="radio"   name="admin" checked="checked" value="1" style="margin-left: 20px;margin-top: 10px;">是
+	    <input type="radio"   name="admin" value="0" style="margin-left: 40px;">否
     </div>
   </div>
         <div class="label" style="margin-left: 30px;">

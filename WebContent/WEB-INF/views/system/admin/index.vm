@@ -48,8 +48,8 @@
    </form>
 </body>
 <script type="text/javascript">
-    var totalPage=${page.totalPage};
-    page("demo",totalPage,5,"$BASE_PATH/system/admin/list","content");
+     var totalPage=${page.totalPage};
+     page("demo",totalPage,5,"$BASE_PATH/system/admin/list","content");
      $(function(){
           adminList();	
 		  $("#search").click(function(){
@@ -66,8 +66,8 @@
 		 });
      });
   
-  function adminList(){
-      $.ajax({
+    function adminList(){
+       $.ajax({
 		 url:"$BASE_PATH/system/admin/list",
 	     dataType:"html",
 		 data:{
