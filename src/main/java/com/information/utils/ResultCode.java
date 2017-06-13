@@ -25,4 +25,8 @@ public class ResultCode {
 		this.message = message;
 		System.out.println("MESSAGE:"+message);
 	}
+
+	public ResultCode(int code) {
+		this.code=code;
+	}
 }

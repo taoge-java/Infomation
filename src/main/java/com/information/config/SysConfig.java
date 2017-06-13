@@ -10,6 +10,7 @@ import com.information.interceptor.IocInterceptor;
 import com.information.interceptor.PermissionInterceptor;
 import com.information.interceptor.ViewContextInterceptor;
 import com.information.job.base.JobManger;
+import com.information.listener.RedisListener;
 import com.information.model.BaseModel;
 import com.information.spring.SpringBeanManger;
 import com.information.spring.SpringPlugin;
@@ -21,7 +22,7 @@ import com.jfinal.config.JFinalConfig;
 import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
-import com.jfinal.ext.handler.ContextPathHandler;
+import com.jfinal.ext.handler.RenderingTimeHandler;
 import com.jfinal.ext.route.AutoBindRoutes;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
@@ -105,13 +106,16 @@ public class SysConfig extends JFinalConfig{
 	    //配置缓存插件
 	    plugin.add(new EhCachePlugin());
 	    //配置redis插件
-	    RedisPlugin redis=new RedisPlugin("student", redisHost,6379,redisPassword);
+	    RedisPlugin redis=new RedisPlugin("information",redisHost,6379,redisPassword);
 	    redis.getJedisPoolConfig().setMaxTotal(200);
 	    redis.getJedisPoolConfig().setMaxIdle(200);
 	    plugin.add(redis);
 	    plugin.add(new SpringPlugin(SpringBeanManger.getContext()));//集成spring
 	}
 
+	/**
+	 * 拦截器配置
+	 */
 	@Override
 	public void configInterceptor(Interceptors interceptors) {
 		interceptors.add(new PermissionInterceptor());
@@ -121,7 +125,8 @@ public class SysConfig extends JFinalConfig{
 
 	@Override
 	public void configHandler(Handlers handlers) {
-	   handlers.add(new ContextPathHandler("BASE_PATH"));
+	   handlers.add(new ContextPathHandler());
+	   handlers.add(new RenderingTimeHandler());
 	}
 	
 	@Override
@@ -129,8 +134,11 @@ public class SysConfig extends JFinalConfig{
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				JobManger job=Duang.duang(JobManger.class);
-				job.start();
+				 JobManger job=Duang.duang(JobManger.class);
+				 job.start();
+		         RedisListener sp = new RedisListener();
+		//         jr.subscribe(sp,"information");//订阅频道
+				 LOG.info("消息订阅成功");
 			}
 		}).start();
 		LOG.info("数据初始化完毕");

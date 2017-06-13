@@ -23,9 +23,18 @@ public class MatchUtil {
 	 * @param mobile
 	 * @return
 	 */
-	public static Matcher getMoblieMatcher(String mobile){
-		Pattern pattern=Pattern.compile("(\\d{4})-(0\\d{1}|1[0-2])-(0\\d{1}|[12]\\d{1}|3[01])");
-		Matcher mat=pattern.matcher(mobile);
+	public static Matcher moblieMatcher(String mobile){
+		return null;
+	}
+	
+	/**
+	 * 数值校验(整数或小数(最多两位小数))
+	 * @param number
+	 * @return
+	 */
+	public static Matcher numberMatcher(String number){
+		Pattern pattern=Pattern.compile("^[0-9]+\\.?[0-9]{2}*$");
+		Matcher mat=pattern.matcher(number);
 		return mat;
 	}
 }
