@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.information.constant.CommonEnum.LogType;
 import com.information.controller.base.BaseController;
 import com.information.model.system.SystemRole;
+import com.information.service.base.Result;
 import com.information.service.system.RoleService;
-import com.information.utils.Result;
 import com.information.utils.ResultCode;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Log;
@@ -61,7 +61,7 @@ public class RoleController extends BaseController{
 			renderJson(new ResultCode(ResultCode.FAIL,"请输入角色名称"));
 			return;
 		}
-	   Result result= roleService.save(name,flag,remark);
+       Result result=roleService.save(name,flag,remark);
 	   systemLog(getCurrentUser().getLoginName()+"成功创建角色"+name,LogType.MODIFY.getValue());
 	   renderJson(result.getResultCode());
 	}

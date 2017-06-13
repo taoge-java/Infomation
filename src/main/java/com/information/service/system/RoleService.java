@@ -19,7 +19,8 @@ import com.information.model.system.SystemMenu;
 import com.information.model.system.SystemOper;
 import com.information.model.system.SystemRole;
 import com.information.model.system.SystemRoleOperRef;
-import com.information.utils.Result;
+import com.information.service.base.DefaultResult;
+import com.information.service.base.Result;
 import com.information.utils.ResultCode;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Db;
@@ -81,7 +82,7 @@ public class RoleService {
      * @return
      */
 	public Result save(String name, String flag, String remark) {
-		Result result=new Result();
+		Result result=new DefaultResult();
 		ResultCode resultCode =new ResultCode(ResultCode.SUCCESS, "角色创建成功!");
         try{
         	SystemRole role1=SystemRole.dao.findFirst("select  *from system_role where role_name=?",name);
@@ -111,7 +112,7 @@ public class RoleService {
 	 * @return
 	 */
 	public Result update(String name, String flag, String remark,int id){
-		Result result=new Result();
+		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS,"角色修改成功");
 		SystemRole role=SystemRole.dao.findById(id);
 		try{
@@ -142,7 +143,7 @@ public class RoleService {
 	 * @return
 	 */
 	public Result delAll(String ids[]){
-		Result result=new Result();
+		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "删除数据成功");
 		try{
 			for(String id:ids){

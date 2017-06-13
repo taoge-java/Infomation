@@ -11,12 +11,11 @@ import com.information.constant.OperCode;
 import com.information.controller.base.BaseController;
 import com.information.model.system.SystemAdmin;
 import com.information.model.system.SystemRole;
+import com.information.service.base.Result;
 import com.information.service.system.AdminService;
-import com.information.utils.Result;
 import com.information.utils.ResultCode;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Log;
-import com.jfinal.plugin.activerecord.Page;
 
 /***
  * 管理员设置
@@ -35,16 +34,15 @@ public class AdminController extends BaseController{
 	public void index(){
 		int pageNmuber=getParaToInt("pageNmuber",1);
 		Result result=adminService.getAdmin("", pageNmuber);
-		setAttr("page", result.getObject());
+		setAttr("page", result.getDefaultModel());
 		rendView("/system/admin/index.vm");
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void list(){
 		int pageNmuber=getParaToInt("pageNmuber",1);
 		String name=getPara("name");
 		Result result=adminService.getAdmin(name, pageNmuber);
-		setAttr("page", (Page<SystemAdmin>)result.getObject());
+		setAttr("page",result.getDefaultModel());
 		rendView("/system/admin/list.vm");
 	}
     /**

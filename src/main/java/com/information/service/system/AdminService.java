@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.information.constant.CommonConstant;
 import com.information.model.system.SystemAdmin;
+import com.information.service.base.DefaultResult;
+import com.information.service.base.Result;
 import com.information.utils.Md5Utils;
-import com.information.utils.Result;
 import com.information.utils.ResultCode;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Page;
@@ -22,7 +23,7 @@ public class AdminService {
 	 * 管理员列表
 	 */
 	public Result getAdmin(String  login_name,int pageNumber){
-		Result result=new Result();
+		Result result=new DefaultResult();
 		StringBuilder context=new StringBuilder("from system_admin where 1=1");
 		List<Object> param=new ArrayList<Object>();
 		if(StringUtils.isNotEmpty(login_name)){
@@ -30,7 +31,7 @@ public class AdminService {
 			param.add(login_name);
 		}
 		Page<SystemAdmin> page= SystemAdmin.dao.paginate(pageNumber, CommonConstant.pageSize, "select *", context.toString(),param.toArray());
-		result.setObject(page);
+		result.setDefaultModel(page);
 		return result;
 	}
 	/**
@@ -41,7 +42,7 @@ public class AdminService {
 	 */
 	@SuppressWarnings("static-access")
 	public Result save(SystemAdmin systemAdmin,String password){
-		Result result=new Result();
+		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "管理员创建成功!");
 		try{
 		    SystemAdmin admin=systemAdmin.dao.findFirst("select * from sys_admin where login_name=?",systemAdmin.getStr("login_name"));
@@ -66,7 +67,7 @@ public class AdminService {
 	 * @return
 	 */
 	public Result delById(int id){
-		Result result=new Result();
+		Result result=new DefaultResult();
 		ResultCode rseultCode=new ResultCode(ResultCode.SUCCESS,"删除成功");
         try{
 			SystemAdmin.dao.deleteById(id);
@@ -85,7 +86,7 @@ public class AdminService {
 		return SystemAdmin.dao.findById(id);
 	}
 	public Result update(SystemAdmin systemAdmin,String password){
-		Result result=new Result();
+		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS,"数据更新成功");
 		try{
 			systemAdmin.set("sys_password",Md5Utils.getMd5(password));
@@ -105,7 +106,7 @@ public class AdminService {
 	 * @return
 	 */
 	public Result delAll(String ids[]){
-		Result result=new Result();
+		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "删除数据成功");
 		try{
 			for(String id:ids){
