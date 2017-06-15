@@ -68,7 +68,7 @@ public class ChatWebSocket {
 	 * WebSocket连接出错
 	 */
 	public void onerror(){
-		System.err.println("websocket�����쳣������");
+		System.err.println("websocket连接异常");
 	}
 	
 	/**
