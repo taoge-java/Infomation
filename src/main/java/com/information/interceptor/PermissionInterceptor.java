@@ -27,6 +27,7 @@ public class PermissionInterceptor implements Interceptor{
 	 */
 	public PermissionInterceptor(){
 		noNeedLoginUrl.add("/account");
+		noNeedLoginUrl.add("/weixin");
 	}
 
 	@Override
