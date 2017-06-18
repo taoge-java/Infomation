@@ -61,7 +61,7 @@
     </div>
 </body>
 <script>
-   setInterval("heart()",1000*25);//心跳包
+ setInterval("heart()",1000);//心跳包
    /**
             客户端向服务器发送在线消息
    */
@@ -80,12 +80,12 @@
                        icon: 2,
                        skin: 'layer-ext-moon',
     			    },function(){
-    			    	localtion="$BASE_PATH/account/exit";
+    			    	location.href="$BASE_PATH/account/exit";
     			    });
 			      }
 			   }
 		  }
 	   });
    }
-</script>
+   </script>
 </html>

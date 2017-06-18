@@ -73,6 +73,18 @@ $(function(){
               ##  <li><cite></cite><a href="#">其他</a><i></i></li>
             </ul>
         </dd>   
+		
+		
+		 <dd>
+    		<div class="title">
+				<span>
+					<img src="$BASE_PATH/resource/images/leftico04.png" />
+				</span>聊天室管理
+			</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="$BASE_PATH/system/admin" target="rightFrame">聊天室</a><i></i></li>
+            </ul>
+        </dd>   
      </dl>
 </body>
 </html>

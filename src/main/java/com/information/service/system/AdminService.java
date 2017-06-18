@@ -11,13 +11,13 @@ import com.information.service.base.DefaultResult;
 import com.information.service.base.Result;
 import com.information.utils.Md5Utils;
 import com.information.utils.ResultCode;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
 
 @Service
 public class AdminService {
 	
-	Logger log=Logger.getLogger(AdminService.class);
+	private static final Log log=Log.getLog(AdminService.class);
 	
 	/**
 	 * 管理员列表

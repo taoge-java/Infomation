@@ -37,6 +37,14 @@ public class BaseController extends Controller{
 	}
 	
 	/**
+	 * 获取登录用户名
+	 * @return
+	 */
+	public String getUserName(){
+		return getCurrentUser().getLoginName();
+	}
+	
+	/**
 	 * 系统日志记录
 	 * @param oper_des
 	 * @param type

@@ -98,7 +98,7 @@ public class WeiXinService {
 		ViewButton sub_click1=new ViewButton();
 		sub_click1.setName("个人中心");
 		sub_click1.setType("view");
-		sub_click1.setUrl("http://47.94.12.108/Stroe-WeiXin/auth");
+		sub_click1.setUrl("http://china234.xicp.io/Information/auth");
 		
 		ClickButton sub_click2=new ClickButton();
 		sub_click2.setName("已支付订单");

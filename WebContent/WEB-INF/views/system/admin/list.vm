@@ -1,16 +1,18 @@
-  #foreach($e in $page.getList())
-    <tr>
-      <td><input type="checkbox" name="all" value="${e.id}"></td>
-      <td>${e.id}</td>
-      <td>$!{e.login_name}</td>
-      <td>$!{e.mobile}</td>
-      <td>$!{e.last_login_ip}</td>
-      <td>$!{e.last_login_time}</td>
-      <td>
-        <div class="button-group"> 
-           <a href="$BASE_PATH/system/admin/alert/${e.id}" name="update" ><span class="icon-pencil-square-o" style="color: blue;"></span></a>&nbsp;&nbsp;
-           <a href="javascript:void(0)" id="del" name="del" value="${e.id}"><span class="icon-trash-o" style="color: red;"></span></a>
-         </div>
-      </td>
-     </tr>
-  #end
+#if($page.getList().size()>0)
+      #foreach($e in $page.getList())
+        <tr>
+          <td><input type="checkbox" name="all" value="${e.id}"></td>
+          <td>${e.id}</td>
+          <td>$!{e.login_name}</td>
+          <td>$!{e.mobile}</td>
+          <td>$!{e.last_login_ip}</td>
+          <td>$!{dateTools.format("yyyy-MM-hh HH:mm:ss",$!e.last_login_time)}</td>
+          <td>
+            <div class="button-group"> 
+               <a href="$BASE_PATH/system/admin/alert/${e.id}" name="update" ><span class="icon-pencil-square-o" style="color: blue;"></span></a>&nbsp;&nbsp;
+               <a href="javascript:void(0)" id="del" name="del" value="${e.id}"><span class="icon-trash-o" style="color: red;"></span></a>
+             </div>
+          </td>
+         </tr>
+      #end
+#end

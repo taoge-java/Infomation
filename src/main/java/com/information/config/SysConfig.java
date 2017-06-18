@@ -12,6 +12,7 @@ import com.information.interceptor.ViewContextInterceptor;
 import com.information.job.base.JobManger;
 import com.information.listener.RedisListener;
 import com.information.model.BaseModel;
+import com.information.service.WeiXinService;
 import com.information.spring.SpringBeanManger;
 import com.information.spring.SpringPlugin;
 import com.jfinal.aop.Duang;
@@ -35,15 +36,18 @@ import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.VelocityRender;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+
+import net.sf.json.JSONObject;
 /**
  * Jfinal Aip引导式配置
  * @author zengjintao
  * @version 1.0
  * @create_at 2017年6月8日 下午9:13:31
  */
-
 @SuppressWarnings("unused")
 public class SysConfig extends JFinalConfig{
+	
+	private WeiXinService weiXinService=Duang.duang(WeiXinService.class);
 
 	private Logger LOG=Logger.getLogger(SysConfig.class);
 	
@@ -56,6 +60,8 @@ public class SysConfig extends JFinalConfig{
 	public static String resourceUpload;//文件上传路径
 	
 	public static String resourceDown;
+	
+	public static String  weixinToken;
 	@Override
 	public void configConstant(Constants constants) {
 		 constants.setDevMode(true);
@@ -68,6 +74,7 @@ public class SysConfig extends JFinalConfig{
 		 redisHost = PropKit.get("db.redis.host").trim();
 		 resourceUpload=PropKit.get("resource.upload.path").trim();
 		 resourceDown=PropKit.get("resource.upload.path").trim();
+		 weixinToken=PropKit.get("weixin.token").trim();
 		 constants.setBaseDownloadPath(resourceUpload);
 		 String fullFile = PathKit.getWebRootPath() + File.separator + "WEB-INF" + "/classes/velocity.properties";
 		 InputStream inputStream=null;
@@ -106,10 +113,10 @@ public class SysConfig extends JFinalConfig{
 	    //配置缓存插件
 	    plugin.add(new EhCachePlugin());
 	    //配置redis插件
-	    RedisPlugin redis=new RedisPlugin("information",redisHost,6379,redisPassword);
-	    redis.getJedisPoolConfig().setMaxTotal(200);
-	    redis.getJedisPoolConfig().setMaxIdle(200);
-	    plugin.add(redis);
+//	    RedisPlugin redis=new RedisPlugin("information",redisHost,6379,redisPassword);
+//	    redis.getJedisPoolConfig().setMaxTotal(200);
+//	    redis.getJedisPoolConfig().setMaxIdle(200);
+//	    plugin.add(redis);
 	    plugin.add(new SpringPlugin(SpringBeanManger.getContext()));//集成spring
 	}
 
@@ -129,11 +136,26 @@ public class SysConfig extends JFinalConfig{
 	   handlers.add(new RenderingTimeHandler());
 	}
 	
+	/**
+	 * 初始化系统数据
+	 */
 	@Override
 	public void afterJFinalStart() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				try{
+				    String menu=JSONObject.fromObject(weiXinService.generateMenu()).toString();
+				    int result=weiXinService.createMenu(weiXinService.getAccesstoken().getAccessToken(),menu);
+				    if(result==0){
+					   LOG.info("菜单创建成功");
+				    }else{
+					   LOG.error("菜单创建异常"); 
+				    }
+			     }catch(Exception e){
+				     e.printStackTrace();
+			         LOG.error("菜单创建异常"); 
+			     }	
 				 JobManger job=Duang.duang(JobManger.class);
 				 job.start();
 		         RedisListener sp = new RedisListener();

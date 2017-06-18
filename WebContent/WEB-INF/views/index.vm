@@ -4,6 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="image/x-icon" rel="shortcut icon" href="$BASE_PATH/resource/images/login.ico"/>
 <title>信息管理系统界面</title>
+<script>
+  
+</script>
 </head>
 <frameset rows="88,*" cols="*" frameborder="no" border="0" framespacing="0">
   <frame src="$BASE_PATH/top" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame" />

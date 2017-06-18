@@ -19,7 +19,7 @@ import net.sf.json.JSONObject;
 public class LoginWeiXinController extends Controller{
 
 	public void index() throws Exception{
-		String callback="http://47.94.12.108/Stroe-WeiXin/auth/callback";
+		String callback="http://china234.xicp.io/Information/auth/callback";
 		String url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constant.WEIXIN_APPID
 				+ "&redirect_uri="+URLEncoder.encode(callback,"UTF-8")
 				+ "&response_type=code"
