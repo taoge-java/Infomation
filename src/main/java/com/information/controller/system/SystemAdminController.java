@@ -12,28 +12,27 @@ import com.information.controller.base.BaseController;
 import com.information.model.system.SystemAdmin;
 import com.information.model.system.SystemRole;
 import com.information.service.base.Result;
-import com.information.service.system.AdminService;
+import com.information.service.system.SystemAdminService;
 import com.information.utils.ResultCode;
+import com.information.utils.StrUtils;
 import com.jfinal.ext.route.ControllerBind;
-import com.jfinal.log.Log;
 
 /***
  * 管理员设置
  */
 @ControllerBind(controllerKey="/system/admin")
-public class AdminController extends BaseController{
+public class SystemAdminController extends BaseController{
 	
 	@Autowired
-	private AdminService adminService;
+	private SystemAdminService systemAdminService;
 	
-	private Log log=Log.getLog(AdminController.class);
 	/**
 	 * 管理员列表
 	 */
 	@Permission(points=OperCode.OPER_CODE_1_3_1_1)
 	public void index(){
 		int pageNmuber=getParaToInt("pageNmuber",1);
-		Result result=adminService.getAdmin("", pageNmuber);
+		Result result=systemAdminService.getAdminList("", pageNmuber);
 		setAttr("page", result.getDefaultModel());
 		rendView("/system/admin/index.vm");
 	}
@@ -41,7 +40,7 @@ public class AdminController extends BaseController{
 	public void list(){
 		int pageNmuber=getParaToInt("pageNmuber",1);
 		String name=getPara("name");
-		Result result=adminService.getAdmin(name, pageNmuber);
+		Result result=systemAdminService.getAdminList(name, pageNmuber);
 		setAttr("page",result.getDefaultModel());
 		rendView("/system/admin/list.vm");
 	}
@@ -49,7 +48,7 @@ public class AdminController extends BaseController{
      * 添加管理员渲染视图
      */
 	public void add(){
-		List<SystemRole> list=SystemRole.dao.find("select id, role_name from system_role");
+		List<SystemRole> list=systemAdminService.findAllSystemRole();
 		setAttr("list", list);
 		rendView("system/admin/add.jsp");
 	}
@@ -60,13 +59,7 @@ public class AdminController extends BaseController{
 		SystemAdmin systemAdmin=new SystemAdmin();
 		systemAdmin.getParamters(getParaMap());
 		String password=getPara("password");
-		String login_name=systemAdmin.getStr("login_name");
-		if(StringUtils.isEmpty(login_name)||StringUtils.isEmpty(password)){
-			ResultCode resultCode=new ResultCode(ResultCode.FAIL, "登录名或密码不能为空");
-			renderJson(resultCode);
-			return;
-		}
-		Result result=adminService.save(systemAdmin,password);
+		Result result=systemAdminService.save(systemAdmin,password);
 		systemLog(getCurrentUser().getLoginName()+"成功创建管理员"+systemAdmin.getStr("login_name"),LogType.MODIFY.getValue());
 		renderJson(result.getResultCode());
 	}
@@ -75,26 +68,18 @@ public class AdminController extends BaseController{
 	 */
 	public void deleteById(){
 		Integer id=getParaToInt("id");
-		Result result= adminService.delById(id);
+		Result result= systemAdminService.delById(id);
 		renderJson(result.getResultCode());
 	}
 	/**
 	 * 修改管理员
 	 */
-	public void alert(){
+	public void edit(){
 		Integer id=getParaToInt(0);
-		try{
-			if(id>0||id!=null){
-			   List<SystemRole> list=SystemRole.dao.find("select id, role_name from system_role");
-			   setAttr("list", list);
-			   setAttr("admin",adminService.alert(id));
-			   rendView("system/admin/update.jsp");
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			log.error("系统异常");
-			renderError(404);
-		}
+	    List<SystemRole> list=systemAdminService.findAllSystemRole();
+	    setAttr("list", list);
+	    setAttr("admin",systemAdminService.getSystemAdmin(id));
+	    rendView("system/admin/update.jsp");
 	}
 	
 	/**
@@ -109,7 +94,7 @@ public class AdminController extends BaseController{
 			renderJson(new ResultCode(ResultCode.FAIL,"密码不能为空"));
 			return;
 		}
-		Result result=adminService.update(systemAdmin,password);
+		Result result=systemAdminService.update(systemAdmin,password);
 		renderJson(result.getResultCode());
 	}
 	/**
@@ -117,8 +102,8 @@ public class AdminController extends BaseController{
 	 */
 	public void delAll(){
 		String ids=getPara("ids");
-		String[] id=ids.split(",");
-		Result result=adminService.delAll(id);
+		String[] id=StrUtils.spilt(ids);
+		Result result=systemAdminService.delAll(id);
 		renderJson(result.getResultCode());
 	}
 }

@@ -18,18 +18,20 @@ public class JsonUtil {
 	 * @return
 	 */
 	public static String toJson(Map<String,String> map){
-		if(null==map)
+		if(null==map){
 			throw new NullPointerException("map can not be null");
+		}
 		Set<String> keySet=map.keySet();
 		String lastKey=getSetLastKey(keySet.iterator());
 		StringBuilder sb=new StringBuilder("{");
 		for(String s:keySet){
 			sb.append("\"");
 			sb.append(s+"\":").append("\""+map.get(s)+"\"");
-			if(s==lastKey)
-			   sb.append("");
-			else
-			   sb.append(",");
+			if(s==lastKey){
+				sb.append("");
+			}else{
+				sb.append(",");
+			}
 		}
 		sb.append("}");
 		return sb.toString();

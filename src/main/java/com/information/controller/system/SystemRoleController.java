@@ -8,7 +8,7 @@ import com.information.constant.CommonEnum.LogType;
 import com.information.controller.base.BaseController;
 import com.information.model.system.SystemRole;
 import com.information.service.base.Result;
-import com.information.service.system.RoleService;
+import com.information.service.system.SystemRoleService;
 import com.information.utils.ResultCode;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Log;
@@ -20,17 +20,17 @@ import com.jfinal.plugin.activerecord.Page;
  * @create_at 2017年6月8日 下午9:29:32
  */
 @ControllerBind(controllerKey="system/role")
-public class RoleController extends BaseController{
+public class SystemRoleController extends BaseController{
 	
-	private Log log=Log.getLog(AdminController.class);
+	private Log log=Log.getLog(SystemAdminController.class);
 	
 	@Autowired
-	private RoleService roleService;
+	private SystemRoleService systemRoleService;
 	
 	public void index(){
 		Integer pageNumber=getParaToInt("pageNumber", 1);
 		String role_name=getPara("role.name");
-		Page<SystemRole> page=roleService.getRole(pageNumber,role_name);
+		Page<SystemRole> page=systemRoleService.getRole(pageNumber,role_name);
 		setAttr("pages", page);
 		setAttr("login_name",role_name);
 		rendView("/system/role/list.vm");
@@ -38,7 +38,7 @@ public class RoleController extends BaseController{
 	
 	public void operRole(){
 		int roleId=getParaToInt("id");
-		String operList=roleService.getOperByRoId(roleId);
+		String operList=systemRoleService.getOperByRoId(roleId);
 		setAttr("operList", operList);
 		rendView("/system/role/oper.vm");
 	}
@@ -61,7 +61,7 @@ public class RoleController extends BaseController{
 			renderJson(new ResultCode(ResultCode.FAIL,"请输入角色名称"));
 			return;
 		}
-       Result result=roleService.save(name,flag,remark);
+       Result result=systemRoleService.save(name,flag,remark);
 	   systemLog(getCurrentUser().getLoginName()+"成功创建角色"+name,LogType.MODIFY.getValue());
 	   renderJson(result.getResultCode());
 	}
@@ -83,7 +83,7 @@ public class RoleController extends BaseController{
 	public void delAll(){
 		String ids=getPara("ids");
 		String[] id=ids.split(",");
-		Result result=roleService.delAll(id);
+		Result result=systemRoleService.delAll(id);
 		renderJson(result.getResultCode());
 	}
 	
@@ -94,7 +94,7 @@ public class RoleController extends BaseController{
 		Integer id=getParaToInt(0);
 		try{
 			if(id>0||id!=null){
-				setAttr("role",roleService.alert(id));
+				setAttr("role",systemRoleService.alert(id));
 				rendView("system/role/update.jsp");
 			}
 		}catch(Exception e){
@@ -111,7 +111,7 @@ public class RoleController extends BaseController{
 		String name=getPara("name");
 		String flag=getPara("flag");
 		String remark=getPara("remark");
-		Result result=roleService.update(name, flag, remark,id);
+		Result result=systemRoleService.update(name, flag, remark,id);
 		systemLog(getCurrentUser().getLoginName()+"成功修改角色"+name,LogType.MODIFY.getValue());
 		renderJson(result.getResultCode());
 	}
@@ -122,7 +122,7 @@ public class RoleController extends BaseController{
 	public void saveOper(){
 		int roleId = getParaToInt("roleId");
 		String operIds = getPara("operIds");
-		boolean flag=roleService.saveOper(roleId, operIds);
+		boolean flag=systemRoleService.saveOper(roleId, operIds);
 		if(flag){
 			renderJson(new ResultCode(ResultCode.SUCCESS, "操作成功"));
 		}else{

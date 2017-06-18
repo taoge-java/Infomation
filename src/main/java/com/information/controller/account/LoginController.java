@@ -14,7 +14,7 @@ import com.information.dao.OnlineManger;
 import com.information.dao.OnlineUser;
 import com.information.dao.UserSession;
 import com.information.model.system.SystemAdmin;
-import com.information.service.system.RoleService;
+import com.information.service.system.SystemRoleService;
 import com.information.utils.DateUtil;
 import com.information.utils.ImageUtil;
 import com.information.utils.IpUtils;
@@ -35,7 +35,7 @@ public class LoginController extends BaseController{
 	private static final Log LOG=Log.getLog(LoginController.class);
 	
 	@Autowired
-	private RoleService roleService;
+	private SystemRoleService systemRoleService;
 	
 	@Autowired
 	private OnlineManger onlineManger;
@@ -189,7 +189,7 @@ public class LoginController extends BaseController{
 	 * 加载权限
 	 */
 	private void loadPermissions(SystemAdmin admin){
-		Set<String> operCode=roleService.findRoleById(admin.getInt("role_id"));//操作列表
+		Set<String> operCode=systemRoleService.findRoleById(admin.getInt("role_id"));//操作列表
 		Set<String> menuCode=addMenuCode(operCode);//菜单列表
 		getCurrentUser().setOperCodeSet(operCode);
 		getCurrentUser().setMenuCodeSet(menuCode);

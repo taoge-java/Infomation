@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.information.constant.CommonConstant;
 import com.information.model.system.SystemAdmin;
+import com.information.model.system.SystemRole;
 import com.information.service.base.DefaultResult;
 import com.information.service.base.Result;
 import com.information.utils.Md5Utils;
@@ -15,14 +16,14 @@ import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
 
 @Service
-public class AdminService {
+public class SystemAdminService {
 	
-	private static final Log log=Log.getLog(AdminService.class);
+	private static final Log log=Log.getLog(SystemAdminService.class);
 	
 	/**
 	 * 管理员列表
 	 */
-	public Result getAdmin(String  login_name,int pageNumber){
+	public Result getAdminList(String  login_name,int pageNumber){
 		Result result=new DefaultResult();
 		StringBuilder context=new StringBuilder("from system_admin where 1=1");
 		List<Object> param=new ArrayList<Object>();
@@ -45,15 +46,19 @@ public class AdminService {
 		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "管理员创建成功!");
 		try{
+			if(StringUtils.isEmpty(systemAdmin.getStr("login_name"))||StringUtils.isEmpty(password)){
+			    resultCode=new ResultCode(ResultCode.FAIL, "登录名或密码不能为空");
+			    result.setResultCode(resultCode);
+				return result;
+			}
 		    SystemAdmin admin=systemAdmin.dao.findFirst("select * from sys_admin where login_name=?",systemAdmin.getStr("login_name"));
 		    if(admin!=null){
 		    	resultCode=new ResultCode(ResultCode.FAIL, "该管理员已存在,请勿重复创建!");
 		    	result.setResultCode(resultCode);
 		    	return result;
-		    }else{
-			    systemAdmin.set("sys_password",Md5Utils.getMd5(password));
-			    systemAdmin.save();
 		    }
+		    systemAdmin.set("sys_password",Md5Utils.getMd5(password));
+		    systemAdmin.save();
 		}catch(Exception e){
 			resultCode=new ResultCode(ResultCode.FAIL, "数据创建异常!");
 			log.error("数据创建异常");
@@ -72,19 +77,18 @@ public class AdminService {
         try{
 			SystemAdmin.dao.deleteById(id);
 		}catch(Exception e){
-			e.printStackTrace();
 			log.error("删除数据异常");
 			rseultCode=new ResultCode(ResultCode.FAIL,"删除数据异常");
 		}
         result.setResultCode(rseultCode);
         return result;
 	}
-	/**
-	 * 修改管理员
-	 */
-	public SystemAdmin alert(int id){
+	
+	public SystemAdmin getSystemAdmin(int id){
 		return SystemAdmin.dao.findById(id);
 	}
+	
+	
 	public Result update(SystemAdmin systemAdmin,String password){
 		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS,"数据更新成功");
@@ -92,7 +96,6 @@ public class AdminService {
 			systemAdmin.set("sys_password",Md5Utils.getMd5(password));
 	        systemAdmin.update();
 		}catch(Exception e){
-			e.printStackTrace();
 			log.error("删除数据异常");
 			resultCode=new ResultCode(ResultCode.FAIL,"更新数据异常");
 		}
@@ -120,5 +123,12 @@ public class AdminService {
 		return result;
 	}
 	
+	/**
+	 * 获取所有角色
+	 * @return
+	 */
+	public List<SystemRole> findAllSystemRole(){
+		return SystemRole.dao.find("select id, role_name from system_role");
+	}
 
 }

@@ -12,7 +12,7 @@ import com.information.interceptor.ViewContextInterceptor;
 import com.information.job.base.JobManger;
 import com.information.listener.RedisListener;
 import com.information.model.BaseModel;
-import com.information.service.WeiXinService;
+import com.information.service.weixin.WeiXinService;
 import com.information.spring.SpringBeanManger;
 import com.information.spring.SpringPlugin;
 import com.jfinal.aop.Duang;

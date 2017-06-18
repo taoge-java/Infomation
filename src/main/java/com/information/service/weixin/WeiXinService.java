@@ -1,4 +1,4 @@
-package com.information.service;
+package com.information.service.weixin;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;

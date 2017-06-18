@@ -14,7 +14,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.information.constant.CommonConstant;
-import com.information.controller.system.AdminController;
+import com.information.controller.system.SystemAdminController;
 import com.information.model.system.SystemMenu;
 import com.information.model.system.SystemOper;
 import com.information.model.system.SystemRole;
@@ -31,9 +31,9 @@ import com.jfinal.plugin.activerecord.Page;
  *
  */
 @Service
-public class RoleService {
+public class SystemRoleService {
 	
-	private Logger LOG=Logger.getLogger(AdminController.class);
+	private Logger LOG=Logger.getLogger(SystemAdminController.class);
 	
 	/**
 	 * 根据角色获取操作权限列表
