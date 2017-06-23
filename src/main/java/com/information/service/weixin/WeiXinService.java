@@ -17,6 +17,7 @@ import com.information.dao.weixin.base.BaseButton;
 import com.information.dao.weixin.event.ClickButton;
 import com.information.dao.weixin.event.ViewButton;
 import com.information.dao.weixin.template.TemplateMsg;
+import com.information.service.base.BaseService;
 import com.information.utils.HttpClientUtil;
 import com.jfinal.log.Logger;
 
@@ -27,7 +28,7 @@ import net.sf.json.JSONObject;
  * @version 1.0
  * 2017年4月9日上午19:51
  */
-public class WeiXinService {
+public class WeiXinService extends BaseService{
 
 	private static final Logger LOG=Logger.getLogger(WeiXinService.class);
 	

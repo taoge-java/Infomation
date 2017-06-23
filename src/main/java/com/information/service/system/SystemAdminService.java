@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.information.constant.CommonConstant;
 import com.information.model.system.SystemAdmin;
 import com.information.model.system.SystemRole;
+import com.information.service.base.BaseService;
 import com.information.service.base.DefaultResult;
 import com.information.service.base.Result;
 import com.information.utils.Md5Utils;
@@ -16,7 +17,7 @@ import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
 
 @Service
-public class SystemAdminService {
+public class SystemAdminService extends BaseService{
 	
 	private static final Log log=Log.getLog(SystemAdminService.class);
 	

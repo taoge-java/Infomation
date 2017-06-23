@@ -13,6 +13,7 @@ import com.information.model.system.SystemLog;
 import com.information.utils.DateUtil;
 import com.information.utils.IpUtils;
 import com.information.utils.NumberUtils;
+import com.jfinal.aop.Duang;
 import com.jfinal.core.Controller;
 import com.jfinal.upload.UploadFile;
 /**
@@ -26,6 +27,10 @@ public class BaseController extends Controller{
 	
 	public void rendView(String path){
 		render(SysConfig.BASE_VIEW+path);
+	}
+	
+	public <T> T getInstance(Class<T> cls){
+		return Duang.duang(cls.getName(),Class.class); 
 	}
 	
     /**

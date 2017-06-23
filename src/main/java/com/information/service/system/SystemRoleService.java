@@ -19,6 +19,7 @@ import com.information.model.system.SystemMenu;
 import com.information.model.system.SystemOper;
 import com.information.model.system.SystemRole;
 import com.information.model.system.SystemRoleOperRef;
+import com.information.service.base.BaseService;
 import com.information.service.base.DefaultResult;
 import com.information.service.base.Result;
 import com.information.utils.ResultCode;
@@ -31,7 +32,7 @@ import com.jfinal.plugin.activerecord.Page;
  *
  */
 @Service
-public class SystemRoleService {
+public class SystemRoleService extends BaseService{
 	
 	private Logger LOG=Logger.getLogger(SystemAdminController.class);
 	
