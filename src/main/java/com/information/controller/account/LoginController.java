@@ -111,8 +111,8 @@ public class LoginController extends BaseController{
 	 */
 	private void loginSrvice(SystemAdmin admin, String password) {
 		UserSession session=onlineManger.getUserSessionById(admin.getInt("id"));
-		    if(session!=null){//如果用户已经登录
-			   onlineManger.remove(session);
+		if(session!=null){//如果用户已经登录
+		    onlineManger.remove(session);
 		}
 		if(admin.getStr("password").equals(Md5Utils.getMd5(password, admin.getStr("encrypt")))){
 			if(admin.getBoolean("disabled_flag")){
@@ -122,10 +122,8 @@ public class LoginController extends BaseController{
 			loginSuccess(admin);//登录成功
 			renderJson(new ResultCode(ResultCode.SUCCESS, "登录成功"));
 		}else{
-			admin.set("login_error", admin.getInt("login_error")+1);
-			admin.update();
-			renderJson(new ResultCode(ResultCode.FAIL, "用户名或密码错误"));
 			LOG.error("用户名或密码错误");
+			renderJson(new ResultCode(ResultCode.FAIL, "用户名或密码错误"));
 			return;
 		}
 	}
