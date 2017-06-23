@@ -96,7 +96,7 @@ public class PropKit {
 		return getBoolean(key,null);
 	}
 	
-	public Boolean getBoolean(String key,String defaultValue){
+	public Boolean getBoolean(String key,Boolean defaultValue){
 		String value=get(key);
 		if(value!=null){
 			value=value.toLowerCase();
@@ -107,6 +107,6 @@ public class PropKit {
 			}
 			throw new RuntimeException("The value can not parse to Boolean : " + value);
 		}
-		return null;
+		return defaultValue;
 	}
 }
