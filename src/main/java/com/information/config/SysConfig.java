@@ -32,6 +32,7 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
+import com.jfinal.plugin.redis.Redis;
 import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.VelocityRender;
 import com.jfinal.render.ViewType;
@@ -55,6 +56,8 @@ public class SysConfig extends JFinalConfig{
 	
 	public static String redisHost; // redis主机
 	
+	public static String channels;
+	
 	public static String redisPassword; // redis密码
 	
 	public static String resourceUpload;//文件上传路径
@@ -72,6 +75,7 @@ public class SysConfig extends JFinalConfig{
 		 PropKit.use("config.properties");//加载配置文件
 		 redisPassword = PropKit.get("db.redis.password").trim();
 		 redisHost = PropKit.get("db.redis.host").trim();
+		 channels=PropKit.get("redis.channels").trim();
 		 resourceUpload=PropKit.get("resource.upload.path").trim();
 		 resourceDown=PropKit.get("resource.upload.path").trim();
 		 weixinToken=PropKit.get("weixin.token").trim();
@@ -113,10 +117,10 @@ public class SysConfig extends JFinalConfig{
 	    //配置缓存插件
 	    plugin.add(new EhCachePlugin());
 	    //配置redis插件
-//	    RedisPlugin redis=new RedisPlugin("information",redisHost,6379,redisPassword);
-//	    redis.getJedisPoolConfig().setMaxTotal(200);
-//	    redis.getJedisPoolConfig().setMaxIdle(200);
-//	    plugin.add(redis);
+	    RedisPlugin redis=new RedisPlugin("information",redisHost,6379,redisPassword);
+	    redis.getJedisPoolConfig().setMaxTotal(200);
+	    redis.getJedisPoolConfig().setMaxIdle(200);
+	    plugin.add(redis);
 	    plugin.add(new SpringPlugin(SpringBeanManger.getContext()));//集成spring
 	}
 
@@ -141,25 +145,25 @@ public class SysConfig extends JFinalConfig{
 	 */
 	@Override
 	public void afterJFinalStart() {
+		try{
+		    String menu=JSONObject.fromObject(weiXinService.generateMenu()).toString();
+		    int result=weiXinService.createMenu(weiXinService.getAccesstoken().getAccessToken(),menu);
+		    if(result==0){
+			   LOG.info("菜单创建成功");
+		    }else{
+			   LOG.error("菜单创建异常"); 
+		    }
+	     }catch(Exception e){
+		     e.printStackTrace();
+	         LOG.error("菜单创建异常"); 
+	     }	
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				try{
-				    String menu=JSONObject.fromObject(weiXinService.generateMenu()).toString();
-				    int result=weiXinService.createMenu(weiXinService.getAccesstoken().getAccessToken(),menu);
-				    if(result==0){
-					   LOG.info("菜单创建成功");
-				    }else{
-					   LOG.error("菜单创建异常"); 
-				    }
-			     }catch(Exception e){
-				     e.printStackTrace();
-			         LOG.error("菜单创建异常"); 
-			     }	
 				 JobManger job=Duang.duang(JobManger.class);
 				 job.start();
-		         RedisListener sp = new RedisListener();
-		//         jr.subscribe(sp,"information");//订阅频道
+		         RedisListener redisListener = new RedisListener();
+		         Redis.use().getJedis().subscribe(redisListener, channels);//订阅频道
 				 LOG.info("消息订阅成功");
 			}
 		}).start();
