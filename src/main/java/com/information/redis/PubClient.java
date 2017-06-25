@@ -40,7 +40,7 @@ public class PubClient {
 	}
 	
 	public void close(String channel,String message){
-		jedis.publish(channel,"关闭jedis消发布");
+		jedis.publish(channel,"关闭jedis消息发布");
 		jedis.del(channel);
 	}
 }
