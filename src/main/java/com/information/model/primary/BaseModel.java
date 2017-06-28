@@ -1,4 +1,4 @@
-package com.information.model;
+package com.information.model.primary;
 
 import java.util.Map;
 

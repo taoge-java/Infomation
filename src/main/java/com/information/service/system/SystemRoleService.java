@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 
 import com.information.constant.CommonConstant;
 import com.information.controller.system.SystemAdminController;
-import com.information.model.system.SystemMenu;
-import com.information.model.system.SystemOper;
-import com.information.model.system.SystemRole;
-import com.information.model.system.SystemRoleOperRef;
+import com.information.model.primary.system.SystemMenu;
+import com.information.model.primary.system.SystemOper;
+import com.information.model.primary.system.SystemRole;
+import com.information.model.primary.system.SystemRoleOperRef;
 import com.information.service.base.BaseService;
 import com.information.service.base.DefaultResult;
 import com.information.service.base.Result;

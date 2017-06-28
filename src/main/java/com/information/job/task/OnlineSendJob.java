@@ -12,7 +12,7 @@ import com.information.common.Constant;
 import com.information.dao.weixin.template.TemplateData;
 import com.information.dao.weixin.template.TemplateMsg;
 import com.information.job.base.BaseJob;
-import com.information.model.weixin.WeiXinUser;
+import com.information.model.primary.weixin.WeiXinUser;
 import com.information.service.weixin.WeiXinService;
 
 public class OnlineSendJob extends BaseJob{

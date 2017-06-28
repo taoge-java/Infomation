@@ -13,7 +13,7 @@ import com.information.controller.base.BaseController;
 import com.information.dao.OnlineManger;
 import com.information.dao.OnlineUser;
 import com.information.dao.UserSession;
-import com.information.model.system.SystemAdmin;
+import com.information.model.primary.system.SystemAdmin;
 import com.information.service.system.SystemRoleService;
 import com.information.utils.DateUtil;
 import com.information.utils.ImageUtil;

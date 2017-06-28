@@ -13,7 +13,6 @@ import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
 import com.jfinal.ext.plugin.tablebind.TableBind;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
-import com.jfinal.plugin.activerecord.DbKit;
 import com.jfinal.plugin.activerecord.IDataSourceProvider;
 import com.jfinal.plugin.activerecord.Model;
 /**
@@ -40,9 +39,6 @@ public class AutoTableBindPlugin extends ActiveRecordPlugin{
         super(dataSource);
         this.nameStyle = nameStyle;
     }
-    public AutoTableBindPlugin(String configName,  IDataSourceProvider dataSourceProvider) {
-		super(configName, dataSourceProvider, DbKit.DEFAULT_TRANSACTION_LEVEL);
-	}
     
     public AutoTableBindPlugin(String confitName,DataSource dataSource, INameStyle nameStyle) {
      super(confitName,dataSource);
@@ -51,22 +47,28 @@ public class AutoTableBindPlugin extends ActiveRecordPlugin{
     public AutoTableBindPlugin(IDataSourceProvider dataSourceProvider,String... packages) {
         this(dataSourceProvider, SimpleNameStyles.DEFAULT);
     }
+    
     public AutoTableBindPlugin(IDataSourceProvider dataSourceProvider, INameStyle nameStyle) {
         super(dataSourceProvider);
         this.nameStyle = nameStyle;
+    }
+    
+    public AutoTableBindPlugin(String configName,IDataSourceProvider dataSourceProvider) {
+        super(configName,dataSourceProvider);
     }
     
     public AutoTableBindPlugin(String configName,IDataSourceProvider dataSourceProvider, INameStyle nameStyle) {
         super(configName,dataSourceProvider);
         this.nameStyle = nameStyle;
     }
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-	public AutoTableBindPlugin addExcludeClasses(Class<? extends Model>... clazzes) {
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public AutoTableBindPlugin addExcludeClasses(Class<? extends Model>... clazzes) {
         for (Class<? extends Model> clazz : clazzes) {
             excludeClasses.add(clazz);
         }
         return this;
     }
+    
     @SuppressWarnings("rawtypes")
 	public AutoTableBindPlugin addExcludeClasses(List<Class<? extends Model>> clazzes) {
         if (clazzes != null) {

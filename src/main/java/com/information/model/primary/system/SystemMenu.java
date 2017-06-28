@@ -1,6 +1,5 @@
-package com.information.model.system;
-
-import com.information.model.BaseModel;
+package com.information.model.primary.system;
+import com.information.model.primary.BaseModel;
 import com.jfinal.ext.plugin.tablebind.TableBind;
 
 /**

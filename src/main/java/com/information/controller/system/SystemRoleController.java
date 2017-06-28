@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.information.constant.CommonEnum.LogType;
 import com.information.controller.base.BaseController;
-import com.information.model.system.SystemRole;
+import com.information.model.primary.system.SystemRole;
 import com.information.service.base.Result;
 import com.information.service.system.SystemRoleService;
 import com.information.utils.ResultCode;

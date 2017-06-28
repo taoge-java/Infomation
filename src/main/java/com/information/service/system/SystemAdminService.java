@@ -6,8 +6,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.information.constant.CommonConstant;
-import com.information.model.system.SystemAdmin;
-import com.information.model.system.SystemRole;
+import com.information.model.primary.system.SystemAdmin;
+import com.information.model.primary.system.SystemRole;
 import com.information.service.base.BaseService;
 import com.information.service.base.DefaultResult;
 import com.information.service.base.Result;

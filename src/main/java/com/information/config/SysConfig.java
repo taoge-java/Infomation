@@ -11,7 +11,8 @@ import com.information.interceptor.PermissionInterceptor;
 import com.information.interceptor.ViewContextInterceptor;
 import com.information.job.base.JobManger;
 import com.information.listener.RedisListener;
-import com.information.model.BaseModel;
+import com.information.model.primary.BaseModel;
+import com.information.model.slave.SlaveBaseModel;
 import com.information.service.weixin.WeiXinService;
 import com.information.spring.SpringBeanManger;
 import com.information.spring.SpringPlugin;
@@ -24,11 +25,14 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.RenderingTimeHandler;
+import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
 import com.jfinal.ext.route.AutoBindRoutes;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.cache.EhCache;
+import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
@@ -52,11 +56,11 @@ public class SysConfig extends JFinalConfig{
 
 	private Logger LOG=Logger.getLogger(SysConfig.class);
 	
-	public final static String BASE_VIEW="/WEB-INF/views";
+	public final static String BASE_VIEW="/WEB-INF/views";//页面存放路径
 	
 	public static String redisHost; // redis主机
 	
-	public static String channels;
+	public static String channels;//redis订阅频道
 	
 	public static String redisPassword; // redis密码
 	
@@ -65,6 +69,7 @@ public class SysConfig extends JFinalConfig{
 	public static String resourceDown;
 	
 	public static String  weixinToken;
+	
 	@Override
 	public void configConstant(Constants constants) {
 		 constants.setDevMode(true);
@@ -73,8 +78,8 @@ public class SysConfig extends JFinalConfig{
 		 JFinal.me().getConstants().setError404View(BASE_VIEW+"/common/404.vm");
 		 JFinal.me().getConstants().setError500View(BASE_VIEW+"/common/500.vm");
 		 PropKit.use("config.properties");//加载配置文件
-		 redisPassword = PropKit.get("db.redis.password").trim();
-		 redisHost = PropKit.get("db.redis.host").trim();
+		 redisPassword = PropKit.get("redis.password").trim();
+		 redisHost = PropKit.get("redis.host").trim();
 		 channels=PropKit.get("redis.channels").trim();
 		 resourceUpload=PropKit.get("resource.upload.path").trim();
 		 resourceDown=PropKit.get("resource.upload.path").trim();
@@ -101,27 +106,45 @@ public class SysConfig extends JFinalConfig{
 	public void configRoute(Routes routes) {
 		routes.add(new AutoBindRoutes());
 	}
+	
 	/**
-	 * 配置c3p0数据库连接池
-	 * 
+	 * 配置多个数据库连接
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void configPlugin(Plugins plugin) {
-		DruidPlugin druid = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
-	    plugin.add(druid);
-	    AutoTableBindPlugin atbp = new AutoTableBindPlugin(druid);
-	    atbp.addExcludeClasses(BaseModel.class);
-	    atbp.setShowSql(true);
-	    plugin.add(atbp);
-	    //配置缓存插件
-	    plugin.add(new EhCachePlugin());
+	    /**
+	     * 配置主数据库
+	     */
+		DruidPlugin primaryDruid = new DruidPlugin(PropKit.get("primary.jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
+	    plugin.add(primaryDruid);
+	    AutoTableBindPlugin primaryAtbp = new AutoTableBindPlugin("information",primaryDruid);
+	    primaryAtbp.scanPackages("com.information.model.primary"); //扫描com.information.model下的model
+	    //如果你只想用注解而不想让没有注解的model被自动注册，则如下使用
+	    primaryAtbp.autoScan(false);
+	    primaryAtbp.addExcludeClasses(BaseModel.class);
+	    primaryAtbp.setShowSql(true);
+	    plugin.add(primaryAtbp);
+	    /**
+	     * 配置从数据库
+	     */
+  		DruidPlugin slaveDruid= new DruidPlugin(PropKit.get("slave.jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
+  	    plugin.add(slaveDruid);
+  	    AutoTableBindPlugin slaveAtbp = new AutoTableBindPlugin("information_back",slaveDruid);
+  	    slaveAtbp.scanPackages("com.information.model.slave");//扫描com.information.student下的model
+  	    slaveAtbp.autoScan(false);
+  	    slaveAtbp.addExcludeClasses(SlaveBaseModel.class);
+  	    slaveAtbp.setShowSql(true);
+  	    plugin.add(slaveAtbp);
+  	   
+	    plugin.add(new EhCachePlugin());//配置缓存插件
 	    //配置redis插件
 	    RedisPlugin redis=new RedisPlugin("information",redisHost,6379,redisPassword);
 	    redis.getJedisPoolConfig().setMaxTotal(200);
 	    redis.getJedisPoolConfig().setMaxIdle(200);
 	    plugin.add(redis);
 	    plugin.add(new SpringPlugin(SpringBeanManger.getContext()));//集成spring
+	    
 	}
 
 	/**
@@ -134,6 +157,9 @@ public class SysConfig extends JFinalConfig{
 		interceptors.add(new IocInterceptor());
 	}
 
+	/**
+	 * 配置处理器
+	 */
 	@Override
 	public void configHandler(Handlers handlers) {
 	   handlers.add(new ContextPathHandler());

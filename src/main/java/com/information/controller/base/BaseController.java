@@ -9,7 +9,7 @@ import java.util.Date;
 import com.information.config.SysConfig;
 import com.information.constant.CommonConstant;
 import com.information.dao.UserSession;
-import com.information.model.system.SystemLog;
+import com.information.model.primary.system.SystemLog;
 import com.information.utils.DateUtil;
 import com.information.utils.IpUtils;
 import com.information.utils.NumberUtils;

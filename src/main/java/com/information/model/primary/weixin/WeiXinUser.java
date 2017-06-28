@@ -1,6 +1,5 @@
-package com.information.model.weixin;
-
-import com.information.model.BaseModel;
+package com.information.model.primary.weixin;
+import com.information.model.primary.BaseModel;
 import com.jfinal.ext.plugin.tablebind.TableBind;
 /**
  * 微信用户列表
