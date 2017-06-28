@@ -60,7 +60,9 @@ public class SystemAdminController extends BaseController{
 		systemAdmin.getParamters(getParaMap());
 		String password=getPara("password");
 		Result result=systemAdminService.save(systemAdmin,password);
-		systemLog(getCurrentUser().getLoginName()+"成功创建管理员"+systemAdmin.getStr("login_name"),LogType.MODIFY.getValue());
+		if(result.isSuccess()){
+			systemLog(getCurrentUser().getLoginName()+"成功创建管理员"+systemAdmin.getStr("login_name"),LogType.MODIFY.getValue());
+		}
 		renderJson(result.getResultCode());
 	}
 	/**
@@ -104,6 +106,9 @@ public class SystemAdminController extends BaseController{
 		String ids=getPara("ids");
 		String[] id=StrUtils.spilt(ids);
 		Result result=systemAdminService.delAll(id);
+		if(result.isSuccess()){
+			
+		}
 		renderJson(result.getResultCode());
 	}
 }

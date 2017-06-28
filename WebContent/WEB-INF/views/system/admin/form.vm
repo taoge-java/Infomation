@@ -29,14 +29,14 @@
              <td>手机号码:</td><td><input type="text" style="line-height: 25px;" name="systemAdmin.mobile" value="${admin.mobile }"></td>
               <td style="width: 90px;"></td>
               <td>是否禁用:</td>
-              <td ><input type="radio" name="systemAdmin.disabled_flag" value="1" <c:if test="${admin.disabled_flag==1 }">checked="checked"</c:if> checked="checked">是&nbsp;&nbsp;&nbsp;
-               <input type="radio" name="systemAdmin.disabled_flag" <c:if test="${admin.disabled_flag==0 }">checked="checked"</c:if>  value="0">否 </td>
+              <td ><input type="radio" name="systemAdmin.disabled_flag" value="1" #if($admin.disabled_flag==1)checked="checked" #end>是&nbsp;&nbsp;&nbsp;
+               <input type="radio" name="systemAdmin.disabled_flag"   value="0">否 </td>
          </tr>
          <tr>
            <td>
                           是否超级管理员:</td><td >
-            <input type="radio" name="systemAdmin.super_flag" <c:if test="${admin.super_flag==1 }">checked="checked"</c:if> value="1" checked="checked">是&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="systemAdmin.flag" <c:if test="${admin.super_flag==0 }">checked="checked"</c:if> value="0">否
+            <input type="radio" name="systemAdmin.super_flag"  value="1" checked="checked">是&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="systemAdmin.flag"  value="0">否
             </td>
             <td>  </td></td>
              <td></td>

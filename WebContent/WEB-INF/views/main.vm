@@ -61,7 +61,7 @@
     </div>
 </body>
 <script>
- setInterval("heart()",1000);//心跳包
+ setInterval("heart()",20*1000);//心跳包
    /**
             客户端向服务器发送在线消息
    */

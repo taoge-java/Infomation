@@ -1,9 +1,12 @@
 package com.information.utils;
-
+/**
+ * 为方便处理ajax请求
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年6月28日上午9:28:04
+ */
 public class ResultCode {
-	/**
-	 * 为方便处理ajax请求
-	 */
+	
 	public static final int SUCCESS=1;
 	
 	public static final int FAIL=0;

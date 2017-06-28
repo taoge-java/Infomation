@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.jfinal.render.Render;
 /**
  * 文件下载辅助类
- * @author Administrator
- *
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年6月28日上午9:27:50
  */
 public class MyFileRender extends Render{
 	

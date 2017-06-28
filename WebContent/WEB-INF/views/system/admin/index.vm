@@ -24,7 +24,7 @@
   <div class="panel-head"><strong class="icon-reorder">管理员列表</strong></div>
     <form id="data-form">
         <button class="button bg-yellow" type="button"  style="margin: 8px 0px 15px 15px;height: 40px;" id="add" onclick="create()">
-    	    <span  class="icon-plus-circle">添加管理员</span>
+    	    <span #if($admin.disabled_flag!=1) class="sdsdsd" #end  class="icon-plus-circle">添加管理员$admin.disabled_flag</span>
     	</button>
 	    <input type="text" placeholder="请输入登录名" id="name" class="input" style="width:250px; line-height:17px;display:inline-block" />
         <button type="button"  class="button border-main icon-search" id="search"> 搜索</button>

@@ -15,7 +15,6 @@ import com.information.dao.weixin.message.response.ResponseNewsMessage;
 import com.thoughtworks.xstream.XStream;
 
 /**
- * 
  * @author zengjintao
  * @version 1.0
  * 2017年4月七日上午8:05

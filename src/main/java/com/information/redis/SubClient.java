@@ -4,7 +4,12 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisPubSub;
-
+/**
+ * 消息订阅端
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年6月26日下午3:08:38
+ */
 public class SubClient {
 
 	private JedisPool jedisPool;

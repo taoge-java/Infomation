@@ -150,21 +150,25 @@ public class SysConfig extends JFinalConfig{
 		    int result=weiXinService.createMenu(weiXinService.getAccesstoken().getAccessToken(),menu);
 		    if(result==0){
 			   LOG.info("菜单创建成功");
-		    }else{
-			   LOG.error("菜单创建异常"); 
 		    }
 	     }catch(Exception e){
 		     e.printStackTrace();
 	         LOG.error("菜单创建异常"); 
 	     }	
+		 new Thread(new Runnable() {
+			@Override
+			public void run() {
+		         RedisListener redisListener = new RedisListener();
+		         Redis.use().getJedis().subscribe(redisListener, channels);//订阅频道
+				 LOG.info("消息订阅成功");
+			}
+		}).start();
+		 
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				 JobManger job=Duang.duang(JobManger.class);
 				 job.start();
-		         RedisListener redisListener = new RedisListener();
-		         Redis.use().getJedis().subscribe(redisListener, channels);//订阅频道
-				 LOG.info("消息订阅成功");
 			}
 		}).start();
 		LOG.info("数据初始化完毕");

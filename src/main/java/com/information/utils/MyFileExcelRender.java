@@ -9,12 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.jfinal.render.Render;
-
+/**
+ *  excel文件导出工具类
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年6月28日上午9:27:34
+ */
 @SuppressWarnings("unused")
 public class MyFileExcelRender extends Render{
-	/**
-	 * excel文件导出工具类
-	 */
+	
 	private String file;
 	private HttpServletResponse response;
 	private  HSSFWorkbook  work;
