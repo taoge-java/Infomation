@@ -8,7 +8,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.information.common.Constant;
+import com.information.constant.Constant;
 import com.information.dao.weixin.template.TemplateData;
 import com.information.dao.weixin.template.TemplateMsg;
 import com.information.job.base.BaseJob;

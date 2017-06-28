@@ -20,7 +20,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.information.common.Constant;
+import com.information.constant.Constant;
 
 
 /**

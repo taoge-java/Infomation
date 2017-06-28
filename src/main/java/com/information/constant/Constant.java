@@ -1,4 +1,4 @@
-package com.information.common;
+package com.information.constant;
 /**
  * 常量类
  * @author zengjintao

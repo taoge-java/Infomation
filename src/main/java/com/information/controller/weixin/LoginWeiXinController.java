@@ -2,7 +2,7 @@
 
 import java.net.URLEncoder;
 
-import com.information.common.Constant;
+import com.information.constant.Constant;
 import com.information.utils.HttpClientUtil;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.route.ControllerBind;
