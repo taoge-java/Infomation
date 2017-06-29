@@ -22,7 +22,7 @@ public class JobManger {
 	
 	public static List<JobBuild> jobs=new ArrayList<JobBuild>();
 	
-	private Logger LOG=Logger.getLogger(getClass());
+	private static final Logger LOG=Logger.getLogger(JobManger.class);
 	
 	public void start(){
 		try {

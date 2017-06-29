@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<link rel="stylesheet" href="$BASE_PATH/resource/css/index/pintuer.css">
+<link rel="stylesheet" href="$BASE_PATH/resource/css/index/admin.css">
+<link rel="stylesheet" href="$BASE_PATH/resource/css/index/layui.css"> 
+<link rel="stylesheet" href="$BASE_PATH/resource/js/layui-v1.0.5/layui/css/layui.css"> 
+<script type="text/javascript" src="$BASE_PATH/resource/js/jquery/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="$BASE_PATH/resource/js/layer/layer.js"></script>
+<script src="$BASE_PATH/resource/js/global.js"></script>
+<script type="text/javascript" src="$BASE_PATH/resource/js/layui-v1.0.5/layui/layui.js"></script>
+<script type="text/javascript" src="$BASE_PATH/resource/js/My97DatePicker/WdatePicker.js"></script>
+<script src="$BASE_PATH/resource/js/pintuer.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+  
+</body>
+</html>

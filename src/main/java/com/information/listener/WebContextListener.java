@@ -15,7 +15,7 @@ import com.jfinal.log.Log;
  */
 public class WebContextListener implements ServletContextListener{
 	
-	Log LOG=Log.getLog(WebContextListener.class);
+	private static final Log LOG=Log.getLog(WebContextListener.class);
 
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {

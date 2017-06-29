@@ -11,7 +11,7 @@ import redis.clients.jedis.JedisPubSub;
  */
 public class RedisListener extends JedisPubSub{
 
-	private static final Log logger=Log.getLog(RedisListener.class);
+	private static final Log LOG=Log.getLog(RedisListener.class);
 	
     /**
      *  取得订阅的消息后的处理    (non-Javadoc)
@@ -19,7 +19,7 @@ public class RedisListener extends JedisPubSub{
      */
     @Override
     public void onMessage(String channel, String message) {
-    	logger.info("开始接收信息");
+    	LOG.info("开始接收信息");
         System.out.println("onMessage: channel["+channel+"], message["+message+"]");
     }
 
@@ -38,7 +38,7 @@ public class RedisListener extends JedisPubSub{
      */
     @Override
     public void onSubscribe(String channel,int subscribedChannels) {
-    	logger.info("初始化订阅消息");
+    	LOG.info("初始化订阅消息");
         System.out.println("onSubscribe: channel["+channel+"],"+"subscribedChannels["+subscribedChannels+"]");
     }
 
@@ -47,7 +47,7 @@ public class RedisListener extends JedisPubSub{
      */
     @Override
     public void onUnsubscribe(String channel,int subscribedChannels) {
-    	logger.info("取消订阅消息");
+    	LOG.info("取消订阅消息");
         System.out.println("onUnsubscribe: channel["+channel+"], "+ "subscribedChannels["+subscribedChannels+"]");
     }
  

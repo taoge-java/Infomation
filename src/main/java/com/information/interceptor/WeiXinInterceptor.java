@@ -1,10 +1,12 @@
 package com.information.interceptor;
 
+
 import com.information.controller.base.BaseWeiXinController;
 import com.information.utils.EncryptUtil;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
+import com.jfinal.log.Log;
 /**
  * 微信接入拦截器
  * @author zengjintao
@@ -12,6 +14,8 @@ import com.jfinal.core.Controller;
  * 2017年4月7日上午8:30
  */
 public class WeiXinInterceptor implements Interceptor{
+	
+	private static final Log LOG=Log.getLog(WeiXinInterceptor.class);
 
 	public void intercept(Invocation inv) {
 		Controller controller=inv.getController();
@@ -60,6 +64,7 @@ public class WeiXinInterceptor implements Interceptor{
 	    	return true;
 	    }else{
 	    	controller.renderText("签名校验失败");
+	    	LOG.error("签名校验失败");
 	    }
 		return false;
 	}

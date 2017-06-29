@@ -34,7 +34,7 @@ import com.jfinal.plugin.activerecord.Page;
 @Service
 public class SystemRoleService extends BaseService{
 	
-	private Logger LOG=Logger.getLogger(SystemAdminController.class);
+	private static final Logger LOG=Logger.getLogger(SystemAdminController.class);
 	
 	/**
 	 * 根据角色获取操作权限列表
@@ -100,7 +100,7 @@ public class SystemRoleService extends BaseService{
         	}
         }catch(Exception e){
             resultCode =new ResultCode(ResultCode.FAIL, "创建数据异常!");
-        	LOG.error("创建数据异常!");
+        	LOG.error("创建数据异常!",e);
         }
 		result.setResultCode(resultCode);
 		return result;
@@ -125,7 +125,7 @@ public class SystemRoleService extends BaseService{
 			}
 		}catch(Exception e){
 			resultCode=new ResultCode(ResultCode.FAIL,"更新数据异常");
-			LOG.error("更新数据异常");
+			LOG.error("更新数据异常",e);
 		}
 		result.setResultCode(resultCode);
 		return result;
@@ -151,7 +151,7 @@ public class SystemRoleService extends BaseService{
 				SystemRole.dao.deleteById(id);
 			}
 		}catch(Exception e){
-			LOG.error("删除数据异常....");
+			LOG.error("删除数据异常....",e);
 			resultCode=new ResultCode(ResultCode.FAIL, "删除数据异常");
 		}
 		result.setResultCode(resultCode);
@@ -227,7 +227,6 @@ public class SystemRoleService extends BaseService{
 			}
 			return true;
 		}catch(Exception e){
-			e.printStackTrace();
 			LOG.error("保存权限异常", e);
 			return false;
 		}

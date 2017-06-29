@@ -19,21 +19,28 @@ import com.jfinal.plugin.activerecord.Page;
 @Service
 public class SystemAdminService extends BaseService{
 	
-	private static final Log log=Log.getLog(SystemAdminService.class);
+	private static final Log LOG=Log.getLog(SystemAdminService.class);
 	
 	/**
 	 * 管理员列表
 	 */
 	public Result getAdminList(String  login_name,int pageNumber){
 		Result result=new DefaultResult();
-		StringBuilder context=new StringBuilder("from system_admin where 1=1");
-		List<Object> param=new ArrayList<Object>();
-		if(StringUtils.isNotEmpty(login_name)){
-			context.append(" and login_name=?");
-			param.add(login_name);
+		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS);
+		try {
+			StringBuilder context=new StringBuilder("from system_admin where 1=1");
+			List<Object> param=new ArrayList<Object>();
+			if(StringUtils.isNotEmpty(login_name)){
+				context.append(" and login_name=?");
+				param.add(login_name);
+			}
+			Page<SystemAdmin> page= SystemAdmin.dao.paginate(pageNumber, CommonConstant.pageSize, "select *", context.toString(),param.toArray());
+			result.setDefaultModel(page);
+		} catch (Exception e) {
+			resultCode=new ResultCode(ResultCode.FAIL);
+			LOG.error("查询异常",e);
 		}
-		Page<SystemAdmin> page= SystemAdmin.dao.paginate(pageNumber, CommonConstant.pageSize, "select *", context.toString(),param.toArray());
-		result.setDefaultModel(page);
+		result.setResultCode(resultCode);
 		return result;
 	}
 	/**
@@ -62,7 +69,7 @@ public class SystemAdminService extends BaseService{
 		    systemAdmin.save();
 		}catch(Exception e){
 			resultCode=new ResultCode(ResultCode.FAIL, "数据创建异常!");
-			log.error("数据创建异常");
+			LOG.error("数据创建异常",e);
 		}
 		result.setResultCode(resultCode);
 		return result;
@@ -78,7 +85,7 @@ public class SystemAdminService extends BaseService{
         try{
 			SystemAdmin.dao.deleteById(id);
 		}catch(Exception e){
-			log.error("删除数据异常");
+			LOG.error("删除数据异常",e);
 			rseultCode=new ResultCode(ResultCode.FAIL,"删除数据异常");
 		}
         result.setResultCode(rseultCode);
@@ -97,8 +104,8 @@ public class SystemAdminService extends BaseService{
 			systemAdmin.set("sys_password",Md5Utils.getMd5(password));
 	        systemAdmin.update();
 		}catch(Exception e){
-			log.error("删除数据异常");
 			resultCode=new ResultCode(ResultCode.FAIL,"更新数据异常");
+			LOG.error("删除数据异常",e);
 		}
 		result.setResultCode(resultCode);
 		return result;
@@ -117,8 +124,8 @@ public class SystemAdminService extends BaseService{
 				SystemAdmin.dao.deleteById(id);
 			}
 		}catch(Exception e){
-			log.error("删除数据异常....");
 			resultCode=new ResultCode(ResultCode.FAIL, "删除数据异常");
+			LOG.error("删除数据异常....",e);
 		}
 		result.setResultCode(resultCode);
 		return result;
