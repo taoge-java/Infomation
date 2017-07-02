@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OnlineManger {
 
-	private Map<String,UserSession> session=new HashMap<String,UserSession>();
+	private static final Map<String,UserSession> session=new HashMap<String,UserSession>();
 	
 	/**
 	 * 添加用户
@@ -39,7 +39,7 @@ public class OnlineManger {
 	 * @return
 	 */
 	public List<UserSession> getAllUserSession(){
-		return new ArrayList<>(session.values());
+		return new ArrayList<UserSession>(session.values());
 	}
 	
 	/**

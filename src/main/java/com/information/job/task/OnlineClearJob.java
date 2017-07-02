@@ -9,7 +9,7 @@ import org.quartz.JobExecutionException;
 import com.information.dao.OnlineManger;
 import com.information.dao.UserSession;
 import com.information.job.base.BaseJob;
-import com.jfinal.aop.Duang;
+import com.information.spring.SpringBeanManger;
 import com.jfinal.log.Logger;
 /**
  * 在线任务清理
@@ -24,7 +24,7 @@ public class OnlineClearJob extends BaseJob{
 	@Override
 	public void execute(JobExecutionContext context) 
 			throws JobExecutionException {
-		OnlineManger onlineManger=Duang.duang(OnlineManger.class);
+		OnlineManger onlineManger=(OnlineManger) SpringBeanManger.getBean("onlineManger");
 		List<UserSession> list=onlineManger.getAllUserSession();
 		/**
 		 * 30分钟无任何操作则剔除用户
