@@ -7,6 +7,7 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.information.annotation.ControllerRoute;
 import com.information.constant.CommonConstant;
 import com.information.constant.CommonEnum.LogType;
 import com.information.controller.base.BaseController;
@@ -20,7 +21,6 @@ import com.information.utils.ImageUtil;
 import com.information.utils.IpUtils;
 import com.information.utils.Md5Utils;
 import com.information.utils.ResultCode;
-import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Log;
 
 /**
@@ -29,7 +29,7 @@ import com.jfinal.log.Log;
  * @version 1.0
  * @create_at 2017年4月27日 上午9:47:48
  */
-@ControllerBind(controllerKey="/account")
+@ControllerRoute(url="/account")
 public class LoginController extends BaseController{
 	
 	private static final Log LOG=Log.getLog(LoginController.class);

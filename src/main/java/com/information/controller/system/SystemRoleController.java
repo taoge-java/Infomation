@@ -4,13 +4,13 @@ package com.information.controller.system;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.information.annotation.ControllerRoute;
 import com.information.constant.CommonEnum.LogType;
 import com.information.controller.base.BaseController;
 import com.information.model.primary.system.SystemRole;
 import com.information.service.base.Result;
 import com.information.service.system.SystemRoleService;
 import com.information.utils.ResultCode;
-import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
 /**
@@ -19,7 +19,7 @@ import com.jfinal.plugin.activerecord.Page;
  * @version 1.0
  * @create_at 2017年6月8日 下午9:29:32
  */
-@ControllerBind(controllerKey="system/role")
+@ControllerRoute(url="/system/role")
 public class SystemRoleController extends BaseController{
 	
 	private Log log=Log.getLog(SystemAdminController.class);

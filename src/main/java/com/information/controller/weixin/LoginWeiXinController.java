@@ -2,10 +2,10 @@
 
 import java.net.URLEncoder;
 
+import com.information.annotation.ControllerRoute;
 import com.information.constant.Constant;
 import com.information.utils.HttpClientUtil;
 import com.jfinal.core.Controller;
-import com.jfinal.ext.route.ControllerBind;
 
 import net.sf.json.JSONObject;
 
@@ -15,7 +15,8 @@ import net.sf.json.JSONObject;
  * @version 1.0
  * 2017年4月10日 下午13:51
  */
-@ControllerBind(controllerKey="/auth")
+//@ControllerBind(controllerKey="/auth")
+@ControllerRoute(url="/auth")
 public class LoginWeiXinController extends Controller{
 
 	public void index() throws Exception{

@@ -26,7 +26,6 @@ import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.RenderingTimeHandler;
 import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
-import com.jfinal.ext.route.AutoBindRoutes;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.log.Logger;

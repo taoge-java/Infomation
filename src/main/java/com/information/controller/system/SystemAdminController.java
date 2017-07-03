@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.information.annotation.Permission;
+import com.information.annotation.ControllerRoute;
 import com.information.constant.CommonEnum.LogType;
 import com.information.constant.OperCode;
 import com.information.controller.base.BaseController;
@@ -15,12 +16,11 @@ import com.information.service.base.Result;
 import com.information.service.system.SystemAdminService;
 import com.information.utils.ResultCode;
 import com.information.utils.StrUtils;
-import com.jfinal.ext.route.ControllerBind;
 
 /***
  * 管理员设置
  */
-@ControllerBind(controllerKey="/system/admin")
+@ControllerRoute(url="/system/admin")
 public class SystemAdminController extends BaseController{
 	
 	@Autowired

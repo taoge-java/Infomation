@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.information.annotation.ControllerRoute;
 import com.information.constant.Constant;
 import com.information.controller.base.BaseWeiXinController;
 import com.information.dao.weixin.message.Articles;
@@ -15,13 +16,13 @@ import com.information.dao.weixin.message.response.ResponseNewsMessage;
 import com.information.interceptor.WeiXinInterceptor;
 import com.information.utils.XMLUtil;
 import com.jfinal.aop.Before;
-import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Log;
 /**
  * 微信服务器接入唯一入口
  * @author zengjintao
  */
-@ControllerBind(controllerKey="/weixin")
+//@ControllerBind(controllerKey="/weixin")
+@ControllerRoute(url="/weixin")
 public class MsgController extends BaseWeiXinController{
 	
 	private static Log LOG=Log.getLog(MsgController.class);

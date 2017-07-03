@@ -2,18 +2,19 @@ package com.information.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.information.annotation.ControllerRoute;
 import com.information.controller.base.BaseController;
 import com.information.dao.OnlineManger;
 import com.information.dao.UserSession;
 import com.information.utils.ResultCode;
-import com.jfinal.ext.route.ControllerBind;
 /**
  * 系统首页
  * @author zengjintao
  * @version 1.0
  * @create_at 2017年4月26日 下午4:36:21
  */
-@ControllerBind(controllerKey="/")
+//@ControllerBind(controllerKey="/")
+@ControllerRoute(url="/")
 public class IndexController extends BaseController{
 
 	@Autowired
