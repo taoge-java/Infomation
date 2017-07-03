@@ -5,9 +5,9 @@ import java.util.List;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.information.annotation.ControllerRoute;
+import com.information.utils.PackageUtil;
 import com.jfinal.config.Routes;
 import com.jfinal.core.Controller;
-import com.jfinal.ext.kit.ClassSearcher;
 import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
 
@@ -15,7 +15,14 @@ public class AutoBindRoutes extends Routes {
 
     private boolean autoScan = true;
 
-    private List<Class<? extends Controller>> excludeClasses = Lists.newArrayList();
+    private String packageName;
+    
+    public AutoBindRoutes setPackageName(String packageName){
+    	this.packageName=packageName;
+    	return this;
+    }
+
+	private List<Class<? extends Controller>> excludeClasses = Lists.newArrayList();
 
     protected final Log logger = Log.getLog(getClass());
 
@@ -57,7 +64,7 @@ public class AutoBindRoutes extends Routes {
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void config() {
-        List<Class<? extends Controller>> controllerClasses = ClassSearcher.of(Controller.class).search();
+        List<Class<? extends Controller>> controllerClasses=PackageUtil.scanPackage(packageName,true,"WEB-INF/classes/");
         ControllerRoute requestMapping = null;
         for (Class controller : controllerClasses) {
             if (excludeClasses.contains(controller)) {
@@ -78,7 +85,7 @@ public class AutoBindRoutes extends Routes {
 
     private String controllerKey(Class<Controller> clazz) {
         Preconditions.checkArgument(clazz.getSimpleName().endsWith(suffix),
-                clazz.getName()+" is not annotated with @RequestMapping and not end with " + suffix);
+                clazz.getName()+" is not annotated with @ControllerRoute and not end with " + suffix);
         String controllerKey = "/" + StrKit.firstCharToLowerCase(clazz.getSimpleName());
         controllerKey = controllerKey.substring(0, controllerKey.indexOf(suffix));
         return controllerKey;

@@ -103,7 +103,9 @@ public class SysConfig extends JFinalConfig{
 	 */
 	@Override
 	public void configRoute(Routes routes) {
-		routes.add(new AutoBindRoutes());
+		AutoBindRoutes autoBindRoutes= new AutoBindRoutes();
+		autoBindRoutes.setPackageName("com.information.controller");
+		routes.add(autoBindRoutes);
 	}
 	
 	/**

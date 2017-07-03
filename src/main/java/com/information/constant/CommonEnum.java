@@ -91,4 +91,32 @@ public class CommonEnum {
 
 	}
 
+	public enum PathType{
+		TARGET(2,"target/classes"),WEB_INF(1,"WEB-INF/classes"),;
+	    
+		int value;
+		
+		String name;
+		
+		public int getValue() {
+			return value;
+		}
+
+		public void setValue(int value) {
+			this.value = value;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		private PathType(int value,String name){
+			this.value=value;
+			this.name=name;
+		}
+	}
 }

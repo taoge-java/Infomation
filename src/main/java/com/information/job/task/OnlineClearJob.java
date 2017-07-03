@@ -10,7 +10,7 @@ import com.information.dao.OnlineManger;
 import com.information.dao.UserSession;
 import com.information.job.base.BaseJob;
 import com.information.spring.SpringBeanManger;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 /**
  * 在线任务清理
  * @author zengjintao
@@ -19,7 +19,7 @@ import com.jfinal.log.Logger;
  */
 public class OnlineClearJob extends BaseJob{
 
-	private Logger LOG=Logger.getLogger(OnlineClearJob.class);
+	private Log LOG=Log.getLog(OnlineClearJob.class);
 	
 	@Override
 	public void execute(JobExecutionContext context) 

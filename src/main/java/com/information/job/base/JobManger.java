@@ -8,7 +8,7 @@ import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.stereotype.Component;
 
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 /**
  * 任务管理器
  * @author zengjintao
@@ -22,7 +22,7 @@ public class JobManger {
 	
 	public static List<JobBuild> jobs=new ArrayList<JobBuild>();
 	
-	private static final Logger LOG=Logger.getLogger(JobManger.class);
+	private static final Log LOG=Log.getLog(JobManger.class);
 	
 	public void start(){
 		try {

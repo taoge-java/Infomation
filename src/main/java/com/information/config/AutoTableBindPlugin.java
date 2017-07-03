@@ -119,38 +119,43 @@ public class AutoTableBindPlugin extends ActiveRecordPlugin{
         }
         return super.start();
     }
+    
+    
     @Override
     public boolean stop() {
         return super.stop();
     }
+    
     @SuppressWarnings({ "unchecked", "rawtypes"})
- private void scanModel(TableBind tb,Class clazz){
-     if (!excludeClasses.contains(clazz)) {
-         tb = (TableBind) clazz.getAnnotation(TableBind.class);
-         String tableName;
-         if (tb == null) {
-             if (autoScan) {
-              tableName = nameStyle.name(clazz.getSimpleName());
-              this.addMapping(tableName, clazz);
-              log.debug("addMapping(" + tableName + ", " + clazz.getName() + ")");
-             }
-         } else {
-             tableName = tb.tableName();
-             if (StringUtils.isNotBlank(tb.pkName())) {
-                 this.addMapping(tableName, tb.pkName(), clazz);
-                 log.debug("addMapping(" + tableName + ", " + tb.pkName() + "," + clazz.getName() + ")");
-             } else {
-                 this.addMapping(tableName, clazz);
-                 log.debug("addMapping(" + tableName + ", " + clazz.getName() + ")");
-             }
-         }
-     }
+    private void scanModel(TableBind tb,Class clazz){
+	    if (!excludeClasses.contains(clazz)) {
+	         tb = (TableBind) clazz.getAnnotation(TableBind.class);
+	         String tableName;
+	         if (tb == null) {
+	             if (autoScan) {
+	              tableName = nameStyle.name(clazz.getSimpleName());
+	              this.addMapping(tableName, clazz);
+	              log.debug("addMapping(" + tableName + ", " + clazz.getName() + ")");
+	             }
+	         } else {
+	             tableName = tb.tableName();
+	             if (StringUtils.isNotBlank(tb.pkName())) {
+	                 this.addMapping(tableName, tb.pkName(), clazz);
+	                 log.debug("addMapping(" + tableName + ", " + tb.pkName() + "," + clazz.getName() + ")");
+	             } else {
+	                 this.addMapping(tableName, clazz);
+	                 log.debug("addMapping(" + tableName + ", " + clazz.getName() + ")");
+	             }
+	         }
+	     }
     }
     
     public AutoTableBindPlugin autoScan(boolean autoScan) {
         this.autoScan = autoScan;
         return this;
     }
+    
+    
     public AutoTableBindPlugin includeAllJarsInLib(boolean includeAllJarsInLib) {
         this.includeAllJarsInLib = includeAllJarsInLib;
         return this;
