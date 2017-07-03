@@ -193,7 +193,7 @@ public class SysConfig extends JFinalConfig{
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				 JobManger job=Duang.duang(JobManger.class);
+				 JobManger job=(JobManger) SpringBeanManger.getBean("jobManger");
 				 job.start();
 			}
 		}).start();

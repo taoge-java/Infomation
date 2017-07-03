@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OnlineManger {
 
-	private static final Map<String,UserSession> session=new HashMap<String,UserSession>();
+	private  Map<String,UserSession> session=new HashMap<String,UserSession>();
 	
 	/**
 	 * 添加用户
