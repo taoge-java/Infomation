@@ -23,7 +23,7 @@ import com.jfinal.plugin.activerecord.Model;
  */
 public class AutoTableBindPlugin extends ActiveRecordPlugin{
 
-	protected final Log log = Log.getLog(getClass());
+	private static final Log log = Log.getLog(AutoTableBindPlugin.class);
     @SuppressWarnings("rawtypes")
 	private List<Class<? extends Model>> excludeClasses = Lists.newArrayList();
     private List<String> packageList = Lists.newArrayList(); 
@@ -31,6 +31,7 @@ public class AutoTableBindPlugin extends ActiveRecordPlugin{
     private boolean autoScan = true;
     private boolean includeAllJarsInLib;
     private INameStyle nameStyle;
+    
     public AutoTableBindPlugin(DataSource dataSource) {
         this(dataSource, SimpleNameStyles.DEFAULT);
         
