@@ -1,5 +1,6 @@
 package com.information.utils;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
@@ -10,24 +11,38 @@ import java.util.Date;
  */
 public class DateUtil {
 	
-	private static final  SimpleDateFormat FORMAT=getFormat("yyy-MM-dd HH:mm");
+	private static final SimpleDateFormat FORMAT=getFormat("yyy-MM-dd HH:mm");
 	
 	/**
 	 * 获取当前时间
 	 * @return
 	 */
-	public synchronized static Date getDate(){
+	public static Date getDate(){
 		return new Date();
 	}
 	
 	public synchronized static SimpleDateFormat getFormat(String format){
 		return new SimpleDateFormat(format);
 	}
+	
 	/**
 	 * 将日期转换成字符串形式
 	 * @return
 	 */
 	public synchronized static String getStrDate(Date date){
 		return FORMAT.format(date);
+	}
+	
+	/**
+	 * 将日期转成字符串
+	 * @return
+	 */
+	public static String toLocaleString() {
+        DateFormat formatter = DateFormat.getDateTimeInstance();
+        return formatter.format(getDate());
+	}
+	
+	public static void main(String[] args) {
+		System.err.println(toLocaleString());;
 	}
 }

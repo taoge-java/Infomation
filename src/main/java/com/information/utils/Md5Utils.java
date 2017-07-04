@@ -89,4 +89,9 @@ public class Md5Utils {
     public static String generatorKey(){
     	return getMd5(UUID.randomUUID().toString());
     }
+    
+    public static void main(String[] args) {
+    	System.out.println(Md5Utils.convertMD5(Md5Utils.getMd5("123456")));
+		//System.err.println(Md5Utils.getMd5("123456"));;
+	}
 }
