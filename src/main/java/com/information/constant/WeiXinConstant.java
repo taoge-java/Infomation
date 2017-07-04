@@ -5,7 +5,7 @@ package com.information.constant;
  * @version 1.0
  * @create_at 2017年6月4日 下午9:56:19
  */
-public class Constant {
+public class WeiXinConstant {
 
 	    public static final String ONE_MINUTE="one.minute";
 	
@@ -39,6 +39,8 @@ public class Constant {
 		public static final String MESSAGE_VIEW="VIEW";
 		
 		public static final String MESAGE_NEWS="news";
+		
+		public static final String CUSTOMER_SERVICE="transfer_customer_service";
 		/**模板测试id**/
 		public static final String TEMPLATE_ID="GNYiG5lPy9Btz45nf7FVvS4Ifu4eC3lt9ZRptdAxra0";
 		
@@ -52,6 +54,7 @@ public class Constant {
 		public static final String TEMPLATE_MESSAGE_URL="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=ACCESS_TOKEN";
 		
 		public static final String URL="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
+		
 		/**微信永久素材接口 **/
 		public static final String FOREVER_UPLOAD_URL="https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=ACCESS_TOKEN&type=TYPE";
 }

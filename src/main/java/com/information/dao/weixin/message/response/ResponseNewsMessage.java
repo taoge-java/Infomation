@@ -33,5 +33,4 @@ public class ResponseNewsMessage extends BaseMessae{
 	public void setArticles(List<Articles> articles) {
 		Articles = articles;
 	}
-
 }

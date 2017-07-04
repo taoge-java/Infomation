@@ -24,6 +24,16 @@ public class RequestVoiceMessage extends BaseMessae{
 	
 	private String Format;//	语音格式，如amr，speex等
 	
+	private String MsgId;
+	
+	public String getMsgId() {
+		return MsgId;
+	}
+
+	public void setMsgId(String msgId) {
+		MsgId = msgId;
+	}
+
 	public String getMediaId() {
 		return MediaId;
 	}
