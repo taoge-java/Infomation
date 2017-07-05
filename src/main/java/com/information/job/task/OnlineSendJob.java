@@ -8,7 +8,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.information.constant.Constant;
+import com.information.constant.WeiXinConstant;
 import com.information.dao.weixin.template.TemplateData;
 import com.information.dao.weixin.template.TemplateMsg;
 import com.information.job.base.BaseJob;
@@ -57,7 +57,7 @@ public class OnlineSendJob extends BaseJob{
 			map.put("remark", remark);  
 			templateMsg.setData(map);
 			templateMsg.setTouser(user.getStr("openid"));
-			templateMsg.setTemplate_id(Constant.TEMPLATE_ID);
+			templateMsg.setTemplate_id(WeiXinConstant.TEMPLATE_ID);
 			templateMsg.setUrl("http://www.baidu.com");
 			templateMsg.setTopcolor("#fff");
 			weiXinService.sendMessage(templateMsg);

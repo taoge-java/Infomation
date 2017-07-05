@@ -3,7 +3,7 @@
 import java.net.URLEncoder;
 
 import com.information.annotation.ControllerRoute;
-import com.information.constant.Constant;
+import com.information.constant.WeiXinConstant;
 import com.information.utils.HttpClientUtil;
 import com.jfinal.core.Controller;
 
@@ -21,7 +21,7 @@ public class LoginWeiXinController extends Controller{
 
 	public void index() throws Exception{
 		String callback="http://china234.xicp.io/Information/auth/callback";
-		String url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constant.WEIXIN_APPID
+		String url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+WeiXinConstant.WEIXIN_APPID
 				+ "&redirect_uri="+URLEncoder.encode(callback,"UTF-8")
 				+ "&response_type=code"
 				+ "&scope=snsapi_userinfo"
@@ -31,8 +31,8 @@ public class LoginWeiXinController extends Controller{
 	
 	public void callback(){
 		String code=getPara("code");
-		String url="https://api.weixin.qq.com/sns/oauth2/access_token?appid="+Constant.WEIXIN_APPID
-				+ "&secret="+Constant.WEIXIN_APPSECRET
+		String url="https://api.weixin.qq.com/sns/oauth2/access_token?appid="+WeiXinConstant.WEIXIN_APPID
+				+ "&secret="+WeiXinConstant.WEIXIN_APPSECRET
 				+ "&code="+code
 				+ "&grant_type=authorization_code";
 		String result=HttpClientUtil.httpGet(url);

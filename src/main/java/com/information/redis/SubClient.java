@@ -6,7 +6,7 @@ import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisPubSub;
 /**
  * 消息订阅端
- * @author zengjintao
+ * @author taoge
  * @version 1.0
  * @create_at 2017年6月26日下午3:08:38
  */

@@ -1,18 +1,18 @@
 package com.information.dao.websocket;
 
-import java.util.Date;
 import java.util.List;
 
 import com.google.gson.Gson;
-
+import com.information.utils.DateUtil;
 
 public class Message {
 
-private String welcome;
+    private String message;
 	
 	private List<String> name;
 
 	private Gson gson;
+	
 	public String getContent() {
 		return content;
 	}
@@ -21,18 +21,18 @@ private String welcome;
 		this.content = content;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void setContent(String content,String name) {
-		this.content =new Date().toLocaleString()+" "+name+":"+content+"</br>";
+		this.content =DateUtil.toLocaleString()+" "+name+":"+content+"</br>";
 	}
+	
 	private String content;
 	
-	public String getWelcome() {
-		return welcome;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setWelcome(String welcome) {
-		this.welcome = welcome;
+	public void setWelcome(String message) {
+		this.message = message;
 	}
 
 	public List<String> getName() {

@@ -20,7 +20,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.information.constant.Constant;
+import com.information.constant.WeiXinConstant;
 
 
 /**
@@ -204,7 +204,7 @@ public class EncryptUtil {
 	 * @return
 	 */
 	public  static String checkSignature(String timestamp,String nonce){
-		String str[]={Constant.TOKEN, timestamp, nonce};
+		String str[]={WeiXinConstant.TOKEN, timestamp, nonce};
 		Arrays.sort(str);
 		StringBuilder sb=new StringBuilder();
 		for(String s:str){

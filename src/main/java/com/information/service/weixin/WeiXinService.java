@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import com.information.constant.Constant;
+import com.information.constant.WeiXinConstant;
 import com.information.dao.weixin.AccessToken;
 import com.information.dao.weixin.Menu;
 import com.information.dao.weixin.base.BaseButton;
@@ -38,7 +38,7 @@ public class WeiXinService extends BaseService{
 	 */
 	public  AccessToken  getAccesstoken(){
 		AccessToken accessToken=new AccessToken();
-		String url=Constant.URL.replace("APPID",Constant.WEIXIN_APPID).replace("APPSECRET", Constant.WEIXIN_APPSECRET);
+		String url=WeiXinConstant.URL.replace("APPID",WeiXinConstant.WEIXIN_APPID).replace("APPSECRET", WeiXinConstant.WEIXIN_APPSECRET);
 		String result=HttpClientUtil.httpGet(url);
 		JSONObject json=JSONObject.fromObject(result);
 		if(json!=null){
@@ -53,7 +53,7 @@ public class WeiXinService extends BaseService{
 	 */
 	public  void sendMessage(TemplateMsg msg){
 		JSONObject json=JSONObject.fromObject(msg);
-		String request_url=Constant.TEMPLATE_MESSAGE_URL.replace("ACCESS_TOKEN", this.getAccesstoken().getAccessToken());
+		String request_url=WeiXinConstant.TEMPLATE_MESSAGE_URL.replace("ACCESS_TOKEN", this.getAccesstoken().getAccessToken());
 	    String result= HttpClientUtil.httpPost(request_url, json.toString());
 	    if(result!=null){
 	    	JSONObject jsonObject=JSONObject.fromObject(result);
@@ -73,7 +73,7 @@ public class WeiXinService extends BaseService{
 	 */
 	public  int createMenu(String  access_token,String menu){
 		int count=0;
-		String url=Constant.CREATE_MENU.replace("ACCESS_TOKEN", access_token);
+		String url=WeiXinConstant.CREATE_MENU.replace("ACCESS_TOKEN", access_token);
 	    String result=HttpClientUtil.httpPost(url, menu);
 	    JSONObject json=JSONObject.fromObject(result);
 	    if(json!=null){
@@ -116,7 +116,7 @@ public class WeiXinService extends BaseService{
 	
 	
 	/**
-	 * 微信图片上传
+	 * 微信素材上传接口
 	 * @param file_path
 	 * @param access_token
 	 * @param type
@@ -125,7 +125,7 @@ public class WeiXinService extends BaseService{
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unused")
-	public String  uploadImg(String file_path,String access_token,String type,String uploadUrl) throws IOException{
+	public String  uploadMaterial(String file_path,String access_token,String type,String uploadUrl) throws IOException{
 		File file=new File(file_path);
 		if(!file.exists()||!file.isFile()){
 			throw new IOException("file is not to exist");

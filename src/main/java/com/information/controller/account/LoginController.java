@@ -68,17 +68,11 @@ public class LoginController extends BaseController{
 		String remberPassword[]=getParaValues("checkbox");//判断用户是否记住密码
 		if(remberPassword!=null&&remberPassword.length>0){//将用户名密码保存在cookie中
 			setCookie(CommonConstant.COOKIE_USERNAME,userName,60*60*24*30);
-			setCookie(CommonConstant.COOKIE_PASSWORD,password,60*60*24*30);
+			//setCookie(CommonConstant.COOKIE_PASSWORD,password,60*60*24*30);
 		}else{//清除cookie
 			removeCookie(CommonConstant.COOKIE_USERNAME, "/");
-			removeCookie(CommonConstant.COOKIE_PASSWORD, "/");
+			//removeCookie(CommonConstant.COOKIE_PASSWORD, "/");
 		}
-		
-		//ehcache 缓存
-//		SystemAdmin admin1=CacheKit.get(Constant.ONE_MINUTE, "user");
-//		SystemAdmin admin=SystemAdmin.dao.findFirstByCache(Constant.ONE_MINUTE,"user"," select * from system_admin where login_name=?",userName);
-		
-		//System.err.println(admin1);
 		SystemAdmin admin=SystemAdmin.dao.findFirst("select * from system_admin where login_name=?",userName);
 		if(admin==null){
 			renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));

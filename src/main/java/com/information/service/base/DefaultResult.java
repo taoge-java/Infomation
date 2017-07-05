@@ -25,6 +25,7 @@ public class DefaultResult implements Result{
 	public boolean isSuccess() {
 		return success;
 	}
+	
 	public DefaultResult(){
 		
 	}

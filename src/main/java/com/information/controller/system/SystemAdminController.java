@@ -15,7 +15,7 @@ import com.information.model.primary.system.SystemRole;
 import com.information.service.base.Result;
 import com.information.service.system.SystemAdminService;
 import com.information.utils.ResultCode;
-import com.information.utils.StrUtils;
+import com.information.utils.StrKit;
 
 /***
  * 管理员设置
@@ -104,7 +104,7 @@ public class SystemAdminController extends BaseController{
 	 */
 	public void delAll(){
 		String ids=getPara("ids");
-		String[] id=StrUtils.spilt(ids);
+		String[] id=StrKit.spilt(ids);
 		Result result=systemAdminService.delAll(id);
 		if(result.isSuccess()){
 			

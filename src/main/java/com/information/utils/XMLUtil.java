@@ -10,6 +10,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.information.dao.weixin.base.BaseMessae;
 import com.information.dao.weixin.message.Articles;
 import com.information.dao.weixin.message.response.ResponseNewsMessage;
 import com.thoughtworks.xstream.XStream;
@@ -55,5 +56,13 @@ public class XMLUtil {
 		}
 		xstream.alias("xml", obj.getClass());
 		return xstream.toXML(obj);
+	}
+	
+	/**
+	 * 将xml转换成消息对象
+	 * @return
+	 */
+	public static BaseMessae xmlToBaseMessae(){
+		return null;
 	}
 }
