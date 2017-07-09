@@ -4,8 +4,8 @@ import java.net.URLEncoder;
 
 import com.information.annotation.ControllerRoute;
 import com.information.constant.WeiXinConstant;
+import com.information.controller.base.BaseController;
 import com.information.utils.HttpClientUtil;
-import com.jfinal.core.Controller;
 
 import net.sf.json.JSONObject;
 
@@ -15,9 +15,8 @@ import net.sf.json.JSONObject;
  * @version 1.0
  * 2017年4月10日 下午13:51
  */
-//@ControllerBind(controllerKey="/auth")
 @ControllerRoute(url="/auth")
-public class LoginWeiXinController extends Controller{
+public class LoginWeiXinController extends BaseController{
 
 	public void index() throws Exception{
 		String callback="http://china234.xicp.io/Information/auth/callback";
@@ -49,5 +48,19 @@ public class LoginWeiXinController extends Controller{
 		setAttr("session", session);
 		System.out.println(session);
 		renderNull();
+	}
+	
+	/**
+	 * 微信个人中心
+	 */
+	public void account(){
+		rendView("/weixin/login.vm");
+	}
+	
+	/**
+	 * 微信个人中心登录
+	 */
+	public void login(){
+		
 	}
 }

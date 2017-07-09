@@ -13,9 +13,7 @@ import com.information.dao.weixin.message.Image;
 import com.information.dao.weixin.message.TextMessage;
 import com.information.dao.weixin.message.Voice;
 import com.information.dao.weixin.message.response.ResponseImageMessage;
-import com.information.dao.weixin.message.response.ResponseMusicMessage;
 import com.information.dao.weixin.message.response.ResponseNewsMessage;
-import com.information.dao.weixin.message.response.ResponseVideoMessage;
 import com.information.dao.weixin.message.response.ResponseVoiceMessage;
 import com.information.interceptor.WeiXinInterceptor;
 import com.information.utils.XMLUtil;
@@ -46,9 +44,8 @@ public class MsgController extends BaseWeiXinController{
 		   msgType=WeiXinConstant.CUSTOMER_SERVICE;
 	   }
 	   String Content=map.get("Content");
-	//   String CreateTime=map.get("CreateTime");
 	   if(WeiXinConstant.MESSAGE_TEXT.equals(msgType)){//回复文本消息
-		  //  sendTextMessge(new TextMessage(),fromUser,toUserName,"亲,感谢您的关注！赶快开启您的购物之旅吧");
+		    sendTextMessge(new TextMessage(),fromUser,toUserName,"亲,感谢您的关注！赶快开启您的购物之旅吧");
 	   }else if(WeiXinConstant.MESSAGE_IMAGE.equals(msgType)){//回复图片
 		    sendImageMessage(new ResponseImageMessage(), fromUser, toUserName);
 	   }else if(WeiXinConstant.MESSAGE_VOICE.equals(msgType)){
@@ -144,18 +141,18 @@ public class MsgController extends BaseWeiXinController{
 	/**
 	 * 回复视频
 	 */
-	@Override
-	public void sendVideoMessage(ResponseVideoMessage responseViedo, String fromUser, String toUser)
-			throws IOException {
-		
-	}
+//	@Override
+//	public void sendVideoMessage(ResponseVideoMessage responseViedo, String fromUser, String toUser)
+//			throws IOException {
+//		
+//	}
 	
 	/**
 	 * 回复音乐
 	 */
-	@Override
-	public void sendMusicMessage(ResponseMusicMessage responseMusic, String fromUser, String toUser)
-			throws IOException {
-		
-	}
+//	@Override
+//	public void sendMusicMessage(ResponseMusicMessage responseMusic, String fromUser, String toUser)
+//			throws IOException {
+//		
+//	}
 }

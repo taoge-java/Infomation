@@ -20,8 +20,8 @@ public abstract class BaseWeiXinController extends Controller{
 	
 	public abstract void sendVoiceMessage(ResponseVoiceMessage responseVoice,String fromUser,String toUser) throws IOException;
 	
-	public abstract void sendVideoMessage(ResponseVideoMessage responseViedo,String fromUser,String toUser) throws IOException;
+	//public abstract void sendVideoMessage(ResponseVideoMessage responseViedo,String fromUser,String toUser) throws IOException;
 	
-	public abstract void sendMusicMessage(ResponseMusicMessage responseMusic,String fromUser,String toUser) throws IOException;
+	//public abstract void sendMusicMessage(ResponseMusicMessage responseMusic,String fromUser,String toUser) throws IOException;
 
 }
