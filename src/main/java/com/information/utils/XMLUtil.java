@@ -1,5 +1,7 @@
 package com.information.utils;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +64,26 @@ public class XMLUtil {
 	 * 将xml转换成消息对象
 	 * @return
 	 */
-	public static BaseMessae xmlToBaseMessae(){
+	@SuppressWarnings("unused")
+	public static BaseMessae xmlToBaseMessae(HttpServletRequest request){
+		Map<String,String> xm=xmlTomap(request);
+		return null;
+	}
+	
+	public static Object mapToBean(HttpServletRequest request){
+		 try {
+			InputStream in=request.getInputStream();
+			InputStreamReader read=new InputStreamReader(in);
+			char[] bytes=new char[10];
+			int flag=0;
+			StringBuffer buffer=new StringBuffer();
+			while((flag=read.read(bytes, 0, 10))!=-1){
+				buffer.append(new String(bytes,0,flag));
+			}
+			System.err.println(buffer.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }
