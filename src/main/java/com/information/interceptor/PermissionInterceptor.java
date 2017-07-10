@@ -13,6 +13,7 @@ import com.information.constant.CommonConstant;
 import com.information.dao.UserSession;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
+import com.jfinal.log.Log;
 /**
  * 用户session全局拦截器
  * @author zengjintao
@@ -21,7 +22,9 @@ import com.jfinal.aop.Invocation;
  */
 public class PermissionInterceptor implements Interceptor{
 	
-	static Set<String> noNeedLoginUrl=new HashSet<String>();
+	private static Set<String> noNeedLoginUrl=new HashSet<String>();
+	
+	private static final Log LOG=Log.getLog(PermissionInterceptor.class);
 	/**
 	 * 不需要登录就能访问的url
 	 */
@@ -39,7 +42,7 @@ public class PermissionInterceptor implements Interceptor{
 			try {
 				response.sendRedirect(request.getContextPath()+"/account/");
 			} catch (IOException e) {
-				e.printStackTrace();
+				LOG.error("",e);
 			}
 		}else{
 			UserSession session=(UserSession) object_session;
