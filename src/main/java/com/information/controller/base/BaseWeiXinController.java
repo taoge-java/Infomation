@@ -4,9 +4,7 @@ import java.io.IOException;
 
 import com.information.dao.weixin.message.TextMessage;
 import com.information.dao.weixin.message.response.ResponseImageMessage;
-import com.information.dao.weixin.message.response.ResponseMusicMessage;
 import com.information.dao.weixin.message.response.ResponseNewsMessage;
-import com.information.dao.weixin.message.response.ResponseVideoMessage;
 import com.information.dao.weixin.message.response.ResponseVoiceMessage;
 import com.jfinal.core.Controller;
 
