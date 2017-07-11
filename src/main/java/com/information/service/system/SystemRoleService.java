@@ -211,11 +211,14 @@ public class SystemRoleService extends BaseService{
 	 * @param session
 	 * @param operIds
 	 */
-	public boolean saveOper(int roleId,String operIds){
+	public Result saveOper(int roleId,String operIds){
+		Result result=new DefaultResult();
+		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS);
 		try{
 			Db.update("delete from system_role_oper_ref where role_id="+ roleId);
 			if (StringUtils.isEmpty(operIds)) {
-				return true;
+				result.setResultCode(resultCode);
+				return result;
 			}
 			String[] opers = operIds.split(",");
 			SystemRoleOperRef roleOperRef = null;
@@ -225,11 +228,11 @@ public class SystemRoleService extends BaseService{
 				roleOperRef.set("oper_id", Integer.parseInt(oper_id) );
 				roleOperRef.save();
 			}
-			return true;
+			result.setResultCode(resultCode);
 		}catch(Exception e){
+			resultCode=new ResultCode(ResultCode.FAIL);
 			LOG.error("保存权限异常", e);
-			return false;
 		}
-		
+		return result;
 	}
 }

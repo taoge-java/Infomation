@@ -122,8 +122,8 @@ public class SystemRoleController extends BaseController{
 	public void saveOper(){
 		int roleId = getParaToInt("roleId");
 		String operIds = getPara("operIds");
-		boolean flag=systemRoleService.saveOper(roleId, operIds);
-		if(flag){
+		Result result=systemRoleService.saveOper(roleId, operIds);
+		if(result.isSuccess()){
 			renderJson(new ResultCode(ResultCode.SUCCESS, "操作成功"));
 		}else{
 			renderJson(new ResultCode(ResultCode.FAIL, "操作失败"));
