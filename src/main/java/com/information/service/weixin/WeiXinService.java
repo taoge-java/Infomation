@@ -44,8 +44,9 @@ public class WeiXinService extends BaseService{
 		if(json!=null){
 			accessToken.setAccessToken(json.getString("access_token"));
 			accessToken.setTime_out(json.getInt("expires_in"));
+			return accessToken;
 		}
-		return accessToken;
+		return null;
 	}
 	
 	/**

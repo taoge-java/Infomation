@@ -18,6 +18,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
+import com.information.constant.WeiXinConstant;
+
+import net.sf.json.JSONObject;
+
 /**
  * http请求工具类
  * @author zengjintao
@@ -73,6 +77,16 @@ public class HttpClientUtil {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static void main(String[] args) {
+		String url=WeiXinConstant.URL.replace("APPID",WeiXinConstant.WEIXIN_APPID).replace("APPSECRET", WeiXinConstant.WEIXIN_APPSECRET);
+		String result=HttpClientUtil.httpGet(url);
+		JSONObject json=JSONObject.fromObject(result);
+		System.out.println(json);
+		if(json!=null){
+			
+		}
 	}
 	/**
 	 * httpPost请求

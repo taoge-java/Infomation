@@ -1,9 +1,11 @@
 package com.information.utils;
 
+import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 
 import javax.crypto.Cipher;
@@ -33,7 +35,7 @@ public class EncryptUtil {
 	/**
 	 * DES加密算法
 	 */
-	public static void encodeDES(String des){
+	public static String encodeDES(String des){
 		//生成key
 		try {
 			KeyGenerator keygenerator=KeyGenerator.getInstance("DES");
@@ -50,24 +52,44 @@ public class EncryptUtil {
 		    Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5padding");
 		    cipher.init(Cipher.ENCRYPT_MODE,key);
 		    byte[] result= cipher.doFinal(des.getBytes());
-		    System.out.println(Hex.encodeHexString(result));
+		    return Hex.encodeHexString(result);
 		    
-		    //解密
-		    cipher.init(Cipher.DECRYPT_MODE, key);
-		    result=cipher.doFinal(result);
-		    System.out.println("解密"+new String(result));
+//		    //解密
+//		    cipher.init(Cipher.DECRYPT_MODE, key);
+//		    result=cipher.doFinal(result);
+//		    System.out.println("解密"+new String(result));
 		   // return  Hex.encodeHexString(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	/**
 	 * des算法解密
 	 * @param key
+	 * @throws NoSuchAlgorithmException 
+	 * @throws InvalidKeyException 
+	 * @throws InvalidKeySpecException 
 	 */
-	public static void decodeDES(String key){
-		
+	public static void decodeDES(String des) throws Exception{
+		KeyGenerator keygenerator=KeyGenerator.getInstance("DES");
+		keygenerator.init(56);
+		SecretKey secretkey = keygenerator.generateKey();
+		byte[] bytes=secretkey.getEncoded();
+
+		//key转换
+	    DESKeySpec desedekeyspec=new DESKeySpec(bytes);
+		SecretKeyFactory factory=SecretKeyFactory.getInstance("DES");
+	    Key key=factory.generateSecret(desedekeyspec);
+
+	    Cipher cipher = Cipher.getInstance("DES/ECB/PKCS5padding");
+	    byte[] result= cipher.doFinal(des.getBytes());
+	    //解密
+	    cipher.init(Cipher.DECRYPT_MODE, key);
+	    result=cipher.doFinal(result);
+	    System.out.println("解密"+new String(result));
+	   // return  Hex.encodeHexString(result);
 	}
 	
 	/**

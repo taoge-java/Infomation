@@ -2,6 +2,7 @@ package com.information.listener;
 
 import com.jfinal.log.Log;
 
+import net.sf.json.JSONObject;
 import redis.clients.jedis.JedisPubSub;
 /**
  * redis订阅消息监听器
@@ -21,6 +22,11 @@ public class RedisListener extends JedisPubSub{
     public void onMessage(String channel, String message) {
     	LOG.info("开始接收信息");
         System.out.println("onMessage: channel["+channel+"], message["+message+"]");
+        JSONObject json= JSONObject.fromObject(message);
+        if(json!=null){
+        	int  code=json.getInt("code");
+        	System.out.println(code);
+        }
     }
 
     /**

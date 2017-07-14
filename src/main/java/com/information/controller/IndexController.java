@@ -1,8 +1,12 @@
 package com.information.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.information.annotation.ControllerRoute;
+import com.information.config.SysConfig;
 import com.information.controller.base.BaseController;
 import com.information.dao.OnlineManger;
 import com.information.dao.UserSession;
@@ -13,7 +17,6 @@ import com.information.utils.ResultCode;
  * @version 1.0
  * @create_at 2017年4月26日 下午4:36:21
  */
-//@ControllerBind(controllerKey="/")
 @ControllerRoute(url="/")
 public class IndexController extends BaseController{
 
@@ -45,7 +48,19 @@ public class IndexController extends BaseController{
 	 * 首页
 	 */
 	public void success(){
-		rendView("/index.vm");
+		HttpServletRequest request=getRequest();
+		Cookie[] cookie=request.getCookies();
+		String gotoURL = request.getRequestURL().toString();
+		if(cookie!=null){
+			for(Cookie c:cookie){
+				if(c.getName().equals(SysConfig.cookie_name)){
+					break;
+				}
+			}
+			rendView("/index.vm");
+		}else{
+			redirect("http://localhost:8080/Auth-SSO/account"+"?action=success"+"&gotoUrL="+gotoURL);
+		}
 	}
 	
 	public void main(){

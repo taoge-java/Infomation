@@ -2,19 +2,25 @@ package com.information.service.system;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+import com.information.config.SysConfig;
 import com.information.constant.CommonConstant;
 import com.information.model.primary.system.SystemAdmin;
 import com.information.model.primary.system.SystemRole;
 import com.information.service.base.BaseService;
 import com.information.service.base.DefaultResult;
 import com.information.service.base.Result;
+import com.information.utils.EncryptUtil;
 import com.information.utils.Md5Utils;
 import com.information.utils.ResultCode;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.redis.Redis;
+
+import net.sf.json.JSONObject;
 
 @Service
 public class SystemAdminService extends BaseService{
@@ -65,7 +71,9 @@ public class SystemAdminService extends BaseService{
 		    	result.setResultCode(resultCode);
 		    	return result;
 		    }
-		    systemAdmin.set("sys_password",Md5Utils.getMd5(password));
+		    String encrypt=EncryptUtil.encodeSalt(Md5Utils.generatorKey());
+            systemAdmin.set("encrypt",encrypt);
+		    systemAdmin.set("sys_password",Md5Utils.getMd5(password,encrypt));
 		    systemAdmin.save();
 		}catch(Exception e){
 			resultCode=new ResultCode(ResultCode.FAIL, "数据创建异常!");
@@ -84,6 +92,8 @@ public class SystemAdminService extends BaseService{
 		ResultCode rseultCode=new ResultCode(ResultCode.SUCCESS,"删除成功");
         try{
 			SystemAdmin.dao.deleteById(id);
+			String message=JSONObject.fromObject(rseultCode).toString();
+			Redis.use().getJedis().publish(SysConfig.channels, message);
 		}catch(Exception e){
 			LOG.error("删除数据异常",e);
 			rseultCode=new ResultCode(ResultCode.FAIL,"删除数据异常");

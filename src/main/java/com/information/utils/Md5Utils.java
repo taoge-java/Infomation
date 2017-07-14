@@ -85,13 +85,22 @@ public class Md5Utils {
         return s;  
     }  
     
-    
     public static String generatorKey(){
     	return getMd5(UUID.randomUUID().toString());
     }
     
-    public static void main(String[] args) {
-    	System.out.println(Md5Utils.convertMD5(Md5Utils.getMd5("123456")));
-		//System.err.println(Md5Utils.getMd5("123456"));;
+    public static void main(String[] args) throws Exception {
+    	String password="123456";
+		String encrypt=EncryptUtil.encodeSalt(Md5Utils.generatorKey());
+		String str=Md5Utils.getMd5(password, encrypt);
+		System.out.println(encrypt);
+		System.err.println(str);
+		boolean b=Md5Utils.getMd5(password,encrypt).equals(str);
+		System.out.println(b);
+		
+    	String s = new String("taoge");  
+    	String s1=getMd5(s, encrypt);
+        System.out.println("MD5后：" + s1);  
+       // System.out.println("解密的：" + convertMD5(convertMD5("d4edbee8aae46ab95387691a74008082")));  
 	}
 }

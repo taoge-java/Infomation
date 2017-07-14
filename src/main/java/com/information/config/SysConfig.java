@@ -13,6 +13,7 @@ import com.information.job.base.JobManger;
 import com.information.listener.RedisListener;
 import com.information.model.primary.BaseModel;
 import com.information.model.slave.SlaveBaseModel;
+import com.information.redis.SubClient;
 import com.information.service.weixin.WeiXinService;
 import com.information.spring.SpringBeanManger;
 import com.information.spring.SpringPlugin;
@@ -51,7 +52,7 @@ import net.sf.json.JSONObject;
 @SuppressWarnings("unused")
 public class SysConfig extends JFinalConfig{
 	
-	private WeiXinService weiXinService=Duang.duang(WeiXinService.class);
+	private WeiXinService weiXinService=Duang.duang(WeiXinService.class.getSimpleName(),WeiXinService.class);
 
 	private Logger LOG=Logger.getLogger(SysConfig.class);
 	
@@ -66,6 +67,8 @@ public class SysConfig extends JFinalConfig{
 	public static String resourceUpload;//文件上传路径
 	
 	public static String resourceDown;
+	
+	public static String cookie_name;
 	
 	public static String  weixinToken;
 	
@@ -83,6 +86,7 @@ public class SysConfig extends JFinalConfig{
 		 resourceUpload=PropKit.get("resource.upload.path").trim();
 		 resourceDown=PropKit.get("resource.upload.path").trim();
 		 weixinToken=PropKit.get("weixin.token").trim();
+		 cookie_name=PropKit.get("cookie.name").trim();
 		 constants.setBaseDownloadPath(resourceUpload);
 		 String fullFile = PathKit.getWebRootPath() + File.separator + "WEB-INF" + "/classes/velocity.properties";
 		 InputStream inputStream=null;

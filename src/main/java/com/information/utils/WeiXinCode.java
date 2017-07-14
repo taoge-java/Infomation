@@ -28,7 +28,7 @@ public class WeiXinCode {
 	 @SuppressWarnings({ "unchecked", "rawtypes" })
 	 public static void getCodeImage(String content,Path path){
 		 
-		 HashMap hint=new HashMap<>();
+		 HashMap hint=new HashMap();
 		 hint.put(EncodeHintType.CHARACTER_SET, "utf-8");
 		 hint.put(EncodeHintType.ERROR_CORRECTION,ErrorCorrectionLevel.M);
 		 hint.put(EncodeHintType.MARGIN, 2);

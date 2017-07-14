@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,6 +24,10 @@ public class PermissionInterceptor implements Interceptor{
 	private static Set<String> noNeedLoginUrl=new HashSet<String>();
 	
 	private static final Log LOG=Log.getLog(PermissionInterceptor.class);
+	
+	//private static final String LOGIN_URL="http://localhost:8080/Auth-SSO";
+	
+	//private String cookieName;
 	/**
 	 * 不需要登录就能访问的url
 	 */
@@ -45,6 +48,26 @@ public class PermissionInterceptor implements Interceptor{
 				LOG.error("",e);
 			}
 		}else{
+//			String gotoUrl=request.getParameter("gotoUrl");
+//			if(gotoUrl==null){
+//				gotoUrl=request.getRequestURI().toString();
+//			}
+//			String URL = LOGIN_URL + "?action="+inv.getActionKey()+"&gotoURL=" + gotoUrl;
+//			Cookie ticket = null;//登录票据
+//			Cookie[] cookies = request.getCookies();
+//			if(cookies != null){
+//				for(Cookie cookie : cookies) {
+//					if(cookie.getName().equals(cookieName)) {
+//						ticket = cookie;
+//						break;
+//					}
+//				}
+//			}
+//			try {
+//				response.sendRedirect(URL);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 			UserSession session=(UserSession) object_session;
 			if(session!=null&&session.isSuperFlag())//是超级管理员
 			   inv.invoke();

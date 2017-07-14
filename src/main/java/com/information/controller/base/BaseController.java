@@ -30,7 +30,7 @@ public class BaseController extends Controller{
 	}
 	
 	public <T> T getInstance(Class<T> cls){
-		return Duang.duang(cls.getName(),Class.class); 
+		return Duang.duang(cls.getSimpleName(),cls);
 	}
 	
     /**

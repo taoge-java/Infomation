@@ -17,11 +17,6 @@ public class AutoBindRoutes extends Routes {
 
     private String packageName;
     
-    public AutoBindRoutes setPackageName(String packageName){
-    	this.packageName=packageName;
-    	return this;
-    }
-
 	private List<Class<? extends Controller>> excludeClasses = Lists.newArrayList();
 
     protected final Log logger = Log.getLog(getClass());
@@ -30,6 +25,11 @@ public class AutoBindRoutes extends Routes {
 
     public AutoBindRoutes(){
     	
+    }
+    
+    public AutoBindRoutes setPackageName(String packageName){
+    	this.packageName=packageName;
+    	return this;
     }
     
     public AutoBindRoutes(String suffix){

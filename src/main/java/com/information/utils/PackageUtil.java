@@ -25,7 +25,8 @@ public class PackageUtil {
 			throw new RuntimeException("packageName can not be null");
 		String  filePath= null;
 		if(isweb){
-			filePath = PathKit.getWebRootPath()+File.separator + classesPath + packageName.replace(".", "\\"); 
+			filePath = PathKit.getWebRootPath()+"/" + classesPath + packageName.replace(".", "/");
+			//filePath = PathKit.getWebRootPath()+File.separator + classesPath + packageName.replace(".", "\\"); 
 		}else{
 			filePath = ClassLoader.getSystemResource("").getPath() + packageName.replace(".", "\\");
 		}
