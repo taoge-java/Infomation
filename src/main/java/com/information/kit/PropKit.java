@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class PropKit {
 	
-	Properties  properties=null;
+	private Properties properties;
 	
 	public PropKit(Properties properties){
 		this.properties=properties;
