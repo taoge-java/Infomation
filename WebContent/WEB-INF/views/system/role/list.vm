@@ -111,14 +111,18 @@
       </td>
       <td>
         <div class="button-group"> 
-         <a href="$BASE_PATH/system/role/alert/${e.id}" name="update" ><span class="icon-pencil-square-o" style="color: blue;"></span></a>&nbsp;&nbsp;
+         <a href="$BASE_PATH/system/role/alert/${e.id}" name="update" >
+			<span class="icon-pencil-square-o" style="color: blue;"></span>
+		 </a>&nbsp;&nbsp;
          <a href="javascript:void(0)" name="del" value="${e.id}"><span class="icon-trash-o" style="color: red;"></span></a>
 		 #if(!${e.super_flag})
-			&nbsp;&nbsp;<a href="javascript:operRole($e.id)" name="fuction"><span class="icon-cog" style="color: green;font-size="16px;"></span></a>
+			&nbsp;&nbsp;
+			<a href="javascript:operRole($e.id)" name="fuction">
+				<span class="icon-cog" style="color: green;font-size="16px;"></span>
+            </a>
 		 #end
         </div>
       </td>
-     
     </tr>
     #end
     <tr>
