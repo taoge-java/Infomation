@@ -61,6 +61,6 @@ public class LoginWeiXinController extends BaseController{
 	 * 微信个人中心登录
 	 */
 	public void login(){
-		
+		rendView("/weixin/login.vm");
 	}
 }

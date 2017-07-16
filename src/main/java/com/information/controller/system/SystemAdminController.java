@@ -50,7 +50,7 @@ public class SystemAdminController extends BaseController{
 	public void add(){
 		List<SystemRole> list=systemAdminService.findAllSystemRole();
 		setAttr("list", list);
-		rendView("system/admin/add.jsp");
+		rendView("system/admin/add.vm");
 	}
 	/**
 	 * 保存管理员
@@ -81,7 +81,7 @@ public class SystemAdminController extends BaseController{
 	    List<SystemRole> list=systemAdminService.findAllSystemRole();
 	    setAttr("list", list);
 	    setAttr("admin",systemAdminService.getSystemAdmin(id));
-	    rendView("system/admin/update.jsp");
+	    rendView("system/admin/update.vm");
 	}
 	
 	/**
@@ -99,6 +99,7 @@ public class SystemAdminController extends BaseController{
 		Result result=systemAdminService.update(systemAdmin,password);
 		renderJson(result.getResultCode());
 	}
+	
 	/**
 	 * 批量删除管理员
 	 */
@@ -107,7 +108,7 @@ public class SystemAdminController extends BaseController{
 		String[] id=StrKit.spilt(ids);
 		Result result=systemAdminService.delAll(id);
 		if(result.isSuccess()){
-			
+			systemLog("批量删除管理员"+ids.toString(),LogType.DELETE.getValue());
 		}
 		renderJson(result.getResultCode());
 	}

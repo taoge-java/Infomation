@@ -1,11 +1,11 @@
 body{
-  background:url(img/bg.png) repeat-x;
+  background:url(images/weixin/bg.png) repeat-x;
   min-height: 600px;
   position: relative;
 
 }
 
- *{font-family:"Î¢ÈíÑÅºÚ"; margin:0; padding:0; border:0; font-size:14px;color:white;}
+ *{font-family:"Î¢ï¿½ï¿½ï¿½Åºï¿½"; margin:0; padding:0; border:0; font-size:14px;color:white;}
   html,body{height:100%; width:100%;;}
 
 .kuico{
@@ -22,7 +22,7 @@ body{
 }
 
 .kutrg{
-    background:url(img/triangle.png) no-repeat;
+    background:url(images/weixin/triangle.png) no-repeat;
     display: inline-block;
     width:10px;
     height:6px;
@@ -35,7 +35,7 @@ a{
 }
 
 .robot{
-    background:url(img/android.png) no-repeat;
+    background:url(images/weixin/android.png) no-repeat;
     display: inline-block;
     width:18px;
     height:20px;
@@ -43,7 +43,7 @@ a{
 }
 
 .question{
-    background:url(img/question.png) no-repeat;
+    background:url(images/weixin/question.png) no-repeat;
     display: inline-block;
     width:20px;
     height:20px;
@@ -254,7 +254,7 @@ margin-right: 25px;
      color:red;
    }
    #sky{
-  background: url(img/sky.png) repeat;
+  background: url(images/weixin/sky.png) repeat;
   width: 100%;
   heigth: 462px;
   z-index: -20;
