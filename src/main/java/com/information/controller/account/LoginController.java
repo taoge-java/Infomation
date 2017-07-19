@@ -96,8 +96,8 @@ public class LoginController extends BaseController{
 			}
 		}
 	}
+	
 	/**
-	 * 
 	 * @param admin
 	 * @param password
 	 * @param code
@@ -135,7 +135,7 @@ public class LoginController extends BaseController{
 		session.setSessionId(online.getSessionId());
 		session.setUserId(admin.getInt("id"));
 		session.setHeartTime(System.currentTimeMillis());
-		session.setLast_login_time(DateUtil.getStrDate(admin.getDate("last_login_time")));
+		session.setLast_login_time(DateUtil.getSecondDate(admin.getDate("last_login_time")));
 		session.setLoginName(admin.getStr("login_name"));
 		session.setSuperFlag(admin.getBoolean("super_flag") ? true:false);
 		session.setNickName(admin.getStr("nickname"));
