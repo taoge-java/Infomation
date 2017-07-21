@@ -6,6 +6,8 @@ public class NumberUtils {
 	
 	/**
 	 * 生成随机短信验证码
+	 * @param length
+	 * @return
 	 */
 	public static String getMessageNum(int length){
 		StringBuffer sb = new StringBuffer();
@@ -19,4 +21,12 @@ public class NumberUtils {
         return sb.toString();
 	}
 	
+	/**
+	 * 生成单号
+	 * 当前时间+五位数字的随机数
+	 * @return
+	 */
+	public static String getOrderCode(){
+		return DateUtil.getDateCode().replaceAll("-","")+getMessageNum(5);
+	}
 }

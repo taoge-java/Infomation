@@ -3,7 +3,6 @@ package com.information.service.system;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.information.config.SysConfig;
@@ -16,6 +15,7 @@ import com.information.service.base.Result;
 import com.information.utils.EncryptUtil;
 import com.information.utils.Md5Utils;
 import com.information.utils.ResultCode;
+import com.information.utils.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.redis.Redis;
@@ -36,7 +36,7 @@ public class SystemAdminService extends BaseService{
 		try {
 			StringBuilder context=new StringBuilder("from system_admin where 1=1");
 			List<Object> param=new ArrayList<Object>();
-			if(StringUtils.isNotEmpty(login_name)){
+			if(StrKit.isEmpoty(login_name)){
 				context.append(" and login_name=?");
 				param.add(login_name);
 			}
@@ -60,7 +60,7 @@ public class SystemAdminService extends BaseService{
 		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "管理员创建成功!");
 		try{
-			if(StringUtils.isEmpty(systemAdmin.getStr("login_name"))||StringUtils.isEmpty(password)){
+			if(StrKit.isEmpoty(systemAdmin.getStr("login_name"))||StrKit.isEmpoty(password)){
 			    resultCode=new ResultCode(ResultCode.FAIL, "登录名或密码不能为空");
 			    result.setResultCode(resultCode);
 				return result;

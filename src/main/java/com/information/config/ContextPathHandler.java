@@ -3,8 +3,7 @@ package com.information.config;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
-
+import com.information.utils.StrKit;
 import com.jfinal.handler.Handler;
 /**
  * 项目路径处理器
@@ -33,7 +32,7 @@ public class ContextPathHandler extends Handler{
 
 	@Override
 	public void handle(String target, HttpServletRequest request, HttpServletResponse response, boolean[] isHandled) {
-		if(StringUtils.isEmpty(contextPath))
+		if(StrKit.isEmpoty(contextPath))
 			throw new IllegalArgumentException("contextPathName can not be blank.");
 		request.setAttribute(contextPath, request.getContextPath());
 		next.handle(target, request, response, isHandled);

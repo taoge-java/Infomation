@@ -10,7 +10,6 @@ import java.util.Set;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.information.constant.CommonConstant;
@@ -23,6 +22,7 @@ import com.information.service.base.BaseService;
 import com.information.service.base.DefaultResult;
 import com.information.service.base.Result;
 import com.information.utils.ResultCode;
+import com.information.utils.StrKit;
 import com.jfinal.log.Logger;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
@@ -66,7 +66,7 @@ public class SystemRoleService extends BaseService{
 	public Page<SystemRole> getRole(int pageNumber,String login_name){
 		StringBuilder context=new StringBuilder("from system_role where 1=1");
 		List<Object> param=new  ArrayList<Object>();
-		if(StringUtils.isNotEmpty(login_name)){
+		if(StrKit.isEmpoty(login_name)){
 			context.append(" and role_name=?");
 			param.add(login_name);
 		}
@@ -216,7 +216,7 @@ public class SystemRoleService extends BaseService{
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS);
 		try{
 			Db.update("delete from system_role_oper_ref where role_id="+ roleId);
-			if (StringUtils.isEmpty(operIds)) {
+			if (StrKit.isEmpoty(operIds)) {
 				result.setResultCode(resultCode);
 				return result;
 			}

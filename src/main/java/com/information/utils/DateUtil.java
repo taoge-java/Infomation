@@ -13,7 +13,11 @@ public class DateUtil {
 	
 	private static final SimpleDateFormat FORMAT=getFormat("yyy-MM-dd HH:mm");
 	
+	private static final SimpleDateFormat YEAR=getFormat("yyyy-MMdd");
+	
 	private static final SimpleDateFormat SECOND=getFormat("yyy-MM-dd HH:mm:ss");
+	
+	private static final SimpleDateFormat DATECODE=getFormat("yyy-MM-ddHHmmss");
 	
 	private static final SimpleDateFormat DAY=getFormat("yyy-MM-dd");
 	
@@ -62,5 +66,13 @@ public class DateUtil {
 	public static String toLocaleString() {
         DateFormat formatter = DateFormat.getDateTimeInstance();
         return formatter.format(getDate());
+	}
+	
+	public static String getYearStr(Date date){
+		return YEAR.format(date);
+	}
+	
+	public static String getDateCode(){
+		return DATECODE.format(new Date());
 	}
 }

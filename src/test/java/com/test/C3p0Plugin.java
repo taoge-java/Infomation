@@ -3,8 +3,7 @@ package com.test;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.apache.commons.lang3.StringUtils;
-
+import com.information.utils.StrKit;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 /**
  * c3p0数据库连接池
@@ -61,7 +60,7 @@ public class C3p0Plugin {
 	}
 	
 	public C3p0Plugin setDriverClass(int maxIdle){
-		if(StringUtils.isEmpty(driverClass))
+		if(StrKit.isEmpoty(driverClass))
 			throw new IllegalArgumentException("driverClass can not be null");
 		this.maxIdle=maxIdle;
 		return this;

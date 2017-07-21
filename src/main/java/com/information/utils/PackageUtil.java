@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.jfinal.kit.PathKit;
 
 /**
@@ -21,7 +19,7 @@ import com.jfinal.kit.PathKit;
 public class PackageUtil {
 	
 	public static <T> List<Class<? extends T>> scanPackage(String packageName,boolean isweb,String classesPath){ 
-		if(StringUtils.isBlank(packageName))
+		if(StrKit.isEmpoty(packageName))
 			throw new RuntimeException("packageName can not be null");
 		String  filePath= null;
 		if(isweb){

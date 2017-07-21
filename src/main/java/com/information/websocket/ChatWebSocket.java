@@ -1,6 +1,5 @@
 package com.information.websocket;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,8 +8,8 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-
 import com.information.dao.websocket.Message;
+import com.jfinal.log.Log;
 /**
  * websocket连接通道
  * @author zengjintao
@@ -20,15 +19,15 @@ import com.information.dao.websocket.Message;
 @ServerEndpoint("/chat")
 public class ChatWebSocket {
 
+	private static final Log LOG=Log.getLog(ChatWebSocket.class);
+	
 	private static List<Session> session=new ArrayList<Session>();
 	
     private static List<String> names=new ArrayList<String>();
 	
 	private String name;
 	
-	@SuppressWarnings("unused")
 	private static int onineCount=0;
-	
 	
 	/**
 	 * 连接websocket
@@ -41,6 +40,7 @@ public class ChatWebSocket {
 		this.names.add(name);
 		this.session.add(session);
 		String msg="欢迎"+name+"进入聊天室";
+		getOnlineCount(true);
 		System.out.println(msg);
 		Message message=new Message();
 		message.setWelcome(msg);
@@ -55,12 +55,12 @@ public class ChatWebSocket {
 	 */
 	public void broadcast(List<Session> s,String msg){
 		for(Iterator<Session> it=s.iterator();it.hasNext();){
-		  Session session=it.next();
-		   try {
-			     session.getBasicRemote().sendText(msg);
-			   } catch (IOException e) {
-				e.printStackTrace();
-		   }
+			Session session=it.next();
+			try {
+				session.getBasicRemote().sendText(msg);
+			} catch (Exception e) {
+				LOG.error("广播信息异常",e);
+			}
 		}
 	}
 	
@@ -79,6 +79,7 @@ public class ChatWebSocket {
 		String msg=name+"离开了聊天室";
 		this.session.remove(session);
 		this.names.remove(this.name);
+		getOnlineCount(false);
 		Message message=new Message();
 		message.setWelcome(msg);
 		message.setName(names);
@@ -92,5 +93,17 @@ public class ChatWebSocket {
 		Message message=new Message();
 		message.setContent(msg, this.name);
 		broadcast(this.session,message.tojson());
+	}
+	
+	/**
+	 * 获取当前在线人数
+	 * @param flag
+	 * @return
+	 */
+	public int getOnlineCount(boolean flag){
+		if(flag){
+			return onineCount++;
+		}
+		return onineCount--;
 	}
 }

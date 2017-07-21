@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
+import com.information.utils.StrKit;
 import com.jfinal.ext.kit.ClassSearcher;
 import com.jfinal.ext.plugin.tablebind.INameStyle;
 import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
@@ -140,7 +140,7 @@ public class AutoTableBindPlugin extends ActiveRecordPlugin{
 	             }
 	         } else {
 	             tableName = tb.tableName();
-	             if (StringUtils.isNotBlank(tb.pkName())) {
+	             if (StrKit.isNotEmpoty(tb.pkName())) {
 	                 this.addMapping(tableName, tb.pkName(), clazz);
 	                 log.debug("addMapping(" + tableName + ", " + tb.pkName() + "," + clazz.getName() + ")");
 	             } else {

@@ -4,7 +4,6 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.information.annotation.ControllerRoute;
@@ -78,7 +77,7 @@ public class LoginController extends BaseController{
 			renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
 			return;
 		}
-		if(StringUtils.isBlank(code)){//如果用户没有输入验证码
+		if(com.information.utils.StrKit.isEmpoty(code)){//如果用户没有输入验证码
 			   loginSrvice(admin,password);
 		}else{//出现验证码
 			if(code.equalsIgnoreCase(number)){
@@ -146,6 +145,7 @@ public class LoginController extends BaseController{
 		if(!session.isSuperFlag()){
 			loadPermissions(admin);
 		}
+		sendMessage(session.getUserId(),"登录成功", "登录成功");
 		systemLog(getCurrentUser().getLoginName()+"登录了系统",LogType.LOGIN.getValue());
 	}
 	/**

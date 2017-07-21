@@ -114,4 +114,14 @@ public class BaseController extends Controller{
 		DateFormat format = new SimpleDateFormat("yyyy-MMdd");
 		return format.format(new Date()).replaceAll("-", "/");
 	}
+	
+	/**
+	 * 发送站内信
+	 * @param userId
+	 * @param title
+	 * @param content
+	 */
+	public void sendMessage(int userId,String title,String content){
+		
+	}
 }

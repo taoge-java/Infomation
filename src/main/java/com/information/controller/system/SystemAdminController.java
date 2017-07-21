@@ -2,7 +2,6 @@ package com.information.controller.system;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.information.annotation.Permission;
@@ -92,7 +91,7 @@ public class SystemAdminController extends BaseController{
 		SystemAdmin systemAdmin=SystemAdmin.dao.findById(id);
 		systemAdmin.getParamters(getParaMap());
 		String password=getPara("password");
-		if(StringUtils.isEmpty(password)){
+		if(StrKit.isEmpoty(password)){
 			renderJson(new ResultCode(ResultCode.FAIL,"密码不能为空"));
 			return;
 		}

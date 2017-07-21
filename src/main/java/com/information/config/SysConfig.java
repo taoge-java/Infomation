@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import com.information.common.config.CommonConfig;
 import com.information.interceptor.IocInterceptor;
 import com.information.interceptor.PermissionInterceptor;
 import com.information.interceptor.ViewContextInterceptor;
@@ -50,7 +51,7 @@ import net.sf.json.JSONObject;
  * @create_at 2017年6月8日 下午9:13:31
  */
 @SuppressWarnings("unused")
-public class SysConfig extends JFinalConfig{
+public class SysConfig extends CommonConfig{
 	
 	private WeiXinService weiXinService=Duang.duang(WeiXinService.class.getSimpleName(),WeiXinService.class);
 
@@ -71,23 +72,9 @@ public class SysConfig extends JFinalConfig{
 	public static String cookie_name;
 	
 	public static String  weixinToken;
-	
+
 	@Override
-	public void configConstant(Constants constants) {
-		 constants.setDevMode(true);
-		 constants.setViewType(ViewType.VELOCITY);
-		 constants.setEncoding("utf-8");
-		 JFinal.me().getConstants().setError404View(BASE_VIEW+"/common/404.vm");
-		 JFinal.me().getConstants().setError500View(BASE_VIEW+"/common/500.vm");
-		 PropKit.use("config.properties");//加载配置文件
-		 redisPassword = PropKit.get("redis.password").trim();
-		 redisHost = PropKit.get("redis.host").trim();
-		 channels=PropKit.get("redis.channels").trim();
-		 resourceUpload=PropKit.get("resource.upload.path").trim();
-		 resourceDown=PropKit.get("resource.upload.path").trim();
-		 weixinToken=PropKit.get("weixin.token").trim();
-		 cookie_name=PropKit.get("cookie.name").trim();
-		 constants.setBaseDownloadPath(resourceUpload);
+	public void loadConfigConstant(Constants constants) {
 		 String fullFile = PathKit.getWebRootPath() + File.separator + "WEB-INF" + "/classes/velocity.properties";
 		 InputStream inputStream=null;
 		 /**
@@ -102,23 +89,22 @@ public class SysConfig extends JFinalConfig{
 			e.printStackTrace();
 		 }
 	}
-	/**
-	 * 添加路由
-	 */
 	@Override
-	public void configRoute(Routes routes) {
+	public void loadConfigRoute(Routes routes) {
 		AutoBindRoutes autoBindRoutes= new AutoBindRoutes();
 		autoBindRoutes.setPackageName("com.information.controller");
 		routes.add(autoBindRoutes);
 	}
+	@Override
+	public void loadConfigEngine(Engine engine) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	/**
-	 * 配置多个数据库连接
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void configPlugin(Plugins plugin) {
-	    /**
+	public void loadConfigPlugin(Plugins plugin) {
+		/**
 	     * 配置主数据库
 	     */
 		DruidPlugin primaryDruid = new DruidPlugin(PropKit.get("primary.jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
@@ -133,15 +119,15 @@ public class SysConfig extends JFinalConfig{
 	    /**
 	     * 配置从数据库
 	     */
-  		DruidPlugin slaveDruid= new DruidPlugin(PropKit.get("slave.jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
-  	    plugin.add(slaveDruid);
-  	    AutoTableBindPlugin slaveAtbp = new AutoTableBindPlugin("information_back",slaveDruid);
-  	    slaveAtbp.scanPackages("com.information.model.slave");//扫描com.information.student下的model
-  	    slaveAtbp.autoScan(false);
-  	    slaveAtbp.addExcludeClasses(SlaveBaseModel.class);
-  	    slaveAtbp.setShowSql(true);
-  	    plugin.add(slaveAtbp);
-  	   
+ 		DruidPlugin slaveDruid= new DruidPlugin(PropKit.get("slave.jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
+ 	    plugin.add(slaveDruid);
+ 	    AutoTableBindPlugin slaveAtbp = new AutoTableBindPlugin("information_back",slaveDruid);
+ 	    slaveAtbp.scanPackages("com.information.model.slave");//扫描com.information.student下的model
+ 	    slaveAtbp.autoScan(false);
+ 	    slaveAtbp.addExcludeClasses(SlaveBaseModel.class);
+ 	    slaveAtbp.setShowSql(true);
+ 	    plugin.add(slaveAtbp);
+ 	   
 	    plugin.add(new EhCachePlugin());//配置缓存插件
 	    //配置redis插件
 	    RedisPlugin redis=new RedisPlugin("information",redisHost,6379,redisPassword);
@@ -149,26 +135,19 @@ public class SysConfig extends JFinalConfig{
 	    redis.getJedisPoolConfig().setMaxIdle(200);
 	    plugin.add(redis);
 	    plugin.add(new SpringPlugin(SpringBeanManger.getContext()));//集成spring
-	    
+		
 	}
-
-	/**
-	 * 拦截器配置
-	 */
 	@Override
-	public void configInterceptor(Interceptors interceptors) {
+	public void loadConfigInterceptor(Interceptors interceptors) {
 		interceptors.add(new PermissionInterceptor());
 		interceptors.add(new ViewContextInterceptor());
 		interceptors.add(new IocInterceptor());
 	}
-
-	/**
-	 * 配置处理器
-	 */
 	@Override
-	public void configHandler(Handlers handlers) {
-	   handlers.add(new ContextPathHandler());
-	   handlers.add(new RenderingTimeHandler());
+	public void loadConfigHandler(Handlers handlers) {
+		handlers.add(new ContextPathHandler());
+		handlers.add(new RenderingTimeHandler());
+		
 	}
 	
 	/**
@@ -205,8 +184,4 @@ public class SysConfig extends JFinalConfig{
 		LOG.info("数据初始化完毕");
 	}
 	
-	@Override
-	public void configEngine(Engine me) {
-		
-	}
 }

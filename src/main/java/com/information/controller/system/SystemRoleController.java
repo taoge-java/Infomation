@@ -1,7 +1,6 @@
 package com.information.controller.system;
 
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.information.annotation.ControllerRoute;
@@ -11,6 +10,7 @@ import com.information.model.primary.system.SystemRole;
 import com.information.service.base.Result;
 import com.information.service.system.SystemRoleService;
 import com.information.utils.ResultCode;
+import com.information.utils.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
 /**
@@ -57,7 +57,7 @@ public class SystemRoleController extends BaseController{
 		String name=getPara("name");
 		String flag=getPara("flag");
 		String remark=getPara("remark");
-		if(StringUtils.isEmpty(name)){
+		if(StrKit.isEmpoty(name)){
 			renderJson(new ResultCode(ResultCode.FAIL,"请输入角色名称"));
 			return;
 		}
