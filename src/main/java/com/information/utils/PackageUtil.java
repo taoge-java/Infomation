@@ -18,7 +18,7 @@ import com.jfinal.kit.PathKit;
  */
 public class PackageUtil {
 	
-	public static <T> List<Class<? extends T>> scanPackage(String packageName,boolean isweb,String classesPath){ 
+	public static <T> List<Class<? extends T>> scanPackage(String packageName,String classesPath,boolean isweb){ 
 		if(StrKit.isEmpoty(packageName))
 			throw new RuntimeException("packageName can not be null");
 		String  filePath= null;
@@ -32,6 +32,23 @@ public class PackageUtil {
 		return getAllClass(classNames);
 	}
 
+	@SuppressWarnings({ "unchecked","rawtypes" })
+	public static <T> List<Class<? extends T>> scanPackage(List<String> packageList,String classesPath,boolean isweb){
+		List<Class<? extends T>> classList=new ArrayList();
+		for(String packageName:packageList){
+			String filePath =null;
+			if(isweb){
+				filePath = PathKit.getWebRootPath()+"/" + classesPath + packageName.replace(".", "/");
+				//filePath = PathKit.getWebRootPath()+File.separator + classesPath + packageName.replace(".", "\\"); 
+			}else{
+				filePath = ClassLoader.getSystemResource("").getPath() + packageName.replace(".", "\\");
+			}
+			List<String> classNames = getClassName(filePath);
+			classList.addAll(getAllClass(classNames));
+		}
+		return classList;
+	}
+	
 	private  static List<String> getClassName(String filePath) {
         return  getClassName(filePath, null);
 	}

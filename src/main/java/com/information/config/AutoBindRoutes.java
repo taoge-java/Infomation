@@ -1,5 +1,6 @@
 package com.information.config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Preconditions;
@@ -10,12 +11,19 @@ import com.jfinal.config.Routes;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.StrKit;
 import com.jfinal.log.Log;
-
+/**
+ * 自动路由映射
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年7月22日上午8:40:03
+ */
 public class AutoBindRoutes extends Routes {
 
     private boolean autoScan = true;
 
     private String packageName;
+    
+    private List<String> packageList=new ArrayList<String>();
     
 	private List<Class<? extends Controller>> excludeClasses = Lists.newArrayList();
 
@@ -25,6 +33,15 @@ public class AutoBindRoutes extends Routes {
 
     public AutoBindRoutes(){
     	
+    }
+    
+    public AutoBindRoutes setPackageName(String... packageName){
+    	if(packageName==null||packageName.length==0)
+    		throw new RuntimeException("packageName can not be null");
+    	for(String pack:packageName){
+    		packageList.add(pack);
+    	}
+    	return this;
     }
     
     public AutoBindRoutes setPackageName(String packageName){
@@ -64,7 +81,7 @@ public class AutoBindRoutes extends Routes {
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void config() {
-        List<Class<? extends Controller>> controllerClasses=PackageUtil.scanPackage(packageName,true,"WEB-INF/classes/");
+        List<Class<? extends Controller>> controllerClasses=PackageUtil.scanPackage(packageName,"WEB-INF/classes/",true);
         ControllerRoute requestMapping = null;
         for (Class controller : controllerClasses) {
             if (excludeClasses.contains(controller)) {

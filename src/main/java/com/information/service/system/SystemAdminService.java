@@ -3,8 +3,7 @@ package com.information.service.system;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
+import com.information.annotation.Aop;
 import com.information.config.SysConfig;
 import com.information.constant.CommonConstant;
 import com.information.model.primary.system.SystemAdmin;
@@ -22,7 +21,7 @@ import com.jfinal.plugin.redis.Redis;
 
 import net.sf.json.JSONObject;
 
-@Service
+@Aop
 public class SystemAdminService extends BaseService{
 	
 	private static final Log LOG=Log.getLog(SystemAdminService.class);
@@ -36,7 +35,7 @@ public class SystemAdminService extends BaseService{
 		try {
 			StringBuilder context=new StringBuilder("from system_admin where 1=1");
 			List<Object> param=new ArrayList<Object>();
-			if(StrKit.isEmpoty(login_name)){
+			if(StrKit.isNotEmpoty(login_name)){
 				context.append(" and login_name=?");
 				param.add(login_name);
 			}

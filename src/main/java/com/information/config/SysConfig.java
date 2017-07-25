@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.information.common.config.CommonConfig;
+import com.information.interceptor.AopBeanInterceptor;
 import com.information.interceptor.IocInterceptor;
 import com.information.interceptor.PermissionInterceptor;
 import com.information.interceptor.ViewContextInterceptor;
@@ -15,6 +15,7 @@ import com.information.listener.RedisListener;
 import com.information.model.primary.BaseModel;
 import com.information.model.slave.SlaveBaseModel;
 import com.information.redis.SubClient;
+import com.information.service.base.BaseService;
 import com.information.service.weixin.WeiXinService;
 import com.information.spring.SpringBeanManger;
 import com.information.spring.SpringPlugin;
@@ -51,7 +52,7 @@ import net.sf.json.JSONObject;
  * @create_at 2017年6月8日 下午9:13:31
  */
 @SuppressWarnings("unused")
-public class SysConfig extends CommonConfig{
+public class SysConfig extends JFinalConfig{
 	
 	private WeiXinService weiXinService=Duang.duang(WeiXinService.class.getSimpleName(),WeiXinService.class);
 
@@ -74,7 +75,21 @@ public class SysConfig extends CommonConfig{
 	public static String  weixinToken;
 
 	@Override
-	public void loadConfigConstant(Constants constants) {
+	public void configConstant(Constants constants) {
+		 constants.setDevMode(true);
+		 constants.setViewType(ViewType.VELOCITY);
+		 constants.setEncoding("utf-8");
+		 JFinal.me().getConstants().setError404View(BASE_VIEW+"/common/404.vm");
+		 JFinal.me().getConstants().setError500View(BASE_VIEW+"/common/500.vm");
+		 PropKit.use("config.properties");//加载配置文件
+		 redisPassword = PropKit.get("redis.password").trim();
+		 redisHost = PropKit.get("redis.host").trim();
+		 channels=PropKit.get("redis.channels").trim();
+		 resourceUpload=PropKit.get("resource.upload.path").trim();
+		 resourceDown=PropKit.get("resource.upload.path").trim();
+		 weixinToken=PropKit.get("weixin.token").trim();
+		 cookie_name=PropKit.get("cookie.name").trim();
+		 constants.setBaseDownloadPath(resourceUpload);
 		 String fullFile = PathKit.getWebRootPath() + File.separator + "WEB-INF" + "/classes/velocity.properties";
 		 InputStream inputStream=null;
 		 /**
@@ -90,20 +105,19 @@ public class SysConfig extends CommonConfig{
 		 }
 	}
 	@Override
-	public void loadConfigRoute(Routes routes) {
+	public void configRoute(Routes routes) {
 		AutoBindRoutes autoBindRoutes= new AutoBindRoutes();
 		autoBindRoutes.setPackageName("com.information.controller");
 		routes.add(autoBindRoutes);
 	}
-	@Override
-	public void loadConfigEngine(Engine engine) {
-		// TODO Auto-generated method stub
-		
-	}
 	
-	@SuppressWarnings("unchecked")
+	
 	@Override
-	public void loadConfigPlugin(Plugins plugin) {
+	public void configEngine(Engine engine) {}
+		
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void configPlugin(Plugins plugin) {
 		/**
 	     * 配置主数据库
 	     */
@@ -135,16 +149,23 @@ public class SysConfig extends CommonConfig{
 	    redis.getJedisPoolConfig().setMaxIdle(200);
 	    plugin.add(redis);
 	    plugin.add(new SpringPlugin(SpringBeanManger.getContext()));//集成spring
+	    //aop自动注入插件
+	    AopBeanPlugin beanPlugin=new AopBeanPlugin();
+	    beanPlugin.setPackageName("com.information.service");
+	    beanPlugin.addExcludeClasses(BaseService.class);
+	    beanPlugin.addExcludeClasses(WeiXinService.class);
+	    plugin.add(beanPlugin);
 		
 	}
 	@Override
-	public void loadConfigInterceptor(Interceptors interceptors) {
+	public void configInterceptor(Interceptors interceptors) {
 		interceptors.add(new PermissionInterceptor());
 		interceptors.add(new ViewContextInterceptor());
 		interceptors.add(new IocInterceptor());
+		interceptors.add(new AopBeanInterceptor());
 	}
 	@Override
-	public void loadConfigHandler(Handlers handlers) {
+	public void configHandler(Handlers handlers) {
 		handlers.add(new ContextPathHandler());
 		handlers.add(new RenderingTimeHandler());
 		

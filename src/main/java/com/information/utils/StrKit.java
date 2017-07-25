@@ -55,4 +55,13 @@ public class StrKit {
 			throw new NullPointerException("str can not be null");
 		return str.split(separator);
 	}
+	
+	/**
+	 * 将字符串首字母变成小写
+	 * @param keyName
+	 * @return
+	 */
+	public static String toLowerCaseFirst(String keyName){
+		return keyName.substring(0,1).toLowerCase();
+	}
 }

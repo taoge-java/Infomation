@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD,ElementType.TYPE})
-public @interface Service {
-	String value();
-//	Class<?> classTarget();
+public @interface Aop {
+	String value() default "";
 }

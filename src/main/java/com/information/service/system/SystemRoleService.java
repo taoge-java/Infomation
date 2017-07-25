@@ -7,11 +7,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.springframework.stereotype.Service;
-
+import com.information.annotation.Aop;
 import com.information.constant.CommonConstant;
 import com.information.controller.system.SystemAdminController;
 import com.information.model.primary.system.SystemMenu;
@@ -31,7 +31,7 @@ import com.jfinal.plugin.activerecord.Page;
  * @author zjt
  *
  */
-@Service
+@Aop
 public class SystemRoleService extends BaseService{
 	
 	private static final Logger LOG=Logger.getLogger(SystemAdminController.class);
