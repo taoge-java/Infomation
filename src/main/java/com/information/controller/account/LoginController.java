@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.information.annotation.AopBean;
 import com.information.annotation.ControllerRoute;
 import com.information.constant.CommonConstant;
 import com.information.constant.CommonEnum.LogType;
@@ -33,10 +34,10 @@ public class LoginController extends BaseController{
 	
 	private static final Log LOG=Log.getLog(LoginController.class);
 	
-	@Autowired
+    @AopBean
 	private SystemRoleService systemRoleService;
-	
-	@Autowired
+    
+    @Autowired
 	private OnlineManger onlineManger;
 	/**
 	 * 用户登录页面

@@ -2,10 +2,8 @@ package com.information.config;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
 import com.information.annotation.Aop;
+import com.information.spring.AopManger;
 import com.information.utils.PackageUtil;
 import com.information.utils.StrKit;
 import com.jfinal.aop.Duang;
@@ -20,8 +18,6 @@ import com.jfinal.plugin.IPlugin;
 public class AopBeanPlugin<T> implements IPlugin{
 
     private List<String> beanList=new ArrayList<String>();
-	
-	public static  ConcurrentMap<String,Object> beanMap=new ConcurrentHashMap<String,Object>();
 	
 	@SuppressWarnings("rawtypes")
 	private List<Class> excludeClasses=new ArrayList<Class>();
@@ -60,9 +56,9 @@ public class AopBeanPlugin<T> implements IPlugin{
 				 String simpleName=target.getSimpleName().substring(1, target.getSimpleName().length());
 				 String key=StrKit.toLowerCaseFirst(target.getSimpleName())+simpleName;
 				 if(StrKit.isNotEmpoty(value)){
-					 beanMap.put(value, object);
+					 AopManger.beanMap.put(value, object);
 				 }else{
-					 beanMap.put(key, object);
+					 AopManger.beanMap.put(key, object);
 				 }
 			 }
 			 continue;

@@ -2,9 +2,8 @@ package com.information.controller.system;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.information.annotation.Permission;
+import com.information.annotation.AopBean;
 import com.information.annotation.ControllerRoute;
 import com.information.constant.CommonEnum.LogType;
 import com.information.constant.OperCode;
@@ -22,7 +21,7 @@ import com.information.utils.StrKit;
 @ControllerRoute(url="/system/admin")
 public class SystemAdminController extends BaseController{
 	
-	@Autowired
+	@AopBean
 	private SystemAdminService systemAdminService;
 	
 	/**

@@ -1,8 +1,6 @@
 package com.information.controller.system;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-
+import com.information.annotation.AopBean;
 import com.information.annotation.ControllerRoute;
 import com.information.constant.CommonEnum.LogType;
 import com.information.controller.base.BaseController;
@@ -24,7 +22,7 @@ public class SystemRoleController extends BaseController{
 	
 	private Log log=Log.getLog(SystemAdminController.class);
 	
-	@Autowired
+	@AopBean
 	private SystemRoleService systemRoleService;
 	
 	public void index(){
