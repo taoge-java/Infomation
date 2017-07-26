@@ -11,8 +11,8 @@ import com.jfinal.core.Controller;
 
 public class IocInterceptor implements Interceptor{
 
-   public static ApplicationContext ctx;
-
+    public static ApplicationContext ctx;
+ 
 	@Override
 	public void intercept(Invocation inv) {
 		Controller controller = inv.getController();
