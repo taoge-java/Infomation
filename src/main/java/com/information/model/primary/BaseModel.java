@@ -66,9 +66,8 @@ public class BaseModel<M extends Model<M>> extends Model<M>{
 	}
 	
 	private boolean execute(Config config,String sql,Object...paras){
-		Connection conn;
 		try {
-			conn = config.getConnection();
+			Connection conn = config.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			for(int i=0;i<paras.length;i++){
 				statement.setObject(i+1,paras[i]);
