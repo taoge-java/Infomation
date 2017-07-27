@@ -24,8 +24,8 @@ public class PropKit {
 				properties=new  Properties();
 			}
 			properties.load(new InputStreamReader(in, encoding));
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -34,8 +34,8 @@ public class PropKit {
 		try {
 			in = new FileInputStream(file);
 			properties.load(new InputStreamReader(in, encoding));
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return properties;
 	}
@@ -45,8 +45,8 @@ public class PropKit {
 		try {
 			in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);	
 			properties.load(new InputStreamReader(in, encoding));
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return properties;
 	}
