@@ -155,11 +155,6 @@ public class SysConfig extends JFinalConfig{
 	    beanPlugin.addExcludeClasses(BaseService.class);
 	    beanPlugin.addExcludeClasses(WeiXinService.class);
 	    plugin.add(beanPlugin);
-	    
-	    TablePlugin table=new TablePlugin();
-	    table.setPackageName("com.information.table");
-	    plugin.add(table);
-		
 	}
 	@Override
 	public void configInterceptor(Interceptors interceptors) {
