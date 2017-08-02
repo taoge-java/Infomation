@@ -28,6 +28,7 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.RenderingTimeHandler;
+import com.jfinal.ext.plugin.shiro.ShiroPlugin;
 import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
@@ -143,7 +144,7 @@ public class SysConfig extends JFinalConfig{
  	    plugin.add(slaveAtbp);
  	   
 	    plugin.add(new EhCachePlugin());//配置缓存插件
-	    //配置redis插件
+	    // 配置redis插件
 	    RedisPlugin redis=new RedisPlugin("information",redisHost,6379,redisPassword);
 	    redis.getJedisPoolConfig().setMaxTotal(200);
 	    redis.getJedisPoolConfig().setMaxIdle(200);
@@ -155,6 +156,8 @@ public class SysConfig extends JFinalConfig{
 	    beanPlugin.addExcludeClasses(BaseService.class);
 	    beanPlugin.addExcludeClasses(WeiXinService.class);
 	    plugin.add(beanPlugin);
+	    
+	   // plugin.add(new ShiroPlugin(routes));
 	}
 	@Override
 	public void configInterceptor(Interceptors interceptors) {
@@ -167,7 +170,6 @@ public class SysConfig extends JFinalConfig{
 	public void configHandler(Handlers handlers) {
 		handlers.add(new ContextPathHandler());
 		handlers.add(new RenderingTimeHandler());
-		
 	}
 	
 	/**

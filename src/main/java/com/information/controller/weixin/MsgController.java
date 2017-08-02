@@ -41,7 +41,8 @@ public class MsgController extends BaseWeiXinController{
 	   String toUserName=map.get("ToUserName");//微信测试号
 	   String msgType=map.get("MsgType");
 	   if(WeiXinConstant.MESSAGE_TEXT.equals(msgType)){
-		   msgType=WeiXinConstant.CUSTOMER_SERVICE;
+		   //msgType=WeiXinConstant.CUSTOMER_SERVICE;
+		   sendTextMessge(new TextMessage(),fromUser,toUserName,"亲,感谢您的关注！赶快开启您的购物之旅吧");
 	   }
 	   String Content=map.get("Content");
 	   if(WeiXinConstant.MESSAGE_TEXT.equals(msgType)){//回复文本消息

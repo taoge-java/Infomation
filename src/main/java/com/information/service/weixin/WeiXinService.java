@@ -100,7 +100,7 @@ public class WeiXinService extends BaseService{
 		ViewButton sub_click1=new ViewButton();
 		sub_click1.setName("个人中心");
 		sub_click1.setType("view");
-		sub_click1.setUrl("http://china234.xicp.io/Information/auth/login");
+		sub_click1.setUrl("http://47.94.12.108/auth/account");
 		
 		ClickButton sub_click2=new ClickButton();
 		sub_click2.setName("已支付订单");

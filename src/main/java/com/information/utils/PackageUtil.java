@@ -68,6 +68,9 @@ public class PackageUtil {
 			    className.addAll(getClassName(children.getPath(), className));
 			}else{
 				String childFilePath = children.getPath();  
+				//linux
+			//	childFilePath = childFilePath.substring(childFilePath.indexOf("/classes") + 9, childFilePath.lastIndexOf("."));  
+			//	childFilePath = childFilePath.replace("/", "."); 
                 childFilePath = childFilePath.substring(childFilePath.indexOf("\\classes") + 9, childFilePath.lastIndexOf("."));  
                 childFilePath = childFilePath.replace("\\", ".");  
                 className.add(childFilePath);  

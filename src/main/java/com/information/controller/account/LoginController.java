@@ -21,6 +21,7 @@ import com.information.utils.ImageUtil;
 import com.information.utils.IpUtils;
 import com.information.utils.Md5Utils;
 import com.information.utils.ResultCode;
+import com.information.utils.StrKit;
 import com.jfinal.log.Log;
 
 /**
@@ -61,6 +62,7 @@ public class LoginController extends BaseController{
 	}
 
 	public void login(){
+		systemRoleService.save("sds", "1", "asa");
 		String userName=getPara("username");
 		String password=getPara("password");
 		String code=getPara("code");
@@ -68,28 +70,25 @@ public class LoginController extends BaseController{
 		String remberPassword[]=getParaValues("checkbox");//判断用户是否记住密码
 		if(remberPassword!=null&&remberPassword.length>0){//将用户名密码保存在cookie中
 			setCookie(CommonConstant.COOKIE_USERNAME,userName,60*60*24*30);
-			//setCookie(CommonConstant.COOKIE_PASSWORD,password,60*60*24*30);
+			setCookie(CommonConstant.COOKIE_PASSWORD,password,60*60*24*30);
 		}else{//清除cookie
 			removeCookie(CommonConstant.COOKIE_USERNAME, "/");
-			//removeCookie(CommonConstant.COOKIE_PASSWORD, "/");
+			removeCookie(CommonConstant.COOKIE_PASSWORD, "/");
 		}
 		SystemAdmin admin=SystemAdmin.dao.findFirst("select * from system_admin where login_name=?",userName);
 		if(admin==null){
 			renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
 			return;
 		}
-		if(com.information.utils.StrKit.isEmpoty(code)){//如果用户没有输入验证码
+		if(StrKit.isEmpoty(code)){//如果用户没有输入验证码
 			   loginSrvice(admin,password);
 		}else{//出现验证码
 			if(code.equalsIgnoreCase(number)){
 		     	loginSrvice(admin,password);//验证码不区分大小写
 			}else{
-				//admin.set("login_error", admin.getInt("login_error")+1);
-				//admin.update();
 				Map<String,Object> map=new HashMap<String,Object>();
 				map.put("code", ResultCode.FAIL);
 				map.put("message", "验证码错误");
-				//map.put("errorCount", admin.getInt("login_error"));
 				LOG.error("验证码错误");
 				renderJson(map);
 				return;
