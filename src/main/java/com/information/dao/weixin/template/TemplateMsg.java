@@ -19,6 +19,8 @@ public class TemplateMsg {
 	
 	private String url;//服务器地址
 	
+	private Map<String, TemplateData> data;
+	
 	public String getUrl() {
 		return url;
 	}
@@ -60,9 +62,5 @@ public class TemplateMsg {
 		this.data = data;
 	}
 
-
-	private Map<String, TemplateData> data;
-	
-	
 	
 }
