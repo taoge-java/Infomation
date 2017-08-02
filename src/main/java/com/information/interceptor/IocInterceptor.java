@@ -19,15 +19,10 @@ public class IocInterceptor implements Interceptor{
 		Field[] fields = controller.getClass().getDeclaredFields();
 		for (Field field : fields) {
 			Object bean = null;
-			if (field.isAnnotationPresent(Inject.BY_NAME.class))
-				bean = ctx.getBean(field.getName());
-			else if (field.isAnnotationPresent(Inject.BY_TYPE.class))
-				bean = ctx.getBean(field.getType());
-			else if(field.isAnnotationPresent(Autowired.class))
+		    if(field.isAnnotationPresent(Autowired.class))
 				bean = ctx.getBean(field.getName());
 			else
 				continue ;
-			
 			try {
 				if (bean != null) {
 					field.setAccessible(true);
