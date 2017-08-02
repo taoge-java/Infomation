@@ -61,6 +61,4 @@ public class TemplateMsg {
 	public void setData(Map<String, TemplateData> data) {
 		this.data = data;
 	}
-
-	
 }
