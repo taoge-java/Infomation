@@ -1,7 +1,5 @@
 package com.information.controller.account;
-import java.util.HashMap;
 import java.util.LinkedHashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,7 @@ import com.information.dao.UserSession;
 import com.information.model.primary.system.SystemAdmin;
 import com.information.service.system.SystemRoleService;
 import com.information.utils.DateUtil;
+import com.information.utils.EncryptUtil;
 import com.information.utils.ImageUtil;
 import com.information.utils.IpUtils;
 import com.information.utils.Md5Utils;
@@ -44,13 +43,21 @@ public class LoginController extends BaseController{
 	 * 用户登录页面
 	 */
 	public void index(){
-		String userName=getCookie(CommonConstant.COOKIE_USERNAME);
-		String password=getCookie(CommonConstant.COOKIE_PASSWORD);
-		if(userName!=null&&password!=null){
-			setAttr("userName", userName);
-			setAttr("password", password);
+		systemRoleService.findRoleById(1);
+		String userCookie=getCookie(CommonConstant.COOKIE_USER_ID);
+		int userId=0;
+		if(userCookie!=null){
+			userId=Integer.parseInt(EncryptUtil.getBase64UserName(userCookie));
+			SystemAdmin admin=SystemAdmin.dao.findById(userId);
+			if(admin!=null){
+				loginSuccess(admin);//登陆成功
+				redirect("/success");
+			}else{
+				redirect("/",false);
+			}
+		}else{
+			rendView("/account/login.vm");
 		}
-		rendView("/account/login.vm");
 	}
 
 	/**
@@ -62,23 +69,22 @@ public class LoginController extends BaseController{
 	}
 
 	public void login(){
-		systemRoleService.save("sds", "1", "asa");
 		String userName=getPara("username");
 		String password=getPara("password");
 		String code=getPara("code");
 		String number=(String) this.getSession().getAttribute(CommonConstant.IMAGE_CODE);//获取session中得验证码
 		String remberPassword[]=getParaValues("checkbox");//判断用户是否记住密码
-		if(remberPassword!=null&&remberPassword.length>0){//将用户名密码保存在cookie中
-			setCookie(CommonConstant.COOKIE_USERNAME,userName,60*60*24*30);
-			setCookie(CommonConstant.COOKIE_PASSWORD,password,60*60*24*30);
-		}else{//清除cookie
-			removeCookie(CommonConstant.COOKIE_USERNAME, "/");
-			removeCookie(CommonConstant.COOKIE_PASSWORD, "/");
-		}
+		
 		SystemAdmin admin=SystemAdmin.dao.findFirst("select * from system_admin where login_name=?",userName);
 		if(admin==null){
 			renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
 			return;
+		}
+		if(remberPassword!=null&&remberPassword.length>0){//将用户名密码保存在cookie中
+			String encryptUserInfo=EncryptUtil.encryptUserInfo(admin.getInt("id").toString(), password);
+			setCookie(CommonConstant.COOKIE_USER_ID,encryptUserInfo,60*60*24*30,"/");
+		}else{//清除cookie
+			removeCookie(CommonConstant.COOKIE_USER_ID, "/");
 		}
 		if(StrKit.isEmpoty(code)){//如果用户没有输入验证码
 			   loginSrvice(admin,password);
@@ -86,16 +92,13 @@ public class LoginController extends BaseController{
 			if(code.equalsIgnoreCase(number)){
 		     	loginSrvice(admin,password);//验证码不区分大小写
 			}else{
-				Map<String,Object> map=new HashMap<String,Object>();
-				map.put("code", ResultCode.FAIL);
-				map.put("message", "验证码错误");
-				LOG.error("验证码错误");
-				renderJson(map);
+				renderJson(new ResultCode(ResultCode.FAIL,"用户不存在"));
 				return;
 			}
 		}
 	}
 	
+
 	/**
 	 * @param admin
 	 * @param password
@@ -146,7 +149,7 @@ public class LoginController extends BaseController{
 			loadPermissions(admin);
 		}
 		sendMessage(session.getUserId(),"登录成功", "登录成功");
-		systemLog(getCurrentUser().getLoginName()+"登录了系统",LogType.LOGIN.getValue());
+		systemLog("登录系统",LogType.LOGIN.getValue());
 	}
 	/**
 	 * 用户注销
@@ -156,27 +159,14 @@ public class LoginController extends BaseController{
 			if(onlineManger.getUserSession(getCurrentUser().getSessionId()) != null){//移除sessionid
 				onlineManger.remove(getCurrentUser());
         	}
-			systemLog(getCurrentUser().getLoginName()+"登出系统",LogType.LOGIN.getValue());
+			systemLog("登出系统",LogType.LOGIN.getValue());
 			getRequest().getSession().removeAttribute(CommonConstant.SESSION_ID_KEY);
 			getRequest().getSession().invalidate();//用户注销
+			removeCookie(CommonConstant.COOKIE_USER_ID, "/");//清除cookie
 			redirect("/",false);
 		}
 	}
 	
-	/**
-	 *获取用户登录错误次数，大于3次出现验证码
-	 */
-//	public void getErrorCount(){
-//		String userName=getPara("userName");
-//		int error_count=0;
-//		SystemAdmin systemAdmin=SystemAdmin.dao.findFirst("select login_error from system_admin where login_name=?",userName);
-//		if(systemAdmin==null){
-//			renderJson(new ResultCode(ResultCode.SUCCESS, "0"));
-//		}else{
-//			error_count=systemAdmin.getInt("login_error");
-//			renderJson(new ResultCode(ResultCode.SUCCESS, error_count+""));
-//		}
-//	}
 	/**
 	 * 加载权限
 	 */

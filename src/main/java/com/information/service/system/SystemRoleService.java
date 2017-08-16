@@ -6,12 +6,10 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import com.information.annotation.Aop;
+import com.information.annotation.AopBean;
 import com.information.constant.CommonConstant;
 import com.information.controller.system.SystemAdminController;
 import com.information.model.primary.system.SystemMenu;
@@ -36,6 +34,9 @@ public class SystemRoleService extends BaseService{
 	
 	private static final Logger LOG=Logger.getLogger(SystemAdminController.class);
 	
+	@AopBean
+	private SystemAdminService systemAdminService;
+	
 	/**
 	 * 根据角色获取操作权限列表
 	 * @param roleId 角色id
@@ -56,9 +57,7 @@ public class SystemRoleService extends BaseService{
 		}
 		return operCode;
 	}
-	
-	
-	
+
 	/**
 	 * 角色列表
 	 * @return
@@ -187,7 +186,7 @@ public class SystemRoleService extends BaseService{
 		}
 		//所有操作
 		List<SystemOper> allOperList=SystemOper.dao.find("select * from system_oper");
-		if(allOperList.size()>0&&allOperList!=null){
+		if(allOperList != null && allOperList.size()>0){
 			JSONObject jsonObject=null;
 			for(SystemOper oper:allOperList){
 				jsonObject=new JSONObject();
@@ -213,7 +212,7 @@ public class SystemRoleService extends BaseService{
 	 */
 	public Result saveOper(int roleId,String operIds){
 		Result result=new DefaultResult();
-		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS);
+		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS,"操作成功");
 		try{
 			Db.update("delete from system_role_oper_ref where role_id="+ roleId);
 			if (StrKit.isEmpoty(operIds)) {
@@ -230,7 +229,7 @@ public class SystemRoleService extends BaseService{
 			}
 			result.setResultCode(resultCode);
 		}catch(Exception e){
-			resultCode=new ResultCode(ResultCode.FAIL);
+			resultCode=new ResultCode(ResultCode.FAIL,"保存异常");
 			LOG.error("保存权限异常", e);
 		}
 		return result;

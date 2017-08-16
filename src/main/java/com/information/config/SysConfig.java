@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.information.interceptor.AopBeanInterceptor;
+import org.osgl.inject.Genie;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.information.interceptor.AopInterceptor;
 import com.information.interceptor.IocInterceptor;
 import com.information.interceptor.PermissionInterceptor;
 import com.information.interceptor.ViewContextInterceptor;
@@ -44,6 +47,7 @@ import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.VelocityRender;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import net.sf.json.JSONObject;
 /**
@@ -55,9 +59,7 @@ import net.sf.json.JSONObject;
 @SuppressWarnings("unused")
 public class SysConfig extends JFinalConfig{
 	
-	private WeiXinService weiXinService=Duang.duang(WeiXinService.class.getSimpleName(),WeiXinService.class);
-
-	private Logger LOG=Logger.getLogger(SysConfig.class);
+	private static final Logger LOG=Logger.getLogger(SysConfig.class);
 	
 	public final static String BASE_VIEW="/WEB-INF/views";//页面存放路径
 	
@@ -154,18 +156,18 @@ public class SysConfig extends JFinalConfig{
 	    AopBeanPlugin beanPlugin=new AopBeanPlugin();
 	    beanPlugin.setPackageName("com.information.service");
 	    beanPlugin.addExcludeClasses(BaseService.class);
-	    beanPlugin.addExcludeClasses(WeiXinService.class);
 	    plugin.add(beanPlugin);
-	    
-	   // plugin.add(new ShiroPlugin(routes));
 	}
+	
 	@Override
 	public void configInterceptor(Interceptors interceptors) {
 		interceptors.add(new PermissionInterceptor());
 		interceptors.add(new ViewContextInterceptor());
 		interceptors.add(new IocInterceptor());
-		interceptors.add(new AopBeanInterceptor());
+		interceptors.addGlobalActionInterceptor(new AopInterceptor());
+	//	interceptors.addGlobalServiceInterceptor(new AopServiceInterceptor());//添加service层全局拦截器
 	}
+	
 	@Override
 	public void configHandler(Handlers handlers) {
 		handlers.add(new ContextPathHandler());
@@ -177,6 +179,7 @@ public class SysConfig extends JFinalConfig{
 	 */
 	@Override
 	public void afterJFinalStart() {
+		WeiXinService weiXinService=(WeiXinService) SpringBeanManger.getBean("weixinService");
 		try{
 		    String menu=JSONObject.fromObject(weiXinService.generateMenu()).toString();
 		    int result=weiXinService.createMenu(weiXinService.getAccesstoken().getAccessToken(),menu);

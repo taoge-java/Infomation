@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import com.information.constant.WeiXinConstant;
 import com.information.dao.weixin.AccessToken;
 import com.information.dao.weixin.Menu;
@@ -100,7 +99,7 @@ public class WeiXinService extends BaseService{
 		ViewButton sub_click1=new ViewButton();
 		sub_click1.setName("个人中心");
 		sub_click1.setType("view");
-		sub_click1.setUrl("http://47.94.12.108/auth/account");
+		sub_click1.setUrl("http://47.94.12.108/Information/auth/account");
 		
 		ClickButton sub_click2=new ClickButton();
 		sub_click2.setName("已支付订单");

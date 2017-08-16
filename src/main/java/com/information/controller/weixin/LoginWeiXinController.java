@@ -19,7 +19,7 @@ import net.sf.json.JSONObject;
 public class LoginWeiXinController extends BaseController{
 
 	public void index() throws Exception{
-		String callback="http://47.94.12.108/auth/callback";
+		String callback="http://47.94.12.108/Information/auth/callback";
 		String url="https://open.weixin.qq.com/connect/oauth2/authorize?appid="+WeiXinConstant.WEIXIN_APPID
 				+ "&redirect_uri="+URLEncoder.encode(callback,"UTF-8")
 				+ "&response_type=code"
@@ -57,10 +57,4 @@ public class LoginWeiXinController extends BaseController{
 		rendView("/weixin/login.vm");
 	}
 	
-	/**
-	 * 微信个人中心登录
-	 */
-	public void login(){
-		rendView("/weixin/login.vm");
-	}
 }

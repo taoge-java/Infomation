@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>用户登录</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" /> 
 		<link rel="stylesheet" href="$BASE_PATH/resource/css/amaze/css/amazeui.min.css" />
 	    <link rel="stylesheet" href="$BASE_PATH/resource/css/amaze/css/amazeui.css" />
@@ -19,13 +19,23 @@
     	.am-input-group{margin-top: 10px;margin-left:5px;width: 98%;}
     	.am-btn{width: 100%;height: 48px;}
     	.login-btn{margin-top: 10px;}
-    	/*.login-btn>span{color: white;}*/
     	.forget_password{display: block;float: right;margin-right: 10px;}
     	.bottom button,img{display:block;width: 50px;height: 50px;margin: 0 auto;;}
     	.bottom img{border-radius: 50%;}
         </style>
 	</head>
 	<body>
+		 <header data-am-widget="header" class="am-header am-header-default">
+          <div class="am-header-left am-header-nav">
+              <a href="#left-link" class="">
+              </a>
+          </div>
+
+          <h1 class="am-header-title">
+              <a href="#title-link" class="">
+                                              用户登录
+              </a>
+          </h1>
 		<div class="login">
 			<div class="am-input-group">
 			   <span class="am-input-group-label">
@@ -45,13 +55,6 @@
 			<div class="login-btn" >
 				<button type="button" class="am-btn am-btn-primary" style="width: 98%;margin-left: 5px;margin-right: 5px;">登录</button>
 			</div>
-		</div>
-		<div class="bottom">
-			<button type="button" class="am-btn am-btn-primary" style="width: 25%;">立即注册</button>
-			<!--<img src="images/login1.png" style="background: #2189DF;"/>-->
-		</div>
-		<div class="bottom">
-			<img src="$BASE_PATH/resource/images/weixin/qq.png" style="background: #2189DF;"/>
 		</div>
 	</body>
 </html>

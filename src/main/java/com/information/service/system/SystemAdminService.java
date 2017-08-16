@@ -33,7 +33,7 @@ public class SystemAdminService extends BaseService{
 		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS);
 		try {
-			StringBuilder context=new StringBuilder("from system_admin where 1=1");
+			StringBuilder context=new StringBuilder(" from system_admin where 1=1");
 			List<Object> param=new ArrayList<Object>();
 			if(StrKit.isNotEmpoty(login_name)){
 				context.append(" and login_name=?");
@@ -64,7 +64,7 @@ public class SystemAdminService extends BaseService{
 			    result.setResultCode(resultCode);
 				return result;
 			}
-		    SystemAdmin admin=systemAdmin.dao.findFirst("select * from sys_admin where login_name=?",systemAdmin.getStr("login_name"));
+		    SystemAdmin admin=systemAdmin.dao.findFirst("select * from system_admin where login_name=?",systemAdmin.getStr("login_name"));
 		    if(admin!=null){
 		    	resultCode=new ResultCode(ResultCode.FAIL, "该管理员已存在,请勿重复创建!");
 		    	result.setResultCode(resultCode);

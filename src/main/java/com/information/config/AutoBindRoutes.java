@@ -81,20 +81,20 @@ public class AutoBindRoutes extends Routes {
     @Override
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void config() {
-        List<Class<? extends Controller>> controllerClasses=PackageUtil.scanPackage(packageName,"WEB-INF/classes/",true);
-        ControllerRoute requestMapping = null;
+        List<Class<? extends Controller>> controllerClasses=PackageUtil.scanPackage(packageName);
+        ControllerRoute controllerRoute = null;
         for (Class controller : controllerClasses) {
             if (excludeClasses.contains(controller)) {
                 continue;
             }
-            requestMapping = (ControllerRoute) controller.getAnnotation(ControllerRoute.class);
+            controllerRoute = (ControllerRoute) controller.getAnnotation(ControllerRoute.class);
             if(autoScan){
-            	if(requestMapping==null){
+            	if(controllerRoute==null){
             		this.add(controllerKey(controller), controller);
                     logger.debug("routes.add(" + controllerKey(controller) + ", " + controller.getName() + ")");
             	}else{
-            		 this.add(requestMapping.url(), controller);
-                     logger.debug("routes.add(" + requestMapping.url() + ", " + controller.getName() + ")");
+            		this.add(controllerRoute.url(), controller);
+                    logger.debug("routes.add(" + controllerRoute.url() + ", " + controller.getName() + ")");
             	}
             }
         }

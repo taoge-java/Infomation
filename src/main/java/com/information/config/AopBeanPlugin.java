@@ -45,7 +45,7 @@ public class AopBeanPlugin<T> implements IPlugin{
 	
 	@Override
 	public boolean start() {
-		 List<Class<? extends T>> targetClass=PackageUtil.scanPackage(beanList,"WEB-INF/classes/",true);
+		 List<Class<? extends T>> targetClass=PackageUtil.scanPackage(beanList,"WEB-INF/classes/");
 		 for(Class<? extends T> target:targetClass){
 			 if(excludeClasses.contains(target)){
 				 continue;

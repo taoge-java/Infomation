@@ -66,18 +66,22 @@ public class BaseModel<M extends Model<M>> extends Model<M>{
 	}
 	
 	private boolean execute(Config config,String sql,Object...paras){
+		Connection conn=null;
+		Boolean flag=null;
 		try {
-			Connection conn = config.getConnection();
+			conn = config.getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
 			for(int i=0;i<paras.length;i++){
 				statement.setObject(i+1,paras[i]);
 			}
 			statement.executeUpdate();
-			config.close(conn);
-			return true;
+			flag=true;
 		} catch (SQLException e) {
+			flag=false;
 			e.printStackTrace();
+		}finally {
+			config.close(conn);
 		}
-		return false;
+		return flag;
 	}
 }
