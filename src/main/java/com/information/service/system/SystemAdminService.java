@@ -2,7 +2,6 @@ package com.information.service.system;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.information.annotation.Aop;
 import com.information.config.SysConfig;
 import com.information.constant.CommonConstant;
@@ -18,7 +17,6 @@ import com.information.utils.StrKit;
 import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.redis.Redis;
-
 import net.sf.json.JSONObject;
 
 @Aop

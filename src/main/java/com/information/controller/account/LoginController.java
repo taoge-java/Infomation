@@ -43,7 +43,6 @@ public class LoginController extends BaseController{
 	 * 用户登录页面
 	 */
 	public void index(){
-		systemRoleService.findRoleById(1);
 		String userCookie=getCookie(CommonConstant.COOKIE_USER_ID);
 		int userId=0;
 		if(userCookie!=null){

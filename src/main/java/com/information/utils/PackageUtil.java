@@ -18,31 +18,25 @@ import com.jfinal.kit.PathKit;
  */
 public class PackageUtil {
 	
-	public static <T> List<Class<? extends T>> scanPackage(String packageName,String classesPath,boolean isweb){ 
+	//普通java项目获取classes路径 filePath = ClassLoader.getSystemResource("").getPath() + packageName.replace(".", "\\");
+	
+	public static <T> List<Class<? extends T>> scanPackage(String packageName){ 
+		return  scanPackage(packageName,"WEB-INF/classes/");
+	}
+	
+	private static <T> List<Class<? extends T>> scanPackage(String packageName,String classesPath){ 
 		if(StrKit.isEmpoty(packageName))
 			throw new RuntimeException("packageName can not be null");
-		String  filePath= null;
-		if(isweb){
-			filePath = PathKit.getWebRootPath()+"/" + classesPath + packageName.replace(".", "/");
-			//filePath = PathKit.getWebRootPath()+File.separator + classesPath + packageName.replace(".", "\\"); 
-		}else{
-			filePath = ClassLoader.getSystemResource("").getPath() + packageName.replace(".", "\\");
-		}
+		String	filePath = PathKit.getWebRootPath()+"/" + classesPath + packageName.replace(".", "/");
 		List<String> classNames = getClassName(filePath);
 		return getAllClass(classNames);
 	}
 
 	@SuppressWarnings({ "unchecked","rawtypes" })
-	public static <T> List<Class<? extends T>> scanPackage(List<String> packageList,String classesPath,boolean isweb){
+	public static <T> List<Class<? extends T>> scanPackage(List<String> packageList,String classesPath){
 		List<Class<? extends T>> classList=new ArrayList();
 		for(String packageName:packageList){
-			String filePath =null;
-			if(isweb){
-				filePath = PathKit.getWebRootPath()+"/" + classesPath + packageName.replace(".", "/");
-				//filePath = PathKit.getWebRootPath()+File.separator + classesPath + packageName.replace(".", "\\"); 
-			}else{
-				filePath = ClassLoader.getSystemResource("").getPath() + packageName.replace(".", "\\");
-			}
+			String filePath = PathKit.getWebRootPath()+"/" + classesPath + packageName.replace(".", "/");
 			List<String> classNames = getClassName(filePath);
 			classList.addAll(getAllClass(classNames));
 		}
@@ -65,12 +59,12 @@ public class PackageUtil {
 		File[] list=file.listFiles();//遍历包下的文件夹
 		for(File children:list){
 			if(children.isDirectory()){
-			    className.addAll(getClassName(children.getPath(), className));
+			    className.addAll(getClassName(children.getPath(), className));//递归调用
 			}else{
 				String childFilePath = children.getPath();  
 				//linux
-			//	childFilePath = childFilePath.substring(childFilePath.indexOf("/classes") + 9, childFilePath.lastIndexOf("."));  
-			//	childFilePath = childFilePath.replace("/", "."); 
+//				childFilePath = childFilePath.substring(childFilePath.indexOf("/classes") + 9, childFilePath.lastIndexOf("."));  
+//				childFilePath = childFilePath.replace("/", "."); 
                 childFilePath = childFilePath.substring(childFilePath.indexOf("\\classes") + 9, childFilePath.lastIndexOf("."));  
                 childFilePath = childFilePath.replace("\\", ".");  
                 className.add(childFilePath);  

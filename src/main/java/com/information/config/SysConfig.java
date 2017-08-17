@@ -50,6 +50,7 @@ import com.jfinal.template.Engine;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import net.sf.json.JSONObject;
+import sun.awt.windows.WEmbeddedFrame;
 /**
  * Jfinal Aip引导式配置
  * @author zengjintao
@@ -165,13 +166,13 @@ public class SysConfig extends JFinalConfig{
 		interceptors.add(new ViewContextInterceptor());
 		interceptors.add(new IocInterceptor());
 		interceptors.addGlobalActionInterceptor(new AopInterceptor());
-	//	interceptors.addGlobalServiceInterceptor(new AopServiceInterceptor());//添加service层全局拦截器
 	}
 	
 	@Override
 	public void configHandler(Handlers handlers) {
 		handlers.add(new ContextPathHandler());
 		handlers.add(new RenderingTimeHandler());
+		handlers.add(new WebSocketHandler());
 	}
 	
 	/**
@@ -179,8 +180,8 @@ public class SysConfig extends JFinalConfig{
 	 */
 	@Override
 	public void afterJFinalStart() {
-		WeiXinService weiXinService=(WeiXinService) SpringBeanManger.getBean("weixinService");
 		try{
+			WeiXinService weiXinService=(WeiXinService) SpringBeanManger.getBean("weixinService");
 		    String menu=JSONObject.fromObject(weiXinService.generateMenu()).toString();
 		    int result=weiXinService.createMenu(weiXinService.getAccesstoken().getAccessToken(),menu);
 		    if(result==0){
@@ -188,7 +189,7 @@ public class SysConfig extends JFinalConfig{
 		    }
 	     }catch(Exception e){
 		     e.printStackTrace();
-	         LOG.error("菜单创建异常"); 
+	         LOG.error("菜单创建异常",e); 
 	     }	
 		 new Thread(new Runnable() {
 			@Override
@@ -197,7 +198,7 @@ public class SysConfig extends JFinalConfig{
 		         Redis.use().getJedis().subscribe(redisListener, channels);//订阅频道
 				 LOG.info("消息订阅成功");
 			}
-		}).start();
+		 }).start();
 		 
 		new Thread(new Runnable() {
 			@Override
@@ -208,5 +209,4 @@ public class SysConfig extends JFinalConfig{
 		}).start();
 		LOG.info("数据初始化完毕");
 	}
-	
 }

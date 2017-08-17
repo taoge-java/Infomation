@@ -1,8 +1,9 @@
 package com.information.config;
-
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 import com.information.annotation.Aop;
+import com.information.annotation.Interceptor;
 import com.information.spring.AopManger;
 import com.information.utils.PackageUtil;
 import com.information.utils.StrKit;
@@ -50,15 +51,28 @@ public class AopBeanPlugin<T> implements IPlugin{
 			 if(excludeClasses.contains(target)){
 				 continue;
 			 }
-			 if(target.isAnnotationPresent(Aop.class)){
-				 Object object= Duang.duang(target.getName(),target);
-				 String value=target.getAnnotation(Aop.class).value();
+			 Annotation[] annotations = target.getAnnotations();
+			 Object object = null;
+			 String value = null;
+			 if(target.getAnnotations() != null){
+				 for(Annotation annotation : annotations){
+					 if(annotation instanceof Aop){
+						 object= Duang.duang(target.getName(),target);
+						 value=target.getAnnotation(Aop.class).value();
+					 }else if(annotation instanceof Interceptor){
+						 Class<? extends com.jfinal.aop.Interceptor>[] interceptorClass = ((Interceptor) annotation).target();
+						 value =((Interceptor) annotation).value();
+						 object = Duang.duang(target.getName(),target,interceptorClass);
+					 }
+				 }
 				 String simpleName=target.getSimpleName().substring(1, target.getSimpleName().length());
 				 String key=StrKit.toLowerCaseFirst(target.getSimpleName())+simpleName;
-				 if(StrKit.isNotEmpoty(value)){
-					 AopManger.beanMap.put(value, object);
-				 }else{
-					 AopManger.beanMap.put(key, object);
+				 if(object != null){
+					 if(StrKit.isNotEmpoty(value)){
+						 AopManger.beanMap.put(value, object);
+					 }else{
+						 AopManger.beanMap.put(key, object);
+					 }
 				 }
 			 }
 			 continue;
@@ -66,6 +80,7 @@ public class AopBeanPlugin<T> implements IPlugin{
 		return true;
 	}
 
+	
 	@Override
 	public boolean stop() {
 		return true;
