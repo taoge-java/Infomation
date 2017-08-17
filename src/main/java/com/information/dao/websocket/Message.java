@@ -11,7 +11,7 @@ public class Message {
 	
 	private List<String> name;
 
-	private Gson gson;
+	private Gson gson = new Gson();
 	
 	public String getContent() {
 		return content;
