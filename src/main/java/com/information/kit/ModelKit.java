@@ -186,7 +186,7 @@ public class ModelKit {
 		}else if(typeName.equals("INT")){
 			return "int";
 		}else if(typeName.equals("TINYINT")){
-			if(size==1)
+			if(size == 1)
 			   return "boolean";
 			return "int";
 		}else if(typeName.equals("DECIMAL")){
