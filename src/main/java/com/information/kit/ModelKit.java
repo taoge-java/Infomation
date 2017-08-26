@@ -148,6 +148,9 @@ public class ModelKit {
 		if(backTypeName.contains("DATETIME")){
 			packBuffer.append("import java.util.Date;\n\n");
 		}
+		if(backTypeName.contains("DECIMAL")){
+			packBuffer.append("import java.math.BigDecimal;\n");
+		}
 		stringBuffer.append("}");
 		return  packBuffer.toString() + stringBuffer.toString();
 	}
