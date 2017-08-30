@@ -50,7 +50,7 @@ public class AopInterceptor implements Interceptor{
 							f.setAccessible(true);
 							f.set(bean, serviceBean);
 						} catch (IllegalArgumentException | IllegalAccessException e) {
-							throw new NullPointerException();
+							throw new NullPointerException("Field can not be null");
 						}
 					}
 				}
