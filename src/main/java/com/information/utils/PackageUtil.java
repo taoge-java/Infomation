@@ -20,23 +20,21 @@ public class PackageUtil {
 	
 	//普通java项目获取classes路径 filePath = ClassLoader.getSystemResource("").getPath() + packageName.replace(".", "\\");
 	
-	public static <T> List<Class<? extends T>> scanPackage(String packageName){ 
-		return  scanPackage(packageName,"WEB-INF/classes/");
-	}
 	
-	private static <T> List<Class<? extends T>> scanPackage(String packageName,String classesPath){ 
+	public static <T> List<Class<? extends T>> scanPackage(String packageName){ 
 		if(StrKit.isEmpoty(packageName))
 			throw new RuntimeException("packageName can not be null");
-		String	filePath = PathKit.getWebRootPath()+"/" + classesPath + packageName.replace(".", "/");
+		String	filePath = PathKit.getRootClassPath() + "/" + packageName.replace(".", "/");
 		List<String> classNames = getClassName(filePath);
 		return getAllClass(classNames);
 	}
 
+	
 	@SuppressWarnings({ "unchecked","rawtypes" })
-	public static <T> List<Class<? extends T>> scanPackage(List<String> packageList,String classesPath){
+	public static <T> List<Class<? extends T>> scanPackage(List<String> packageList){
 		List<Class<? extends T>> classList=new ArrayList();
 		for(String packageName:packageList){
-			String filePath = PathKit.getWebRootPath()+"/" + classesPath + packageName.replace(".", "/");
+			String filePath = PathKit.getRootClassPath() + "/"+ packageName.replace(".", "/");
 			List<String> classNames = getClassName(filePath);
 			classList.addAll(getAllClass(classNames));
 		}

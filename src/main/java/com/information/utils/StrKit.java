@@ -18,7 +18,7 @@ public class StrKit {
 	}
 	
 	public static boolean isbank(String str){
-		return str==null ||str.length() == 0 ? true:false;
+		return str==null || str.length() == 0 ? true:false;
 	}
 	
 	@SuppressWarnings("null")
@@ -27,16 +27,16 @@ public class StrKit {
 	}
 	
 	public static boolean isEmpoty(Object object){
-		return object==null ||object.toString().trim().length() == 0 ? true:false;
+		return object == null || object.toString().trim().length() == 0 ? true : false;
 	}
 	
 	public static boolean isNotEmpoty(String str){
-		return str!=null && str.trim().length() > 0 ? true:false;
+		return str !=null && str.trim().length() > 0 ? true : false;
 	}
 	
 	@SuppressWarnings("null")
 	public static boolean isNotEmpoty(Object object){
-		return object !=null ||object.toString().trim().length()!=0 ? true:false;
+		return object !=null ||object.toString().trim().length() !=0 ? true : false;
 	}
 	
 	/**
@@ -57,11 +57,24 @@ public class StrKit {
 	}
 	
 	/**
-	 * 将字符串首字母变成小写
+	 * 将首字母变成小写
 	 * @param keyName
 	 * @return
 	 */
 	public static String toLowerCaseFirst(String keyName){
 		return keyName.substring(0,1).toLowerCase();
+	}
+	
+	/**
+	 * 将首字母变成大写
+	 * @param keyName
+	 * @return
+	 */
+	public static String totoUpperCaseFirst(String keyName){
+		return keyName.substring(0,1).toUpperCase()+keyName.substring(1,keyName.length());
+	}
+	
+	public static void main(String[] args) {
+		System.err.println(totoUpperCaseFirst("user"));;
 	}
 }

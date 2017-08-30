@@ -80,23 +80,12 @@ public class ModelKit {
 			      	typeName[i] = metadate.getColumnTypeName(i+1);//列类型
 			      	columnDisplaySize[i] = metadate.getColumnDisplaySize(i+1);
 			    }
-		        String tableNameArry[] = null;
-		        String context=null;
-				if(tableName.contains("_")){
-					tableNameArry = tableName.split("_");
-					String newTableName="";
-					for (int i = 0; i < tableNameArry.length; i++) {
-						newTableName += StrKit.totoUpperCaseFirst(tableNameArry[i]);
-					}
-					context = createModel(columnNames,typeName,columnDisplaySize,newTableName);
-					generModel(context,newTableName);
-				}else{
-				    context = createModel(columnNames,typeName,columnDisplaySize,tableName);
-				    generModel(context,tableName);
-				}
+		        String newTableName = getNewTabelName(tableName);
+				String context = createModel(columnNames,typeName,columnDisplaySize,newTableName);
+				generModel(context,newTableName);
 		    }
 			long end = System.currentTimeMillis();
-			System.out.println("生成model成功,耗时"+(end-start)/1000+"s");
+			System.out.println("生成model成功,耗时"+(end-start)+"ms");
 		}catch(Exception e){
 			e.printStackTrace();
 			System.err.println("生成model异常");
@@ -185,13 +174,29 @@ public class ModelKit {
 			return "double";  
 		}else if(typeName.equals("INT")){
 			return "int";
-		}else if(typeName.equals("TINYINT")){
+		}else if(typeName.equals("TINYINT")||typeName.equals("SMALLINT")){
 			if(size == 1)
 			   return "boolean";
 			return "int";
 		}else if(typeName.equals("DECIMAL")){
 			return "BigDecimal";
+		}else  if(typeName.equals("FLOAT")){
+			return "float";
+		}else  if(typeName.equals("DOUBLE")){
+			return "double";
 		}
 		return null;
+	}
+	
+	private String getNewTabelName(String tableName){
+		if(tableName.contains("_")){
+			String[] tableNameArry = tableName.split("_");
+			String newTableName="";
+			for (int i = 0; i < tableNameArry.length; i++) {
+				newTableName += StrKit.totoUpperCaseFirst(tableNameArry[i]);
+			}
+			return newTableName;
+		}
+		return tableName;
 	}
 }

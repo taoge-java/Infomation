@@ -1,5 +1,6 @@
 package com.information.utils;
 
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.MessageDigest;
@@ -21,8 +22,12 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import com.information.constant.WeiXinConstant;
+
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 
 /**
@@ -266,4 +271,65 @@ public class EncryptUtil {
 		}
 		return null;
 	}
+	
+	/**
+	 * 将用户密码加密
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public static String encryptUserInfo(String userName,String password){
+		String userInfo=userName+password;
+		String md5Info=Md5Utils.stringMD5(userInfo);
+		String dBase64=getBase64(md5Info)+","+userName;
+        return getBase64(dBase64);
+	}
+
+	private static String getBase64(String str) {
+		 if(StringUtils.isBlank(str)){
+	            return null;
+	        }
+	        byte[] b = null;
+	        try {
+	            b = str.getBytes("utf-8");
+	        } catch (UnsupportedEncodingException e) {
+	            e.printStackTrace();
+	        }
+	     return new BASE64Encoder().encode(b);
+	}
+	
+	// base64解密
+    public static final String getStrFromBase64(String str) {
+        byte[] b = null;
+        String result = null;
+        if (str != null&&!"".equals(str.trim())) {
+            BASE64Decoder decoder = new BASE64Decoder();
+            try {
+                b = decoder.decodeBuffer(str);
+                result = new String(b, "utf-8");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+    
+    
+    /**
+     * 从base64中解密获取用户名
+     * @return
+     */
+    public static final String getBase64UserName(String encryptionInfo){
+        //解密身份信息；
+        String userName=null;
+        String str=    getStrFromBase64(encryptionInfo);
+        if(str==null||"".equals(str.trim())){
+            return null;
+        }
+        if(str.indexOf(",")>0){
+            String []arr=str.split(",");
+            userName=arr[1];
+        }
+        return userName;
+    }
 }
