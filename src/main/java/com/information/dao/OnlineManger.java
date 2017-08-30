@@ -1,11 +1,11 @@
 package com.information.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * 在线用户管理器
@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  * @create_at 2017年6月4日 下午6:06:34
  */
-@Service
+@Component
 public class OnlineManger {
 
-	private  Map<String,UserSession> session=new HashMap<String,UserSession>();
+	private  Map<String,UserSession> session = new ConcurrentHashMap<String,UserSession>();
 	
 	/**
 	 * 添加用户
