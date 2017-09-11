@@ -5,7 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.information.annotation.AopBean;
-import com.information.annotation.ControllerRoute;
+import com.information.annotation.ControllerMapping;
 import com.information.constant.CommonConstant;
 import com.information.constant.CommonEnum.LogType;
 import com.information.controller.base.BaseController;
@@ -29,7 +29,7 @@ import com.jfinal.log.Log;
  * @version 1.0
  * @create_at 2017年4月27日 上午9:47:48
  */
-@ControllerRoute(url="/account")
+@ControllerMapping(url="/account")
 public class LoginController extends BaseController{
 	
 	private static final Log LOG=Log.getLog(LoginController.class);
@@ -39,6 +39,7 @@ public class LoginController extends BaseController{
     
     @Autowired
 	private OnlineManger onlineManger;
+    
 	/**
 	 * 用户登录页面
 	 */
