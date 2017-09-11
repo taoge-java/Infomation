@@ -8,6 +8,7 @@ import com.information.spring.AopManger;
 import com.information.utils.PackageUtil;
 import com.information.utils.StrKit;
 import com.jfinal.aop.Duang;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.IPlugin;
 
 /**
@@ -18,6 +19,8 @@ import com.jfinal.plugin.IPlugin;
  */
 public class AopBeanPlugin<T> implements IPlugin{
 
+	private static final Log LOG=Log.getLog(AopBeanPlugin.class);
+	
     private List<String> beanList=new ArrayList<String>();
 	
 	@SuppressWarnings("rawtypes")
@@ -46,15 +49,15 @@ public class AopBeanPlugin<T> implements IPlugin{
 	
 	@Override
 	public boolean start() {
-		 List<Class<? extends T>> targetClass=PackageUtil.scanPackage(beanList,"WEB-INF/classes/");
+		 List<Class<? extends T>> targetClass = PackageUtil.scanPackage(beanList);
 		 for(Class<? extends T> target:targetClass){
 			 if(excludeClasses.contains(target)){
 				 continue;
 			 }
 			 Annotation[] annotations = target.getAnnotations();
-			 Object object = null;
-			 String value = null;
 			 if(target.getAnnotations() != null){
+				 Object object = null;
+				 String value = null;
 				 for(Annotation annotation : annotations){
 					 if(annotation instanceof Aop){
 						 object= Duang.duang(target.getName(),target);
@@ -73,6 +76,7 @@ public class AopBeanPlugin<T> implements IPlugin{
 					 }else{
 						 AopManger.beanMap.put(key, object);
 					 }
+					 LOG.info("create aop bean "+object);
 				 }
 			 }
 			 continue;

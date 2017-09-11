@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.information.annotation.ControllerRoute;
+import com.information.annotation.ControllerMapping;
 import com.information.utils.PackageUtil;
 import com.jfinal.config.Routes;
 import com.jfinal.core.Controller;
@@ -82,12 +82,12 @@ public class AutoBindRoutes extends Routes {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public void config() {
         List<Class<? extends Controller>> controllerClasses=PackageUtil.scanPackage(packageName);
-        ControllerRoute controllerRoute = null;
+        ControllerMapping controllerRoute = null;
         for (Class controller : controllerClasses) {
             if (excludeClasses.contains(controller)) {
                 continue;
             }
-            controllerRoute = (ControllerRoute) controller.getAnnotation(ControllerRoute.class);
+            controllerRoute = (ControllerMapping) controller.getAnnotation(ControllerMapping.class);
             if(autoScan){
             	if(controllerRoute==null){
             		this.add(controllerKey(controller), controller);
