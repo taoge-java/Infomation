@@ -2,7 +2,7 @@
 
 import java.net.URLEncoder;
 
-import com.information.annotation.ControllerRoute;
+import com.information.annotation.ControllerMapping;
 import com.information.constant.WeiXinConstant;
 import com.information.controller.base.BaseController;
 import com.information.utils.HttpClientUtil;
@@ -15,7 +15,7 @@ import net.sf.json.JSONObject;
  * @version 1.0
  * 2017年4月10日 下午13:51
  */
-@ControllerRoute(url="/auth")
+@ControllerMapping(url="/auth")
 public class LoginWeiXinController extends BaseController{
 
 	public void index() throws Exception{

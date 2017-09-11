@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.information.annotation.ControllerRoute;
+import com.information.annotation.ControllerMapping;
 import com.information.constant.WeiXinConstant;
 import com.information.controller.base.BaseWeiXinController;
 import com.information.dao.weixin.message.Articles;
@@ -23,7 +23,7 @@ import com.jfinal.log.Log;
  * 微信服务器接入唯一入口
  * @author zengjintao
  */
-@ControllerRoute(url="/weixin")
+@ControllerMapping(url="/weixin")
 public class MsgController extends BaseWeiXinController{
 	
 	private static Log LOG=Log.getLog(MsgController.class);
