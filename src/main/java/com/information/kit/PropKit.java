@@ -10,26 +10,34 @@ import java.util.Properties;
 
 public class PropKit {
 	
-	private Properties properties;
+	private  Properties properties = new Properties();
+	
+	private String fileName;
 	
 	public PropKit(Properties properties){
-		this.properties=properties;
+		this.properties = properties;
 	}
 	
+	public PropKit(String fileName){
+		this.fileName = fileName;
+		loadProperties();
+	}
+	
+	private PropKit loadProperties() {
+		getProperties();
+		return this;
+	}
+
 	public PropKit(File file,String encoding){
-		InputStream in;
-		try {
-			in = new FileInputStream(file);
-			if(properties==null){
-				properties=new  Properties();
-			}
-			properties.load(new InputStreamReader(in, encoding));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		loadFileProperties(file,encoding);
 	}
 	
-	public  Properties getProperties(File file,String encoding){
+	private PropKit loadFileProperties(File file,String encoding) {
+		 getProperties(file,encoding);
+		 return this;
+	}
+
+	private Properties getProperties(File file,String encoding){
 		InputStream in;
 		try {
 			in = new FileInputStream(file);
@@ -41,10 +49,14 @@ public class PropKit {
 	}
 	
 	public  Properties getProperties(String fileName,String encoding){
+		return getProperties();
+	}
+	
+	private  Properties getProperties(){
 		InputStream in;
 		try {
 			in = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);	
-			properties.load(new InputStreamReader(in, encoding));
+			properties.load(new InputStreamReader(in,"UTF-8"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -108,5 +120,9 @@ public class PropKit {
 			throw new RuntimeException("The value can not parse to Boolean : " + value);
 		}
 		return defaultValue;
+	}
+	
+	public Properties getPropertie(){
+		return properties;
 	}
 }
