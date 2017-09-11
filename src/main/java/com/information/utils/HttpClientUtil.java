@@ -6,19 +6,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.httpclient.NameValuePair;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.httpclient.util.HttpURLConnection;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import com.information.constant.WeiXinConstant;
+import com.jfinal.log.Log;
 
 import net.sf.json.JSONObject;
 
@@ -30,18 +35,45 @@ import net.sf.json.JSONObject;
  */
 public class HttpClientUtil {
 	
-	@SuppressWarnings("unused")
-	public static  String httpPostRequest(String url,Map<String,String> map){
-		String content=null;
-		HttpClientBuilder builder=HttpClientBuilder.create();
-		CloseableHttpClient httpClient= builder.build();
-		HttpPost post=new HttpPost(url);
-		//NameValuePair:代表数据类型
-		List<NameValuePair> valuePair = new ArrayList<NameValuePair>();
-		Iterator<String> iterator = map.keySet().iterator();
-		while(iterator.hasNext()){
-			String key=iterator.next();
-			//valuePair.add(new BasicNameValuePair(key,map.get(key)));
+    private static final Log LOG = Log.getLog(HttpClientUtil.class);
+	
+	public static  String httpPostRequest(String url,Map<String,String> params){
+		String content = null;
+		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();  
+        CloseableHttpClient httpClient = httpClientBuilder.build();
+		try {
+			HttpPost httpPost = new HttpPost(url);
+			//NameValuePair:代表数据类型
+			List<NameValuePair> valuePair = new ArrayList<NameValuePair>();
+			Iterator<String> iterator = params.keySet().iterator();
+			while(iterator.hasNext()) {
+				String key = iterator.next();
+				valuePair.add(new BasicNameValuePair(key, params.get(key))); 
+			}
+			 // 设置参数  
+			httpPost.setEntity(new UrlEncodedFormEntity(valuePair, "UTF-8")); 
+			HttpResponse response = httpClient.execute(httpPost);
+			if (response.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_OK) {
+				HttpEntity entity = response.getEntity();
+				content = EntityUtils.toString(entity, "UTF-8");
+				try {
+					EntityUtils.consume(response.getEntity());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			httpPost.abort();
+            httpPost = null;
+		} catch (IOException e) {
+			LOG.error("HTTP请求异常", e);
+		} finally {
+			if (httpClient != null) {
+				try {
+					httpClient.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		return content;
 	}
@@ -121,4 +153,25 @@ public class HttpClientUtil {
 		return httpPost(url,params,"UTF-8");
 	}
 
+	/**
+	 * 判读是否post请求
+	 * @param request
+	 * @return
+	 */
+	public static boolean isPost(HttpServletRequest request){
+		if(request.getMethod().equals("post") || request.getMethod().equals("POST"))
+		     return true;
+		return false;
+	}
+	
+	/**
+	 * 判读是否get请求
+	 * @param request
+	 * @return
+	 */
+	public static boolean isGet(HttpServletRequest request){
+		if(request.getMethod().equals("get") || request.getMethod().equals("GET"))
+		     return true;
+		return false;
+	}
 }
