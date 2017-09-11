@@ -1,6 +1,6 @@
 package com.information.controller.room;
 
-import com.information.annotation.ControllerRoute;
+import com.information.annotation.ControllerMapping;
 import com.information.controller.base.BaseController;
 
 /**
@@ -9,11 +9,11 @@ import com.information.controller.base.BaseController;
  * @version 1.0
  * @create_at 2017年8月16日下午9:13:30
  */
-@ControllerRoute(url="/system/room")
+@ControllerMapping(url="/system/room")
 public class RoomChatController extends BaseController{
 
 	public void index(){
-		String userName = getCurrentUser().getLoginName();
+		String userName =getUserName();
 		setAttr("userName", userName);
 		rendView("/room/chat.vm");
 	}

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.information.annotation.Permission;
 import com.information.annotation.AopBean;
-import com.information.annotation.ControllerRoute;
+import com.information.annotation.ControllerMapping;
 import com.information.constant.CommonEnum.LogType;
 import com.information.constant.OperCode;
 import com.information.controller.base.BaseController;
@@ -18,7 +18,7 @@ import com.information.utils.StrKit;
 /***
  * 管理员设置
  */
-@ControllerRoute(url="/system/admin")
+@ControllerMapping(url="/system/admin")
 public class SystemAdminController extends BaseController{
 	
 	@AopBean

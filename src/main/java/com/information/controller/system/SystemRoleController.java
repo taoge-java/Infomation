@@ -1,7 +1,7 @@
 package com.information.controller.system;
 
 import com.information.annotation.AopBean;
-import com.information.annotation.ControllerRoute;
+import com.information.annotation.ControllerMapping;
 import com.information.constant.CommonEnum.LogType;
 import com.information.controller.base.BaseController;
 import com.information.model.primary.system.SystemRole;
@@ -17,7 +17,7 @@ import com.jfinal.plugin.activerecord.Page;
  * @version 1.0
  * @create_at 2017年6月8日 下午9:29:32
  */
-@ControllerRoute(url="/system/role")
+@ControllerMapping(url="/system/role")
 public class SystemRoleController extends BaseController{
 	
 	private Log log=Log.getLog(SystemAdminController.class);
