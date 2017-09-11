@@ -6,10 +6,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
 import com.information.config.SysConfig;
 import com.information.constant.CommonConstant;
 import com.information.dao.UserSession;
 import com.information.model.primary.system.SystemLog;
+import com.information.redis.RedisUtil;
 import com.information.utils.DateUtil;
 import com.information.utils.IpUtils;
 import com.information.utils.NumberUtils;
@@ -24,6 +26,7 @@ import com.jfinal.upload.UploadFile;
  */
 public class BaseController extends Controller{
 	
+	int pageSize = 30;
 	
 	public void rendView(String path){
 		render(SysConfig.BASE_VIEW+path);
@@ -38,7 +41,7 @@ public class BaseController extends Controller{
      * @return
      */
 	public  UserSession getCurrentUser(){
-		return  getSessionAttr(CommonConstant.SESSION_ID_KEY);
+		return RedisUtil.get(CommonConstant.SESSIONID);
 	}
 	
 	/**
@@ -56,8 +59,8 @@ public class BaseController extends Controller{
 	 */
 	@SuppressWarnings("static-access")
 	public void systemLog(String oper_des,int type){
-		UserSession user=getCurrentUser();
-		SystemLog systemLog=new SystemLog();
+		UserSession user = getCurrentUser();
+		SystemLog systemLog = new SystemLog();
 		systemLog.set("oper_name", user.getLoginName());
 		systemLog.set("admin_id", user.getUserId());
 		systemLog.set("oper_time", new DateUtil().getDate());
@@ -72,30 +75,30 @@ public class BaseController extends Controller{
 	 * @param upload
 	 * @return
 	 */
-	public String UploadRename(UploadFile upload){
-		File file=upload.getFile();
+	public String uploadRename(UploadFile upload){
+		File file = upload.getFile();
 		try {
-			FileInputStream in=new FileInputStream(file);
-			String fileName=upload.getFileName();
-			String style=fileName.substring(fileName.indexOf(","),fileName.length());
-			String newName=NumberUtils.getMessageNum(4)+style;
-			String imagePath=getImagePath();
-			String basePath=SysConfig.resourceUpload+"/"+imagePath;
+			FileInputStream in = new FileInputStream(file);
+			String fileName = upload.getFileName();
+			String style = fileName.substring(fileName.indexOf(","),fileName.length());
+			String newName = NumberUtils.getMessageNum(4)+style;
+			String imagePath = getImagePath();
+			String basePath = SysConfig.resourceUpload+"/"+imagePath;
 			File fi=new File(basePath);
 			if(!fi.exists()){
 				fi.mkdirs();
 			}
-			File upFile=new File(basePath,newName);
-			FileOutputStream out=new FileOutputStream(upFile);
-			byte[] bytes=new byte[1024];
-			int flag=0;
-			while((flag=in.read(bytes, 0, 1024))!=-1){
+			File upFile = new File(basePath,newName);
+			FileOutputStream out = new FileOutputStream(upFile);
+			byte[] bytes = new byte[1024];
+			int flag = 0;
+			while((flag =in.read(bytes, 0, 1024)) != -1){
 				out.write(bytes, 0, flag);
 			}
-			if(out!=null){
+			if(out != null){
 				out.close();
 			}
-			if(in!=null){
+			if(in != null){
 				in.close();
 			}
 			file.delete();
