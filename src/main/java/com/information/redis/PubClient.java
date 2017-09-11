@@ -19,10 +19,10 @@ public class PubClient {
 	
 	private JedisPool jedisPool;
 	
-	private static final Log LOG=Log.getLog(PubClient.class);
+	private static final Log LOG = Log.getLog(PubClient.class);
 	
 	public PubClient(String host, int port){
-		jedis=new Jedis(host, port);
+		jedis = new Jedis(host, port);
 	}
 	
 	/**连接池的jedis**/
@@ -51,8 +51,9 @@ public class PubClient {
 	public void close(String channel,String message){
 		jedis.publish(channel,"关闭jedis消息发布");
 		jedis.del(channel);
-		if(jedis!=null){
+		if(jedis != null){
 			jedis.close();
 		}
 	}
+	
 }
