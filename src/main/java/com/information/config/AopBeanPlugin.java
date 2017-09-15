@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.information.annotation.Aop;
 import com.information.annotation.Interceptor;
-import com.information.spring.AopManger;
+import com.information.spring.AopBeanManger;
 import com.information.utils.PackageUtil;
 import com.information.utils.StrKit;
 import com.jfinal.aop.Duang;
@@ -22,6 +22,8 @@ public class AopBeanPlugin<T> implements IPlugin{
 	private static final Log LOG=Log.getLog(AopBeanPlugin.class);
 	
     private List<String> beanList=new ArrayList<String>();
+    
+    private AopBeanManger aopManger = AopBeanManger.getInstance();
 	
 	@SuppressWarnings("rawtypes")
 	private List<Class> excludeClasses=new ArrayList<Class>();
@@ -68,15 +70,14 @@ public class AopBeanPlugin<T> implements IPlugin{
 						 object = Duang.duang(target.getName(),target,interceptorClass);
 					 }
 				 }
-				 String simpleName=target.getSimpleName().substring(1, target.getSimpleName().length());
-				 String key=StrKit.toLowerCaseFirst(target.getSimpleName())+simpleName;
+				 String key=StrKit.toLowerCaseFirst(target.getSimpleName());
 				 if(object != null){
 					 if(StrKit.isNotEmpoty(value)){
-						 AopManger.beanMap.put(value, object);
+						 aopManger.put(value, object);
 					 }else{
-						 AopManger.beanMap.put(key, object);
+						 aopManger.put(key, object);
 					 }
-					 LOG.info("create aop bean "+object);
+					 LOG.debug("created singleton aop bean '"+key+"'");
 				 }
 			 }
 			 continue;
