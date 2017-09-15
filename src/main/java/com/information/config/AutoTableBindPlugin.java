@@ -42,8 +42,8 @@ public class AutoTableBindPlugin extends ActiveRecordPlugin{
     }
     
     public AutoTableBindPlugin(String confitName,DataSource dataSource, INameStyle nameStyle) {
-     super(confitName,dataSource);
-     this.nameStyle = nameStyle;
+        super(confitName,dataSource);
+        this.nameStyle = nameStyle;
     }
     public AutoTableBindPlugin(IDataSourceProvider dataSourceProvider,String... packages) {
         this(dataSourceProvider, SimpleNameStyles.DEFAULT);
