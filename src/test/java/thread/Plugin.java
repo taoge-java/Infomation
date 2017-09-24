@@ -1,4 +1,4 @@
-package com.thread;
+package thread;
 
 public class Plugin {
 
