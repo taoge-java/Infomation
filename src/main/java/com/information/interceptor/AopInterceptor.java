@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import com.information.annotation.AopBean;
-import com.information.spring.AopManger;
+import com.information.spring.AopBeanManger;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
@@ -20,11 +20,15 @@ public class AopInterceptor implements Interceptor{
 	
 	private  ApplicationContext ctx;
 	
+	private AopBeanManger aopManger = AopBeanManger.getInstance();
+	
 	public AopInterceptor(ApplicationContext ctx){
 		this.ctx = ctx;
 	}
 	
-	public AopInterceptor(){}
+	public AopInterceptor(){
+		
+	}
 	
 	@Override
 	public void intercept(Invocation inv) {
@@ -34,15 +38,14 @@ public class AopInterceptor implements Interceptor{
 		for (Field field : fields) {
 			Object bean = null;
 			if (field.isAnnotationPresent(AopBean.class)){
-				bean = AopManger.beanMap.get(field.getName());
-				initServiceBean(bean,field);
-			}else if(field.isAnnotationPresent(Autowired.class)){
+				bean = aopManger.get(field.getName());
+			}else if(field.isAnnotationPresent(Autowired.class) && ctx != null){
 				bean = ctx.getBean(field.getName());
-				initServiceBean(bean,field);
 			}else{
 				continue ;
 		    }
 			try {
+				initServiceBean(bean,field);
 				if (bean != null) {
 					field.setAccessible(true);
 					field.set(controller, bean);
@@ -54,13 +57,18 @@ public class AopInterceptor implements Interceptor{
 		inv.invoke();
 	}
 	
+	/**
+	 * service层 bean的自动注入
+	 * @param bean
+	 * @param field
+	 */
 	private  void initServiceBean(Object bean,Field field){
 		Class<?> cla = field.getType();
 		//service层aop的自动注入
 		for(Field f : cla.getDeclaredFields()){
 			Object serviceBean = null;
 			if(f.isAnnotationPresent(AopBean.class)){
-				serviceBean = AopManger.beanMap.get(f.getName());
+				serviceBean = aopManger.get(f.getName());
 			}else if(f.isAnnotationPresent(Autowired.class)){
 				serviceBean = ctx.getBean(f.getName());
 			}
