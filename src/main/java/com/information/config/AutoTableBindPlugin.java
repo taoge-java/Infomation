@@ -114,8 +114,6 @@ public class AutoTableBindPlugin extends ActiveRecordPlugin{
                       scanModel(tb,modelClass);
                    }
                 }
-            }else{
-               scanModel(tb,modelClass);
             }
         }
         return super.start();

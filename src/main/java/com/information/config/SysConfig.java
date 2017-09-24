@@ -9,6 +9,7 @@ import java.util.Properties;
 import org.osgl.inject.Genie;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.information.constant.CommonConstant;
 import com.information.interceptor.AopInterceptor;
 import com.information.interceptor.IocInterceptor;
 import com.information.interceptor.PermissionInterceptor;
@@ -31,6 +32,7 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.ext.handler.RenderingTimeHandler;
+import com.jfinal.ext.plugin.shiro.ShiroInterceptor;
 import com.jfinal.ext.plugin.shiro.ShiroPlugin;
 import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
 import com.jfinal.kit.PathKit;
@@ -51,6 +53,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import net.sf.json.JSONObject;
 import sun.awt.windows.WEmbeddedFrame;
+import sun.security.provider.SHA;
 /**
  * Jfinal Aip引导式配置
  * @author zengjintao
@@ -60,9 +63,9 @@ import sun.awt.windows.WEmbeddedFrame;
 @SuppressWarnings("unused")
 public class SysConfig extends JFinalConfig{
 	
-	private static final Logger LOG=Logger.getLogger(SysConfig.class);
+	private static final Logger LOG = Logger.getLogger(SysConfig.class);
 	
-	public final static String BASE_VIEW="/WEB-INF/views";//页面存放路径
+	public final static String BASE_VIEW = "/WEB-INF/views";//页面存放路径
 	
 	public static String redisHost; // redis主机
 	
@@ -77,6 +80,8 @@ public class SysConfig extends JFinalConfig{
 	public static String cookie_name;
 	
 	public static String  weixinToken;
+	
+	private Routes shiroRoutes = null;
 
 	@Override
 	public void configConstant(Constants constants) {
@@ -88,14 +93,14 @@ public class SysConfig extends JFinalConfig{
 		 PropKit.use("config.properties");//加载配置文件
 		 redisPassword = PropKit.get("redis.password").trim();
 		 redisHost = PropKit.get("redis.host").trim();
-		 channels=PropKit.get("redis.channels").trim();
-		 resourceUpload=PropKit.get("resource.upload.path").trim();
-		 resourceDown=PropKit.get("resource.upload.path").trim();
-		 weixinToken=PropKit.get("weixin.token").trim();
-		 cookie_name=PropKit.get("cookie.name").trim();
+		 channels = PropKit.get("redis.channels").trim();
+		 resourceUpload = PropKit.get("resource.upload.path").trim();
+		 resourceDown = PropKit.get("resource.upload.path").trim();
+		 weixinToken = PropKit.get("weixin.token").trim();
+		 cookie_name = PropKit.get("cookie.name").trim();
 		 constants.setBaseDownloadPath(resourceUpload);
 		 String fullFile = PathKit.getWebRootPath() + File.separator + "WEB-INF" + "/classes/velocity.properties";
-		 InputStream inputStream=null;
+		 InputStream inputStream = null;
 		 /**
 		  * 加载Velocity配置文件
 		  */
@@ -110,14 +115,17 @@ public class SysConfig extends JFinalConfig{
 	}
 	@Override
 	public void configRoute(Routes routes) {
-		AutoBindRoutes autoBindRoutes= new AutoBindRoutes();
+		routes.setBaseViewPath(BASE_VIEW);
+		AutoBindRoutes autoBindRoutes = new AutoBindRoutes();
 		autoBindRoutes.setPackageName("com.information.controller");
+		shiroRoutes = autoBindRoutes;
 		routes.add(autoBindRoutes);
 	}
 	
 	
 	@Override
-	public void configEngine(Engine engine) {}
+	public void configEngine(Engine engine) {
+	}
 		
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
@@ -127,7 +135,7 @@ public class SysConfig extends JFinalConfig{
 	     */
 		DruidPlugin primaryDruid = new DruidPlugin(PropKit.get("primary.jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
 	    plugin.add(primaryDruid);
-	    AutoTableBindPlugin primaryAtbp = new AutoTableBindPlugin("information",primaryDruid);
+	    AutoTableBindPlugin primaryAtbp = new AutoTableBindPlugin(CommonConstant.HOSTCAHENAME,primaryDruid);
 	    primaryAtbp.scanPackages("com.information.model.primary"); //扫描com.information.model下的model
 	    //如果你只想用注解而不想让没有注解的model被自动注册，则如下使用
 	    primaryAtbp.autoScan(false);
@@ -148,24 +156,29 @@ public class SysConfig extends JFinalConfig{
  	   
 	    plugin.add(new EhCachePlugin());//配置缓存插件
 	    // 配置redis插件
-	    RedisPlugin redis=new RedisPlugin("information",redisHost,6379,redisPassword);
+	    RedisPlugin redis = new RedisPlugin("information",redisHost,6379,redisPassword);
 	    redis.getJedisPoolConfig().setMaxTotal(200);
 	    redis.getJedisPoolConfig().setMaxIdle(200);
 	    plugin.add(redis);
-	    plugin.add(new SpringPlugin(SpringBeanManger.getContext()));//集成spring
+	    
 	    //aop自动注入插件
-	    AopBeanPlugin beanPlugin=new AopBeanPlugin();
+	    AopBeanPlugin beanPlugin = new AopBeanPlugin();
 	    beanPlugin.setPackageName("com.information.service");
 	    beanPlugin.addExcludeClasses(BaseService.class);
 	    plugin.add(beanPlugin);
+	    
+	    plugin.add(new PropertiesPlugin(SpringBeanManger.getContext()));
+	    //配置shiro插件
+//	    ShiroPlugin shiroPlugin = new ShiroPlugin(shiroRoutes);
+//	    plugin.add(shiroPlugin);
 	}
 	
 	@Override
 	public void configInterceptor(Interceptors interceptors) {
 		interceptors.add(new PermissionInterceptor());
 		interceptors.add(new ViewContextInterceptor());
-		interceptors.add(new IocInterceptor());
-		interceptors.addGlobalActionInterceptor(new AopInterceptor());
+		interceptors.add(new AopInterceptor(SpringBeanManger.getContext()));//aop,spring bean注入拦截器
+	//	interceptors.add(new ShiroInterceptor());
 	}
 	
 	@Override
@@ -181,10 +194,10 @@ public class SysConfig extends JFinalConfig{
 	@Override
 	public void afterJFinalStart() {
 		try{
-			WeiXinService weiXinService=(WeiXinService) SpringBeanManger.getBean("weixinService");
-		    String menu=JSONObject.fromObject(weiXinService.generateMenu()).toString();
-		    int result=weiXinService.createMenu(weiXinService.getAccesstoken().getAccessToken(),menu);
-		    if(result==0){
+			WeiXinService weiXinService = (WeiXinService) SpringBeanManger.getBean("weiXinService");
+		    String menu = JSONObject.fromObject(weiXinService.generateMenu()).toString();
+		    int result = weiXinService.createMenu(weiXinService.getAccesstoken().getAccessToken(),menu);
+		    if(result == 0){
 			   LOG.info("菜单创建成功");
 		    }
 	     }catch(Exception e){
@@ -203,10 +216,15 @@ public class SysConfig extends JFinalConfig{
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				 JobManger job=(JobManger) SpringBeanManger.getBean("jobManger");
+				 JobManger job = (JobManger) SpringBeanManger.getBean("jobManger");
 				 job.start();
 			}
 		}).start();
 		LOG.info("数据初始化完毕");
+	}
+	
+	@Override
+	public void beforeJFinalStop() {
+		Redis.removeCache(CommonConstant.HOSTCAHENAME);//清除所有缓存
 	}
 }
