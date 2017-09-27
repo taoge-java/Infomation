@@ -10,7 +10,6 @@ import com.information.dao.OnlineManger;
 import com.information.dao.OnlineUser;
 import com.information.dao.UserSession;
 import com.information.model.primary.system.SystemAdmin;
-import com.information.model.slave.User;
 import com.information.redis.RedisUtil;
 import com.information.service.system.SystemRoleService;
 import com.information.utils.DateUtil;
@@ -44,11 +43,6 @@ public class LoginController extends BaseController{
 	 * 用户登录页面
 	 */
 	public void index(){
-		User user = User.dao.findById(1);
-		System.out.println(user);
-		String name = getPara("name");
-		System.out.println(name);
-		renderJson(new ResultCode(ResultCode.SUCCESS));
 //		String userCookie=getCookie(CommonConstant.COOKIE_USER_ID);
 //		int userId=0;
 //		if(userCookie!=null){

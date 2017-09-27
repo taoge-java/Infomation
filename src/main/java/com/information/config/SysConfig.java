@@ -17,7 +17,6 @@ import com.information.interceptor.ViewContextInterceptor;
 import com.information.job.base.JobManger;
 import com.information.listener.RedisListener;
 import com.information.model.primary.BaseModel;
-import com.information.model.slave.SlaveBaseModel;
 import com.information.redis.SubClient;
 import com.information.service.base.BaseService;
 import com.information.service.weixin.WeiXinService;
@@ -150,7 +149,6 @@ public class SysConfig extends JFinalConfig{
  	    AutoTableBindPlugin slaveAtbp = new AutoTableBindPlugin("information_back",slaveDruid);
  	    slaveAtbp.scanPackages("com.information.model.slave");//扫描com.information.student下的model
  	    slaveAtbp.autoScan(false);
- 	    slaveAtbp.addExcludeClasses(SlaveBaseModel.class);
  	    slaveAtbp.setShowSql(true);
  	    plugin.add(slaveAtbp);
  	   
