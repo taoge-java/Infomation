@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 import com.google.common.collect.Lists;
 import com.information.utils.StrKit;
 import com.jfinal.kit.PathKit;
-import com.test.JdbcUtil;
 
 /**
  * model类生成工具类
@@ -28,7 +27,6 @@ public class ModelKit {
 
 	private String packeName;
 	
-	@SuppressWarnings("unused")
 	private DataSource dataSource;
 	
 	public static final String DEFAULT="/src/main/java/";
@@ -51,7 +49,7 @@ public class ModelKit {
 	public void create(){
 		long start = System.currentTimeMillis();
 		try {
-			Connection connection = JdbcUtil.getConnection();
+			Connection connection = dataSource.getConnection();
 			DatabaseMetaData  databaseMetaData = connection.getMetaData();
 			ResultSet resultSet = databaseMetaData.getTables(null, null, null, null);
 			while (resultSet.next()) {
@@ -175,8 +173,9 @@ public class ModelKit {
 		}else if(typeName.equals("INT")){
 			return "int";
 		}else if(typeName.equals("TINYINT")||typeName.equals("SMALLINT")){
-			if(size == 1)
-			   return "boolean";
+			if(size == 1){
+				return "boolean";
+			}
 			return "int";
 		}else if(typeName.equals("DECIMAL")){
 			return "BigDecimal";
@@ -184,6 +183,8 @@ public class ModelKit {
 			return "float";
 		}else  if(typeName.equals("DOUBLE")){
 			return "double";
+		}else if(typeName.equals("BIGINT")){
+			return "long";
 		}
 		return null;
 	}
