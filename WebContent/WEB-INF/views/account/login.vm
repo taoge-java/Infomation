@@ -21,15 +21,6 @@
     	$(".loginbtn").mouseout(function(){
     		$(this).css("background","#77B621");
     	});
-		//$(".loginuser").blur(function(){
-		//   var count=0;
-		//   $.post("$BASE_PATH/account/getErrorCount",{"userName":$('.loginuser').val()},function(data){
-		 //      count=parseInt(data.message);
-		//	   if(count>3){
-		//	      $(".yzm").css("display","block");
-		//	   }
-		 //  },"json");
-		//});
     });  
 	document.onkeydown = function (e) {
 	    var theEvent = window.event || e;
@@ -89,6 +80,7 @@
          <div id="cloud1" class="cloud"></div>
          <div id="cloud2" class="cloud"></div>
      </div>  
+	 
      <div class="logintop">    
          <span>欢迎登录后台管理界面平台</span>    
          <ul>
@@ -116,6 +108,7 @@
            </div>
     </div>
     </form>
-    <div class="loginbm">版权所有  2017  <a href="http://www.taoge.com">技术支持:   小雪JAVA开发工作室</a></div>
+    <div class="loginbm">版权所有  2017  <a href="http://www.taoge.com">技术支持: #userInfo()
+	 #end  涛哥JAVA开发工作室</a></div>
 </body>
 </html>

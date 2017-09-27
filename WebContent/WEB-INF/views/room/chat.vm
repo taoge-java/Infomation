@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="$BASE_PATH/resource/css/pintuer/css/pintuer.css">
     <style>
         *{padding: 0;margin: 0}
-        #chat{margin: 0 auto;}
+        #chat{margin-left:20px;}
         #content{border: 5px solid #d0d0d0;width: 800px;height: 400px}
         .length{width: 745px;display: inline;margin-top: 10px;}
         .bg-sub{display: inline}
@@ -17,18 +17,21 @@
     <script>
        var websocket=null;
 	   var userName ='$userName';
+	   
        window.onload=function(){
     	  if('WebSocket' in window){
-    		  websocket=new WebSocket("ws://localhost:8080/Information/chat?user="+userName);
+    		  websocket=new WebSocket("ws://localhost:8082/Information/chat?user="+userName);
     	  }else{
     		  layer.alert('您的浏览器不支持WebSocket', {
                   icon: 0,
+				   time: 2000,
                   skin: 'layer-ext-moon'
               })
     	  }
     	  websocket.onopen=function(){
 		      layer.alert('websocket连接成功', {
                   icon: 1,
+				  time: 2000,
                   skin: 'layer-ext-moon'
               })
     	  }
@@ -38,7 +41,15 @@
                   skin: 'layer-ext-moon'
               })
     	  }
+		  
+		  websocket.onmessage=function(even){
+		     console.log(even);
+		  }
       }
+	  
+	  function sendMessage(){
+	      websocket.send($("#msg").val());
+	  }
     </script>
 </head>
 <body>
@@ -48,7 +59,7 @@
        </div>
        <div>
            <form>
-               <input type="text" class="input length" placeholder="文本框" />
+               <input type="text" id="msg" class="input length" placeholder="文本框" />
                <button class="button bg-sub" onclick="sendMessage()"> 发送</button>
            </form>
 

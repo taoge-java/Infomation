@@ -71,7 +71,7 @@ $(function(){
 			<a href="#">关于</a>
 		</li>
         <li>
-			<a href="$BASE_PATH/account/exit" target="_parent">退出</a>
+			<a href="$BASE_PATH/account/exit/$session.userId"  target="_parent">退出</a>
 		</li>
     </ul>
      

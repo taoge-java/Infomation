@@ -1,6 +1,6 @@
 package com.information.controller.account;
 
-import com.information.annotation.ControllerRoute;
+import com.information.annotation.ControllerMapping;
 import com.information.controller.base.BaseController;
 /**
  * 忘记密码找回
@@ -8,7 +8,7 @@ import com.information.controller.base.BaseController;
  * @version 1.0
  * @create_at 2017年4月26日 下午9:19:57
  */
-@ControllerRoute(url="/account/forgetPassword")
+@ControllerMapping(url="/account/forgetPassword")
 public class ForgetPasswordController extends BaseController{
 
 }

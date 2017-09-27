@@ -22,6 +22,10 @@ public class RedisUtil {
 		return Redis.use(CommonConstant.HOSTCAHENAME).set(key, value);
 	}
 	
+	public static String set(String key,Object value,int seconds){
+		return Redis.use(CommonConstant.HOSTCAHENAME).setex(key, seconds, value);
+	}
+	
 	public static <T> T get(String key){
 		return Redis.use(CommonConstant.HOSTCAHENAME).get(key);
 	}

@@ -82,7 +82,7 @@ $(function(){
 				</span>聊天室管理
 			</div>
             <ul class="menuson">
-                <li><cite></cite><a href="$BASE_PATH/system/room" target="rightFrame">聊天室</a><i></i></li>
+                <li><cite></cite><a href="$BASE_PATH/echarts" target="rightFrame">聊天室</a><i></i></li>
             </ul>
         </dd>   
      </dl>

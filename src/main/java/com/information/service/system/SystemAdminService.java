@@ -2,9 +2,11 @@ package com.information.service.system;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.information.annotation.Aop;
 import com.information.config.SysConfig;
-import com.information.constant.CommonConstant;
 import com.information.model.primary.system.SystemAdmin;
 import com.information.model.primary.system.SystemRole;
 import com.information.service.base.BaseService;
@@ -22,6 +24,10 @@ import net.sf.json.JSONObject;
 @Aop
 public class SystemAdminService extends BaseService{
 	
+	@SuppressWarnings("unused")
+	@Autowired
+	private SystemRoleService systemRoleService;
+	
 	private static final Log LOG=Log.getLog(SystemAdminService.class);
 	
 	/**
@@ -37,7 +43,7 @@ public class SystemAdminService extends BaseService{
 				context.append(" and login_name=?");
 				param.add(login_name);
 			}
-			Page<SystemAdmin> page= SystemAdmin.dao.paginate(pageNumber, CommonConstant.pageSize, "select *", context.toString(),param.toArray());
+			Page<SystemAdmin> page= SystemAdmin.dao.paginate(pageNumber, 30, "select *", context.toString(),param.toArray());
 			result.setDefaultModel(page);
 		} catch (Exception e) {
 			resultCode=new ResultCode(ResultCode.FAIL);

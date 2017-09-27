@@ -14,6 +14,30 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
+	<dependency>
+	    <groupId>org.apache.shiro</groupId>
+	    <artifactId>shiro-core</artifactId>
+	    <version>1.4.0</version>
+	</dependency>
+    <!-- https://mvnrepository.com/artifact/be.nille.jwt/jwt-components -->
+	<!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+	<dependency>
+	    <groupId>com.auth0</groupId>
+	    <artifactId>java-jwt</artifactId>
+	    <version>3.2.0</version>
+	</dependency>
+<!-- https://mvnrepository.com/artifact/com.atlassian.jwt/jwt-core -->
+	<dependency>
+	    <groupId>com.atlassian.jwt</groupId>
+	    <artifactId>jwt-core</artifactId>
+	    <version>1.6.2</version>
+	</dependency>
+	<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>0.7.0</version>
+</dependency>
     <dependency>
 	    <groupId>com.thoughtworks.xstream</groupId>
 	    <artifactId>xstream</artifactId>
@@ -30,51 +54,54 @@
 	    <version>1.5</version>
 	</dependency>
 	<dependency>
+	    <groupId>org.apache.shiro</groupId>
+	    <artifactId>shiro-all</artifactId>
+	    <version>1.3.2</version>
+	</dependency>
+	<dependency>
 	    <groupId>com.google.code.gson</groupId>
 	    <artifactId>gson</artifactId>
 	    <version>2.8.0</version>
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-webmvc</artifactId>
 	    <version>5.0.0.M5</version>
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
 	<dependency>
 	    <groupId>com.alibaba</groupId>
 	    <artifactId>druid</artifactId>
 	    <version>1.0.29</version>
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.osgi/org.osgi.core -->
 	<dependency>
 	    <groupId>org.osgi</groupId>
 	    <artifactId>org.osgi.core</artifactId>
 	    <version>6.0.0</version>
 	    <scope>provided</scope>
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.osgl/genie -->
 	<dependency>
 	    <groupId>org.osgl</groupId>
 	    <artifactId>genie</artifactId>
 	    <version>1.1.3</version>
 	</dependency>
 	
-	<!-- https://mvnrepository.com/artifact/org.apache.felix/org.osgi.core -->
 	<dependency>
 	    <groupId>org.apache.felix</groupId>
 	    <artifactId>org.osgi.core</artifactId>
 	    <version>1.0.0</version>
 	    <scope>provided</scope>
 	</dependency>
-	
-<!-- https://mvnrepository.com/artifact/org.jboss.osgi.core/org.osgi.core -->
-	<!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
-<dependency>
-    <groupId>com.alibaba</groupId>
-    <artifactId>druid</artifactId>
-    <version>1.0.29</version>
-</dependency>
+	<!-- https://mvnrepository.com/artifact/cn.dreampie/jfinal-shiro -->
+	<dependency>
+	    <groupId>com.alibaba</groupId>
+	    <artifactId>druid</artifactId>
+	    <version>1.0.29</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.google.inject</groupId>
+	    <artifactId>guice</artifactId>
+	    <version>4.1.0</version>
+	</dependency>
 	
 	<dependency>
 	    <groupId>org.apache.commons</groupId>
@@ -82,11 +109,11 @@
 	    <version>1.4</version>
    </dependency>
    <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
-<dependency>
-    <groupId>org.quartz-scheduler</groupId>
-    <artifactId>quartz</artifactId>
-    <version>2.2.3</version>
-</dependency>
+	<dependency>
+	    <groupId>org.quartz-scheduler</groupId>
+	    <artifactId>quartz</artifactId>
+	    <version>2.2.3</version>
+	</dependency>
    <!-- https://mvnrepository.com/artifact/javax/javaee-api -->
 	<dependency>
 	    <groupId>javax</groupId>

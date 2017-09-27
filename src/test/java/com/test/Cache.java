@@ -1,5 +1,6 @@
 package com.test;
 
+
 import com.jfinal.plugin.activerecord.cache.ICache;
 
 public class Cache implements ICache{
@@ -27,5 +28,4 @@ public class Cache implements ICache{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

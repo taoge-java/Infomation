@@ -6,12 +6,13 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.springframework.stereotype.Service;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import com.information.annotation.Aop;
 import com.information.annotation.AopBean;
-import com.information.constant.CommonConstant;
 import com.information.controller.system.SystemAdminController;
 import com.information.model.primary.system.SystemMenu;
 import com.information.model.primary.system.SystemOper;
@@ -20,26 +21,22 @@ import com.information.model.primary.system.SystemRoleOperRef;
 import com.information.service.base.BaseService;
 import com.information.service.base.DefaultResult;
 import com.information.service.base.Result;
-import com.information.service.weixin.TestService;
 import com.information.utils.ResultCode;
 import com.information.utils.StrKit;
-import com.jfinal.log.Logger;
+import com.jfinal.log.Log;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
 /**
  * 角色管理services
  * @author zjt
  */
-@Aop
+@Service
 public class SystemRoleService extends BaseService{
 	
-	private static final Logger LOG=Logger.getLogger(SystemAdminController.class);
+	private static final Log LOG = Log.getLog(SystemAdminController.class);
 	
 	@AopBean
 	private SystemAdminService systemAdminService;
-	
-	@AopBean
-	private TestService testService;
 	
 	/**
 	 * 根据角色获取操作权限列表
@@ -75,7 +72,7 @@ public class SystemRoleService extends BaseService{
 		}
 		String order=" order by id desc";
 		context.append(order);
-		return SystemRole.dao.paginate(pageNumber,CommonConstant.pageSize, "select *",context.toString(),param.toArray());
+		return SystemRole.dao.paginate(pageNumber,30, "select *",context.toString(),param.toArray());
 	}
 	
     /**

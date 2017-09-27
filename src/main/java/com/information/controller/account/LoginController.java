@@ -2,17 +2,16 @@ package com.information.controller.account;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.information.annotation.AopBean;
 import com.information.annotation.ControllerMapping;
 import com.information.constant.CommonConstant;
-import com.information.constant.CommonEnum.LogType;
 import com.information.controller.base.BaseController;
 import com.information.dao.OnlineManger;
 import com.information.dao.OnlineUser;
 import com.information.dao.UserSession;
 import com.information.model.primary.system.SystemAdmin;
+import com.information.model.slave.User;
+import com.information.redis.RedisUtil;
 import com.information.service.system.SystemRoleService;
 import com.information.utils.DateUtil;
 import com.information.utils.EncryptUtil;
@@ -34,30 +33,36 @@ public class LoginController extends BaseController{
 	
 	private static final Log LOG=Log.getLog(LoginController.class);
 	
-    @AopBean
+	@AopBean
 	private SystemRoleService systemRoleService;
     
-    @Autowired
+	@AopBean
 	private OnlineManger onlineManger;
+
     
 	/**
 	 * 用户登录页面
 	 */
 	public void index(){
-		String userCookie=getCookie(CommonConstant.COOKIE_USER_ID);
-		int userId=0;
-		if(userCookie!=null){
-			userId=Integer.parseInt(EncryptUtil.getBase64UserName(userCookie));
-			SystemAdmin admin=SystemAdmin.dao.findById(userId);
-			if(admin!=null){
-				loginSuccess(admin);//登陆成功
-				redirect("/success");
-			}else{
-				redirect("/",false);
-			}
-		}else{
-			rendView("/account/login.vm");
-		}
+		User user = User.dao.findById(1);
+		System.out.println(user);
+		String name = getPara("name");
+		System.out.println(name);
+		renderJson(new ResultCode(ResultCode.SUCCESS));
+//		String userCookie=getCookie(CommonConstant.COOKIE_USER_ID);
+//		int userId=0;
+//		if(userCookie!=null){
+//			userId=Integer.parseInt(EncryptUtil.getBase64UserName(userCookie));
+//			SystemAdmin admin=SystemAdmin.dao.findById(userId);
+//			if(admin!=null){
+//				loginSuccess(admin);//登陆成功
+//				redirect("/success");
+//			}else{
+//				redirect("/",false);
+//			}
+//		}else{
+		//	rendView("/account/login.vm");
+//		}
 	}
 
 	/**
@@ -142,29 +147,31 @@ public class LoginController extends BaseController{
 		session.setSuperFlag(admin.getBoolean("super_flag") ? true:false);
 		session.setNickName(admin.getStr("nickname"));
 		session.setMobile(admin.getStr("mobile"));
-		setSessionAttr(CommonConstant.SESSION_ID_KEY, session);
+		//setCookie("JSESSIONID", getSession().getId(), 3600);
+		RedisUtil.set(getCookie("JSESSIONID"),session);
 		onlineManger.add(session);
 		//非超级管理员加载权限
 		if(!session.isSuperFlag()){
 			loadPermissions(admin);
 		}
 		sendMessage(session.getUserId(),"登录成功", "登录成功");
-		systemLog("登录系统",LogType.LOGIN.getValue());
+		//systemLog("登录系统",LogType.LOGIN.getValue());
 	}
 	/**
 	 * 用户注销
 	 */
 	public void exit(){		
-		if(getCurrentUser()!=null){
-			if(onlineManger.getUserSession(getCurrentUser().getSessionId()) != null){//移除sessionid
-				onlineManger.remove(getCurrentUser());
-        	}
-			systemLog("登出系统",LogType.LOGIN.getValue());
-			getRequest().getSession().removeAttribute(CommonConstant.SESSION_ID_KEY);
-			getRequest().getSession().invalidate();//用户注销
+//		if(getCurrentUser()!=null){
+//			if(onlineManger.getUserSession(getCurrentUser().getSessionId()) != null){//移除sessionid
+//				onlineManger.remove(getCurrentUser());
+//        	}
+//			systemLog("登出系统",LogType.LOGIN.getValue());
+//			getRequest().getSession().removeAttribute(CommonConstant.SESSION_ID_KEY);
+//			getRequest().getSession().invalidate();//用户注销
+		    RedisUtil.delete(getCookie("JSESSIONID"));//移除用户session缓存
 			removeCookie(CommonConstant.COOKIE_USER_ID, "/");//清除cookie
 			redirect("/",false);
-		}
+	//	}
 	}
 	
 	/**
