@@ -9,6 +9,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import org.springframework.stereotype.Service;
+
 import com.information.constant.WeiXinConstant;
 import com.information.dao.weixin.AccessToken;
 import com.information.dao.weixin.Menu;
@@ -27,6 +30,7 @@ import net.sf.json.JSONObject;
  * @version 1.0
  * 2017年4月9日上午19:51
  */
+@Service
 public class WeiXinService extends BaseService{
 
 	private static final Logger LOG=Logger.getLogger(WeiXinService.class);
