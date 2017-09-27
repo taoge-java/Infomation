@@ -1,5 +1,6 @@
 package com.information.dao;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 /**
@@ -8,9 +9,14 @@ import java.util.Set;
  * @version 1.0
  * @create_at 2017年5月6日 下午4:16:11
  */
-public class UserSession {
+public class UserSession implements Serializable{
 	
-    private String sessionId;//用户sessionId
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String sessionId;//用户sessionId
 	
 	private int userId;//用户id
 	
