@@ -33,18 +33,18 @@ import net.sf.json.JSONObject;
 @Service
 public class WeiXinService extends BaseService{
 
-	private static final Logger LOG=Logger.getLogger(WeiXinService.class);
+	private static final Logger LOG = Logger.getLogger(WeiXinService.class);
 	
 	/**
 	 * 获取AccessToken
 	 * @return
 	 */
 	public  AccessToken  getAccesstoken(){
-		AccessToken accessToken=new AccessToken();
-		String url=WeiXinConstant.URL.replace("APPID",WeiXinConstant.WEIXIN_APPID).replace("APPSECRET", WeiXinConstant.WEIXIN_APPSECRET);
-		String result=HttpClientUtil.httpGet(url);
-		JSONObject json=JSONObject.fromObject(result);
-		if(json!=null){
+		AccessToken accessToken = new AccessToken();
+		String url = WeiXinConstant.URL.replace("APPID",WeiXinConstant.WEIXIN_APPID).replace("APPSECRET", WeiXinConstant.WEIXIN_APPSECRET);
+		String result = HttpClientUtil.httpGet(url);
+		JSONObject json = JSONObject.fromObject(result);
+		if(json != null){
 			accessToken.setAccessToken(json.getString("access_token"));
 			accessToken.setTime_out(json.getInt("expires_in"));
 			return accessToken;
@@ -56,12 +56,12 @@ public class WeiXinService extends BaseService{
 	 * 发送模板消息
 	 */
 	public  void sendMessage(TemplateMsg msg){
-		JSONObject json=JSONObject.fromObject(msg);
-		String request_url=WeiXinConstant.TEMPLATE_MESSAGE_URL.replace("ACCESS_TOKEN", this.getAccesstoken().getAccessToken());
-	    String result= HttpClientUtil.httpPost(request_url, json.toString());
-	    if(result!=null){
-	    	JSONObject jsonObject=JSONObject.fromObject(result);
-	    	if(jsonObject.getInt("errcode")==0){
+		JSONObject json = JSONObject.fromObject(msg);
+		String request_url = WeiXinConstant.TEMPLATE_MESSAGE_URL.replace("ACCESS_TOKEN", this.getAccesstoken().getAccessToken());
+	    String result = HttpClientUtil.httpPost(request_url, json.toString());
+	    if(result != null){
+	    	JSONObject jsonObject = JSONObject.fromObject(result);
+	    	if(jsonObject.getInt("errcode") == 0){
 	    		LOG.info("消息发送成功。。。。");
 	    	}else{
 	    		LOG.error("消息发送异常。。。。");
@@ -76,11 +76,11 @@ public class WeiXinService extends BaseService{
 	 * @return
 	 */
 	public  int createMenu(String  access_token,String menu){
-		int count=0;
-		String url=WeiXinConstant.CREATE_MENU.replace("ACCESS_TOKEN", access_token);
-	    String result=HttpClientUtil.httpPost(url, menu);
-	    JSONObject json=JSONObject.fromObject(result);
-	    if(json!=null){
+		int count = 0;
+		String url = WeiXinConstant.CREATE_MENU.replace("ACCESS_TOKEN", access_token);
+	    String result = HttpClientUtil.httpPost(url, menu);
+	    JSONObject json = JSONObject.fromObject(result);
+	    if(json != null){
 	    	count=json.getInt("errcode");
 	    }
 	    return count;
@@ -90,30 +90,30 @@ public class WeiXinService extends BaseService{
 	 * 生成微信公众号菜单
 	 */
 	public  Menu generateMenu(){
-		ClickButton click1=new ClickButton();
+		ClickButton click1 = new ClickButton();
 		click1.setName("新品上市");
 		click1.setType("click");
 		click1.setKey("15");
 		
-		ClickButton click2=new ClickButton();
+		ClickButton click2 = new ClickButton();
 		click2.setName("天下淘商城");
 		click2.setType("click");
 		click2.setKey("2");
 		
-		ViewButton sub_click1=new ViewButton();
+		ViewButton sub_click1 = new ViewButton();
 		sub_click1.setName("个人中心");
 		sub_click1.setType("view");
 		sub_click1.setUrl("http://47.94.12.108/Information/auth/account");
 		
-		ClickButton sub_click2=new ClickButton();
+		ClickButton sub_click2 = new ClickButton();
 		sub_click2.setName("已支付订单");
 		sub_click2.setType("location_select");
 		sub_click2.setKey("32");
 		
-		BaseButton base=new BaseButton();
+		BaseButton base = new BaseButton();
 		base.setName("我的账户");
 		base.setSub_button(new BaseButton[]{sub_click1,sub_click2});
-		Menu menu=new Menu();
+		Menu menu = new Menu();
 		menu.setButton(new BaseButton[]{click1,click2,base});
 		return menu;
 	}
@@ -130,11 +130,11 @@ public class WeiXinService extends BaseService{
 	 */
 	@SuppressWarnings("unused")
 	public String  uploadMaterial(String file_path,String access_token,String type,String uploadUrl) throws IOException{
-		File file=new File(file_path);
+		File file = new File(file_path);
 		if(!file.exists()||!file.isFile()){
 			throw new IOException("file is not to exist");
 		}
-		String upload_url=uploadUrl.replace("ACCESS_TOKEN", access_token).replace("TYPE", type);
+		String upload_url = uploadUrl.replace("ACCESS_TOKEN", access_token).replace("TYPE", type);
 		URL url=new URL(upload_url);
 		HttpURLConnection connection=(HttpURLConnection) url.openConnection();
 		connection.setRequestMethod("POST");

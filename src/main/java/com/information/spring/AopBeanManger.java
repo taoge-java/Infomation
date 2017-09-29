@@ -1,5 +1,7 @@
 package com.information.spring;
 
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -23,5 +25,13 @@ public class AopBeanManger {
 	
 	public Object get(String keyName){
 		return beanMap.get(keyName);
+	}
+	
+	public Set<Entry<String, Object>>  getAllKeys(){
+		return beanMap.entrySet();
+	}
+	
+	public boolean isContain(String keyName){
+		return beanMap.containsKey(keyName);
 	}
 }
