@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/pintuer.css" />
+		<script type="text/javascript" src="js/jquery.js" ></script>
+		<script type="text/javascript" src="js/layer/layer.js"></script>
+		<script>
+			$(function(){
+				$("input[name=color]").each(function(){
+					$(this).click(function(){
+						var value = $(this).val();
+						if(this.checked){
+							var length = $(".table tr").first().find("th").length-1;
+							var tr = '<tr name='+value+'>';
+							var td='<td>'+value+'</td>';
+							for(var i=0;i<length*2;i++){
+								td += '<td></td>';
+							}
+							tr += td+"</tr>";
+							$(".table").append(tr);
+						}else{
+							$(".table").find("tr[name="+value+"]").remove();
+						}
+					});
+				});
+				
+				$("input[name=starandar]").each(function(){
+					$(this).click(function(){
+						var value = $(this).val();
+						if(this.checked){
+							var th='<th name='+value+' colspan="2">'+value+'</th>';
+							var heardTd='<td>成本价</td><td>销售价</td>';
+							var td = '<td></td><td></td>'
+							$(".table tr").first().append(th);
+							$(".table tr").first().next().append(heardTd);
+							$(".table tr").first().next().nextAll().each(function(){
+								$(this).append(td);
+							})
+						}else{
+							//$(".table").find("th[name="+value+"]").remove();
+							
+							var index=this.parentNode.rowIndex;
+                            var table = document.getElementById("table");
+                            table.deleteRow(index);
+							//$(".table tr").first().next().remove();
+							//$(".table tr").first().next().nextAll().remove();
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<table id="table" class="table table-bordered">
+			<tr>
+				<th rowspan="2"></th>
+				<th colspan="2">100*100</th>
+			</tr>
+			<tr>
+				<td>成本价</td>
+				<td>销售价</td>
+			<tr>
+				<td>黄色</td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>绿色</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		颜色:<input type="checkbox" name="color" value="黄色"/>黄色
+		<input type="checkbox" name="color" value="绿色"/>绿色
+		<input type="checkbox" name="color" value="红色"/>红色
+		
+		
+		规格:
+		<input type="checkbox" name="starandar" value="2000"/>2000
+		<input type="checkbox" name="starandar" value="100"/>100
+	</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{font-size: 18px;color: white;font-weight: 100;height:100%;}
+			#head{width: 100%;height:50px;margin: 0;text-align: center;background: black;}
+			#head .menu{width: 50%;height:40px;background: black;float: left;}
+			*{padding: 0;margin: 0;color: #FFFFFF;font-family:kartika;}
+	        ul>li{color: #FFFFFF;}
+			ul li{list-style: none;float: left;width:100px;line-height: 50px;text-align: center;}
+			 ul li a{display: block;text-decoration: none;height: 50px;margin-top: 0px;}
+			 ul li a:hover{text-decoration: none;background: #3F3F3F;}
+			 ul li ul{margin-top:1px;display: none;}
+			 ul li ul li{background:#D0D0D0;margin-top: 1px;}
+			 ul li ul a:hover{background: #06f;}
+			 ul li:hover ul{display: block;}
+		 	.box{width:72%;height:720px;margin: 0 auto;}
+			 #head #right{float:right;width:10%;height: 50px;line-height: 30px;margin-right: 10px;}
+			 #head #right span{text-align: center;width:150px;height: 30px;padding-top: 12px;display: block;font-size: 18px;}
+			 #right span a{text-decoration: none;}
+			 #right span a:hover{color: red;text-decoration: underline;}
+			 #foot{background:black;}
+			 #head .img{width:50px;height: 30px;text-align: center;margin-top: 10px; position: absolute;top: 0px;left: 20px;}
+		    .bottom{width: 1000px;height:200px;margin: 0 auto;background: ;}
+			
+		    .one{float: left;position: relative; top: 40px;left: 30px;}
+		    .one dl dt a,.one dl dd a,.two dl dt a,.two dl dd a{text-decoration: none;color: white;}
+		    .one dl dt a:hover,.one dl dd a:hover{text-decoration: underline;}
+		    
+			.two{float: left;position: relative; top: 40px;left: 55px;}
+			.two dl dt a:hover,.two dl dd a:hover{text-decoration: underline;color: red;}
+			.bottom li{padding-top: 5px;}
+			.three{position: relative;top: 40px;left: 80px;float: left;}
+			.three dl dt a,.three dl dd a{text-decoration: none;color: white;}
+			.three dl dt a:hover,.three dl dd a:hover{text-decoration: underline;color: red;}
+			.four{position: relative;top: 40px;left: 105px;float: left;}
+			.four dl dt a,.four dl dd a{text-decoration: none;color: white;}
+			.four dl dt a:hover,.four dl dd a:hover{text-decoration: underline;color: red;}
+			.five{position: relative;top: 40px;left: 130px;float: left;}
+			.five dl dt a,.five dl dd a{text-decoration: none;color: white;}
+			.five dl dt a:hover,.five dl dd a:hover{text-decoration: underline;color: red;}
+			.code{position: relative;;top: 40px;left: 150px;float: left;}
+			.code img{width: 100px;height: 100px;}
+			.code span{display: block;text-align: center;line-height: 20px;}
+			.kefu{position:relative;top:40px;left: 170px;float: left;}
+		    .kefu dl dt a,.kefu dl dd a{text-decoration: none;color: white;}
+			.kefu dl dt a:hover,.kefu dl dd a:hover{text-decoration: underline;color: red;}
+		    .bottom{margin-top: 35px;}
+		    .bottom dl dt{font-size:18px ;color: #FFFFFF;}
+			.bottom  dl dd{text-align: left;font-size: 13px;padding-top: 12px;color: #D4D4D4;}
+		</style>
+		<script type="text/javascript" src="../js/jquery.min.js" ></script>
+		<script>
+			$(function(){
+				var height=$(window).height();
+				var foot_height=height-$(".box").height()-$("#head").height()+80;
+				$("#foot").css({
+					"height":foot_height,
+					"border":"1px solid black"
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="head">
+			<div style="width: 50px;">
+				<img src="" class="img"/>
+			</div>
+			<div class="menu" style="margin-left:80px ;">
+				
+				<ul id="first">
+					<li>
+						<a href="#">首页</a>
+						<ul id="item">
+							<li><a href="#">java课程</a></li>
+							<li><a href="#">php课程</a></li>
+							<li><a href="#">javascript</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">课程库</a>
+						<!--<ul>
+							<li>我的账户</li>
+							<li>退出</li>
+						</ul>-->
+					</li>
+					<li><a href="">岗位课程</a></li>
+					<li><a href="#">就业班</a></li>
+					<li><a href="#">社区</a></li>
+					<li><a href="#">APP</a></li>
+				</ul>
+			</div>
+			<div id="right">
+			   <span>
+			     <a href="" > 登录</a> | <a href="">注册</a>
+			   </span>
+			</div>
+		</div>
+		<div class="box">
+			
+		</div>
+		<div id="foot">
+			<div class="bottom">
+				<div class="one">
+					<dl>
+						<dt><a href="">关于我们</a></dt>
+						<dd><a href="">联系我们</a></dd>
+						<dd><a href="">职坐标简介</a></dd>
+						<dd><a href="">用户协议</a></dd>
+						<dd><a href="">网站动态</a></dd>
+					</dl>
+				</div>
+				<div class="two">
+					<dl>
+						<dt><a href="">特色亮点</a></dt>
+						<dd><a href="">优才计划</a></dd>
+						<dd><a href="">助学贷款</a></dd>
+						<dd><a href="">用户协议</a></dd>
+						<dd><a href="">猎头服务</a></dd>
+					</dl>
+				</div>
+				<div class="three">
+					<dl>
+						<dt><a href="#">帮助中心</a></dt>
+						<dd><a href="">常见问题</a></dd>
+						<dd><a href="">认证流程</a></dd>
+						<dd><a href="">就业流程</a></dd>
+						<dd><a href="">客服与支持</a></dd>
+					</dl>
+				</div>
+				<div class="four">
+					<dl>
+						<dt><a href="#">机构合作</a></dt>
+						<dd><a href="#">高校职通车</a></dd>
+						<dd><a href="#">企业职通车</a></dd>
+						<dd><a href="">合作机构</a></dd>
+						<dd><a href="">媒体合作</a></dd>
+					</dl>
+				</div>
+			    <div class="five">
+					<dl>
+						<dt><a href="http://www.baidu.com">精英招募</a></dt>
+						<dd><a href="http://www.baidu.com">讲师招募</dd>
+						<dd><a href="">校园大使招募</a></dd>
+						<dd><a href="">职坐标招聘</a></dd>
+						<dd><a href="">名企招聘</a></dd>
+					</dl>
+				</div>
+				<div class="code">
+					<img src="../images/code.jpg" />
+					<span>职坐标APP</span>
+				</div>
+				<div class="kefu">
+					<dl>
+						<dt>客服电话</dt>
+						<dd><a href="">400-6570-510</a></dd>
+						<dd style="font-size: 12px;">周一至周日9:00-21:00</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

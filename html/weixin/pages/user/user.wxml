@@ -1,0 +1,5 @@
+<view wx:for="{{names}}"  wx:for-item="name">
+     {{name}}
+</view>
+
+<view wx:if="{{flag}}">hello</view>
