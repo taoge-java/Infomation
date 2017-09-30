@@ -1,0 +1,21 @@
+[root@localhost mysql]# service mysql start
+Starting MySQL.. ERROR! The server quit without updating PID file (/var/lib/mysql/localhost.localdomain.pid).
+
+
+[root@localhost mysql]# less localhost.localdomain.err 
+
+
+执行 mysql_install_db --user=mysql --ldata=/var/lib/mysql/ 
+
+FATAL ERROR: please install the following Perl modules before executing /usr/bin/mysql_install_db:
+Data::Dumper
+
+
+解决
+   # yum install -y perl-Module-Install.noarch  
+
+
+再次运行 mysql_install_db --user=mysql --ldata=/var/lib/mysql/ 
+
+
+重启service mysql start 

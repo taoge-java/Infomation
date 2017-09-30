@@ -1,0 +1,28 @@
+开启mysql服务
+# service mysqld start
+# service mysqld stop
+
+
+查看mysql是否安装    rpm -q mysql 
+安装mysql  yum install mysql-server
+重启服务   service mysqld restart
+卸载mysql   yum remove mysql 
+
+
+
+关于mysql ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)错误.
+
+解决办法
+   
+
+   mysqld_safe --user=mysql --skip-grant-tables --skip-networking &
+   [2] 9396
+
+   flush privileges;
+
+http://www.cnblogs.com/chenjw-note/p/5887908.html
+
+ use mysql;
+mysql> UPDATE user SET password=password("test123") WHERE user='root';   
+mysql> flush privileges;
+mysql> exit;           

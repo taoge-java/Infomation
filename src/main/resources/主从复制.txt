@@ -1,0 +1,11 @@
+datadir =/var/lib/mysql
+socket = /var/lib/mysql/mysql.sock
+log-bin=mysql-bin
+user=mysql
+server-id=1
+auto_increment_offset=1
+auto_increment_increment=2
+[mysqld-sale]
+pid-file=/data/mysql/localhost.localdomain.pid
+replicate-to-db=all
+

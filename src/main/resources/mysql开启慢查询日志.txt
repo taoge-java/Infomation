@@ -1,0 +1,8 @@
+mysql开启慢查询日志
+   1.查看开启状态
+       show  variables like 'alow_query_log';
+       查看log_queries_not_using_indexes状态
+       show variables like '%log%'
+       查看慢查询日志位置
+       show variables like 'slow';
+       

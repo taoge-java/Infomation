@@ -1,0 +1,528 @@
+---> Package libdb-utils.x86_64 0:5.3.21-19.el7 will be an update
+---> Package perl-Net-Daemon.noarch 0:0.48-5.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================================================
+ Package                                      Arch                   Version                             Repository            Size
+====================================================================================================================================
+Installing:
+ perl-Module-Install                          noarch                 1.06-4.el7                          base                 185 k
+Installing for dependencies:
+ gdbm-devel                                   x86_64                 1.10-8.el7                          base                  47 k
+ libdb-devel                                  x86_64                 5.3.21-19.el7                       base                  38 k
+ mailcap                                      noarch                 2.1.41-2.el7                        base                  31 k
+ perl-Algorithm-Diff                          noarch                 1.1902-17.el7                       base                  47 k
+ perl-Archive-Extract                         noarch                 1:0.68-3.el7                        base                  28 k
+ perl-Archive-Zip                             noarch                 1.30-11.el7                         base                 107 k
+ perl-Business-ISBN                           noarch                 2.06-2.el7                          base                  25 k
+ perl-Business-ISBN-Data                      noarch                 20120719.001-2.el7                  base                  24 k
+ perl-CPAN                                    noarch                 1.9800-291.el7                      base                 292 k
+ perl-CPAN-Meta                               noarch                 2.120921-5.el7                      base                 113 k
+ perl-CPAN-Meta-Requirements                  noarch                 2.122-7.el7                         base                  24 k
+ perl-CPAN-Meta-YAML                          noarch                 0.008-14.el7                        base                  24 k
+ perl-CPANPLUS                                noarch                 0.91.38-4.el7                       base                 307 k
+ perl-Compress-Raw-Bzip2                      x86_64                 2.061-3.el7                         base                  32 k
+ perl-Compress-Raw-Zlib                       x86_64                 1:2.061-4.el7                       base                  57 k
+ perl-DBD-SQLite                              x86_64                 1.39-3.el7                          base                 1.3 M
+ perl-DBI                                     x86_64                 1.627-4.el7                         base                 802 k
+ perl-DBIx-Simple                             noarch                 1.35-7.el7                          base                  43 k
+ perl-Data-Dumper                             x86_64                 2.145-3.el7                         base                  47 k
+ perl-Digest                                  noarch                 1.17-245.el7                        base                  23 k
+ perl-Digest-MD5                              x86_64                 2.52-3.el7                          base                  30 k
+ perl-Digest-SHA                              x86_64                 1:5.85-3.el7                        base                  58 k
+ perl-Digest-SHA1                             x86_64                 2.13-9.el7                          base                  50 k
+ perl-Encode-Locale                           noarch                 1.03-5.el7                          base                  16 k
+ perl-ExtUtils-CBuilder                       noarch                 1:0.28.2.6-291.el7                  base                  67 k
+ perl-ExtUtils-Install                        noarch                 1.58-291.el7                        base                  74 k
+ perl-ExtUtils-MakeMaker                      noarch                 6.68-3.el7                          base                 275 k
+ perl-ExtUtils-Manifest                       noarch                 1.61-244.el7                        base                  31 k
+ perl-ExtUtils-ParseXS                        noarch                 1:3.18-2.el7                        base                  77 k
+ perl-File-Fetch                              noarch                 0.42-2.el7                          base                  27 k
+ perl-File-Listing                            noarch                 6.04-7.el7                          base                  13 k
+ perl-File-Remove                             noarch                 1.52-6.el7                          base                  26 k
+ perl-HTML-Parser                             x86_64                 3.71-4.el7                          base                 115 k
+ perl-HTML-Tagset                             noarch                 3.20-15.el7                         base                  18 k
+ perl-HTTP-Cookies                            noarch                 6.01-5.el7                          base                  26 k
+ perl-HTTP-Daemon                             noarch                 6.01-5.el7                          base                  20 k
+ perl-HTTP-Date                               noarch                 6.02-8.el7                          base                  14 k
+ perl-HTTP-Message                            noarch                 6.06-6.el7                          base                  82 k
+ perl-HTTP-Negotiate                          noarch                 6.01-5.el7                          base                  17 k
+ perl-IO-Compress                             noarch                 2.061-2.el7                         base                 260 k
+ perl-IO-HTML                                 noarch                 1.00-2.el7                          base                  23 k
+ perl-IO-Socket-IP                            noarch                 0.21-4.el7                          base                  35 k
+ perl-IO-Socket-SSL                           noarch                 1.94-5.el7                          base                 114 k
+ perl-IPC-Cmd                                 noarch                 1:0.80-4.el7                        base                  34 k
+ perl-JSON-PP                                 noarch                 2.27202-2.el7                       base                  55 k
+ perl-LWP-MediaTypes                          noarch                 6.02-2.el7                          base                  24 k
+ perl-Locale-Maketext                         noarch                 1.23-3.el7                          base                  93 k
+ perl-Locale-Maketext-Simple                  noarch                 1:0.21-291.el7                      base                  50 k
+ perl-Log-Message                             noarch                 1:0.08-3.el7                        base                  29 k
+ perl-Log-Message-Simple                      noarch                 0.10-2.el7                          base                  11 k
+ perl-Module-Build                            noarch                 2:0.40.05-2.el7                     base                 281 k
+ perl-Module-CoreList                         noarch                 1:2.76.02-291.el7                   base                  85 k
+ perl-Module-Load                             noarch                 1:0.24-3.el7                        base                  11 k
+ perl-Module-Load-Conditional                 noarch                 0.54-3.el7                          base                  18 k
+ perl-Module-Loaded                           noarch                 1:0.08-291.el7                      base                  46 k
+ perl-Module-Metadata                         noarch                 1.000018-2.el7                      base                  26 k
+ perl-Module-Pluggable                        noarch                 1:4.8-3.el7                         base                  29 k
+ perl-Module-ScanDeps                         noarch                 1.10-3.el7                          base                  45 k
+ perl-Module-Signature                        noarch                 0.73-2.el7                          base                  68 k
+ perl-Net-Daemon                              noarch                 0.48-5.el7                          base                  51 k
+ perl-Net-HTTP                                noarch                 6.06-2.el7                          base                  29 k
+ perl-Net-LibIDN                              x86_64                 0.12-15.el7                         base                  28 k
+ perl-Net-SSLeay                              x86_64                 1.55-4.el7                          base                 285 k
+ perl-Object-Accessor                         noarch                 1:0.42-291.el7                      base                  55 k
+ perl-PAR-Dist                                noarch                 0.49-2.el7                          base                  31 k
+ perl-Package-Constants                       noarch                 1:0.02-291.el7                      base                  45 k
+ perl-Params-Check                            noarch                 1:0.38-2.el7                        base                  18 k
+ perl-Parse-CPAN-Meta                         noarch                 1:1.4404-5.el7                      base                  14 k
+ perl-Perl-OSType                             noarch                 1.003-3.el7                         base                  20 k
+ perl-PlRPC                                   noarch                 0.2020-14.el7                       base                  36 k
+ perl-Term-UI                                 noarch                 0.36-2.el7                          base                  22 k
+ perl-Test-Harness                            noarch                 3.28-3.el7                          base                 302 k
+ perl-Text-Diff                               noarch                 1.41-5.el7                          base                  40 k
+ perl-TimeDate                                noarch                 1:2.30-2.el7                        base                  52 k
+ perl-URI                                     noarch                 1.60-9.el7                          base                 106 k
+ perl-WWW-RobotRules                          noarch                 6.02-5.el7                          base                  18 k
+ perl-YAML-Tiny                               noarch                 1.51-6.el7                          base                  37 k
+ perl-devel                                   x86_64                 4:5.16.3-291.el7                    base                 453 k
+ perl-libwww-perl                             noarch                 6.05-2.el7                          base                 205 k
+ perl-local-lib                               noarch                 1.008010-3.el7                      base                  64 k
+ perl-version                                 x86_64                 3:0.99.07-2.el7                     base                  84 k
+ systemtap-sdt-devel                          x86_64                 3.0-7.el7                           base                  69 k
+Updating for dependencies:
+ libdb                                        x86_64                 5.3.21-19.el7                       base                 718 k
+ libdb-utils                                  x86_64                 5.3.21-19.el7                       base                 102 k
+
+Transaction Summary
+====================================================================================================================================
+Install  1 Package  (+82 Dependent packages)
+Upgrade             (  2 Dependent packages)
+
+Total size: 8.7 M
+Total download size: 7.9 M
+Downloading packages:
+warning: /var/cache/yum/x86_64/7/base/packages/gdbm-devel-1.10-8.el7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY
+Public key for gdbm-devel-1.10-8.el7.x86_64.rpm is not installed
+(1/83): gdbm-devel-1.10-8.el7.x86_64.rpm                                                                     |  47 kB  00:00:00     
+(2/83): libdb-devel-5.3.21-19.el7.x86_64.rpm                                                                 |  38 kB  00:00:00     
+(3/83): perl-Business-ISBN-2.06-2.el7.noarch.rpm                                                             |  25 kB  00:00:00     
+(4/83): perl-Archive-Zip-1.30-11.el7.noarch.rpm                                                              | 107 kB  00:00:00     
+(5/83): perl-Business-ISBN-Data-20120719.001-2.el7.noarch.rpm                                                |  24 kB  00:00:00     
+(6/83): perl-Archive-Extract-0.68-3.el7.noarch.rpm                                                           |  28 kB  00:00:00     
+(7/83): mailcap-2.1.41-2.el7.noarch.rpm                                                                      |  31 kB  00:00:00     
+(8/83): perl-CPAN-Meta-Requirements-2.122-7.el7.noarch.rpm                                                   |  24 kB  00:00:00     
+(9/83): perl-CPAN-Meta-2.120921-5.el7.noarch.rpm                                                             | 113 kB  00:00:00     
+(10/83): perl-CPAN-1.9800-291.el7.noarch.rpm                                                                 | 292 kB  00:00:00     
+(11/83): perl-CPAN-Meta-YAML-0.008-14.el7.noarch.rpm                                                         |  24 kB  00:00:00     
+(12/83): perl-Compress-Raw-Bzip2-2.061-3.el7.x86_64.rpm                                                      |  32 kB  00:00:00     
+(13/83): perl-Compress-Raw-Zlib-2.061-4.el7.x86_64.rpm                                                       |  57 kB  00:00:00     
+(14/83): perl-DBIx-Simple-1.35-7.el7.noarch.rpm                                                              |  43 kB  00:00:00     
+(15/83): perl-Data-Dumper-2.145-3.el7.x86_64.rpm                                                             |  47 kB  00:00:00     
+(16/83): perl-Digest-1.17-245.el7.noarch.rpm                                                                 |  23 kB  00:00:00     
+(17/83): perl-Digest-MD5-2.52-3.el7.x86_64.rpm                                                               |  30 kB  00:00:00     
+(18/83): perl-Digest-SHA-5.85-3.el7.x86_64.rpm                                                               |  58 kB  00:00:00     
+(19/83): perl-Digest-SHA1-2.13-9.el7.x86_64.rpm                                                              |  50 kB  00:00:00     
+(20/83): perl-CPANPLUS-0.91.38-4.el7.noarch.rpm                                                              | 307 kB  00:00:00     
+(21/83): perl-Encode-Locale-1.03-5.el7.noarch.rpm                                                            |  16 kB  00:00:00     
+(22/83): perl-DBI-1.627-4.el7.x86_64.rpm                                                                     | 802 kB  00:00:00     
+(23/83): perl-ExtUtils-Install-1.58-291.el7.noarch.rpm                                                       |  74 kB  00:00:00     
+(24/83): perl-ExtUtils-Manifest-1.61-244.el7.noarch.rpm                                                      |  31 kB  00:00:00     
+(25/83): perl-ExtUtils-CBuilder-0.28.2.6-291.el7.noarch.rpm                                                  |  67 kB  00:00:00     
+(26/83): perl-ExtUtils-ParseXS-3.18-2.el7.noarch.rpm                                                         |  77 kB  00:00:00     
+(27/83): perl-ExtUtils-MakeMaker-6.68-3.el7.noarch.rpm                                                       | 275 kB  00:00:00     
+(28/83): perl-File-Listing-6.04-7.el7.noarch.rpm                                                             |  13 kB  00:00:00     
+(29/83): perl-File-Remove-1.52-6.el7.noarch.rpm                                                              |  26 kB  00:00:00     
+(30/83): perl-File-Fetch-0.42-2.el7.noarch.rpm                                                               |  27 kB  00:00:00     
+(31/83): perl-HTML-Tagset-3.20-15.el7.noarch.rpm                                                             |  18 kB  00:00:00     
+(32/83): perl-HTML-Parser-3.71-4.el7.x86_64.rpm                                                              | 115 kB  00:00:00     
+(33/83): perl-HTTP-Date-6.02-8.el7.noarch.rpm                                                                |  14 kB  00:00:00     
+(34/83): perl-HTTP-Cookies-6.01-5.el7.noarch.rpm                                                             |  26 kB  00:00:00     
+(35/83): perl-HTTP-Daemon-6.01-5.el7.noarch.rpm                                                              |  20 kB  00:00:00     
+(36/83): perl-HTTP-Message-6.06-6.el7.noarch.rpm                                                             |  82 kB  00:00:00     
+(37/83): perl-HTTP-Negotiate-6.01-5.el7.noarch.rpm                                                           |  17 kB  00:00:00     
+(38/83): perl-IO-HTML-1.00-2.el7.noarch.rpm                                                                  |  23 kB  00:00:00     
+(39/83): perl-IO-Socket-IP-0.21-4.el7.noarch.rpm                                                             |  35 kB  00:00:00     
+(40/83): perl-IPC-Cmd-0.80-4.el7.noarch.rpm                                                                  |  34 kB  00:00:00     
+(41/83): perl-IO-Socket-SSL-1.94-5.el7.noarch.rpm                                                            | 114 kB  00:00:00     
+(42/83): perl-JSON-PP-2.27202-2.el7.noarch.rpm                                                               |  55 kB  00:00:00     
+(43/83): perl-LWP-MediaTypes-6.02-2.el7.noarch.rpm                                                           |  24 kB  00:00:00     
+(44/83): perl-Locale-Maketext-1.23-3.el7.noarch.rpm                                                          |  93 kB  00:00:00     
+(45/83): perl-Locale-Maketext-Simple-0.21-291.el7.noarch.rpm                                                 |  50 kB  00:00:00     
+(46/83): perl-IO-Compress-2.061-2.el7.noarch.rpm                                                             | 260 kB  00:00:00     
+(47/83): perl-Log-Message-0.08-3.el7.noarch.rpm                                                              |  29 kB  00:00:00     
+(48/83): perl-Log-Message-Simple-0.10-2.el7.noarch.rpm                                                       |  11 kB  00:00:00     
+(49/83): perl-Module-CoreList-2.76.02-291.el7.noarch.rpm                                                     |  85 kB  00:00:00     
+(50/83): perl-Module-Install-1.06-4.el7.noarch.rpm                                                           | 185 kB  00:00:00     
+(51/83): perl-Module-Load-0.24-3.el7.noarch.rpm                                                              |  11 kB  00:00:00     
+(52/83): perl-Module-Load-Conditional-0.54-3.el7.noarch.rpm                                                  |  18 kB  00:00:00     
+(53/83): perl-Module-Loaded-0.08-291.el7.noarch.rpm                                                          |  46 kB  00:00:00     
+(54/83): perl-Module-Metadata-1.000018-2.el7.noarch.rpm                                                      |  26 kB  00:00:00     
+(55/83): perl-DBD-SQLite-1.39-3.el7.x86_64.rpm                                                               | 1.3 MB  00:00:01     
+(56/83): perl-Module-Pluggable-4.8-3.el7.noarch.rpm                                                          |  29 kB  00:00:00     
+(57/83): perl-Module-Build-0.40.05-2.el7.noarch.rpm                                                          | 281 kB  00:00:00     
+(58/83): perl-Module-ScanDeps-1.10-3.el7.noarch.rpm                                                          |  45 kB  00:00:00     
+(59/83): perl-Net-Daemon-0.48-5.el7.noarch.rpm                                                               |  51 kB  00:00:00     
+(60/83): perl-Net-LibIDN-0.12-15.el7.x86_64.rpm                                                              |  28 kB  00:00:00     
+(61/83): perl-Net-HTTP-6.06-2.el7.noarch.rpm                                                                 |  29 kB  00:00:00     
+(62/83): perl-Object-Accessor-0.42-291.el7.noarch.rpm                                                        |  55 kB  00:00:00     
+(63/83): perl-Net-SSLeay-1.55-4.el7.x86_64.rpm                                                               | 285 kB  00:00:00     
+(64/83): perl-Package-Constants-0.02-291.el7.noarch.rpm                                                      |  45 kB  00:00:00     
+(65/83): perl-PAR-Dist-0.49-2.el7.noarch.rpm                                                                 |  31 kB  00:00:00     
+(66/83): perl-Parse-CPAN-Meta-1.4404-5.el7.noarch.rpm                                                        |  14 kB  00:00:00     
+(67/83): perl-Params-Check-0.38-2.el7.noarch.rpm                                                             |  18 kB  00:00:00     
+(68/83): perl-PlRPC-0.2020-14.el7.noarch.rpm                                                                 |  36 kB  00:00:00     
+(69/83): perl-Term-UI-0.36-2.el7.noarch.rpm                                                                  |  22 kB  00:00:00     
+(70/83): perl-Perl-OSType-1.003-3.el7.noarch.rpm                                                             |  20 kB  00:00:00     
+(71/83): perl-Text-Diff-1.41-5.el7.noarch.rpm                                                                |  40 kB  00:00:00     
+(72/83): perl-URI-1.60-9.el7.noarch.rpm                                                                      | 106 kB  00:00:00     
+(73/83): perl-Test-Harness-3.28-3.el7.noarch.rpm                                                             | 302 kB  00:00:00     
+(74/83): perl-TimeDate-2.30-2.el7.noarch.rpm                                                                 |  52 kB  00:00:00     
+(75/83): perl-YAML-Tiny-1.51-6.el7.noarch.rpm                                                                |  37 kB  00:00:00     
+(76/83): perl-WWW-RobotRules-6.02-5.el7.noarch.rpm                                                           |  18 kB  00:00:00     
+(77/83): perl-local-lib-1.008010-3.el7.noarch.rpm                                                            |  64 kB  00:00:00     
+(78/83): perl-version-0.99.07-2.el7.x86_64.rpm                                                               |  84 kB  00:00:00     
+(79/83): perl-libwww-perl-6.05-2.el7.noarch.rpm                                                              | 205 kB  00:00:00     
+(80/83): systemtap-sdt-devel-3.0-7.el7.x86_64.rpm                                                            |  69 kB  00:00:00     
+(81/83): perl-devel-5.16.3-291.el7.x86_64.rpm                                                                | 453 kB  00:00:00     
+(82/83): perl-Module-Signature-0.73-2.el7.noarch.rpm                                                         |  68 kB  00:00:01     
+(83/83): perl-Algorithm-Diff-1.1902-17.el7.noarch.rpm                                                        |  47 kB  00:00:22     
+------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                               349 kB/s | 7.9 MB  00:00:23     
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+Importing GPG key 0xF4A80EB5:
+ Userid     : "CentOS-7 Key (CentOS 7 Official Signing Key) <security@centos.org>"
+ Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
+ Package    : centos-release-7-0.1406.el7.centos.2.3.x86_64 (@anaconda)
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : perl-Data-Dumper-2.145-3.el7.x86_64                                                                             1/87 
+  Installing : 3:perl-version-0.99.07-2.el7.x86_64                                                                             2/87 
+  Installing : 1:perl-Compress-Raw-Zlib-2.061-4.el7.x86_64                                                                     3/87 
+  Installing : perl-ExtUtils-Manifest-1.61-244.el7.noarch                                                                      4/87 
+  Installing : 1:perl-Module-CoreList-2.76.02-291.el7.noarch                                                                   5/87 
+  Installing : 1:perl-Module-Load-0.24-3.el7.noarch                                                                            6/87 
+  Installing : perl-Module-Metadata-1.000018-2.el7.noarch                                                                      7/87 
+  Installing : perl-YAML-Tiny-1.51-6.el7.noarch                                                                                8/87 
+  Installing : perl-Encode-Locale-1.03-5.el7.noarch                                                                            9/87 
+  Installing : perl-Test-Harness-3.28-3.el7.noarch                                                                            10/87 
+  Installing : perl-Perl-OSType-1.003-3.el7.noarch                                                                            11/87 
+  Installing : perl-CPAN-Meta-YAML-0.008-14.el7.noarch                                                                        12/87 
+  Installing : perl-Digest-1.17-245.el7.noarch                                                                                13/87 
+  Installing : 1:perl-Digest-SHA-5.85-3.el7.x86_64                                                                            14/87 
+  Updating   : libdb-5.3.21-19.el7.x86_64                                                                                     15/87 
+  Installing : libdb-devel-5.3.21-19.el7.x86_64                                                                               16/87 
+  Installing : perl-Digest-MD5-2.52-3.el7.x86_64                                                                              17/87 
+  Installing : perl-Archive-Zip-1.30-11.el7.noarch                                                                            18/87 
+  Installing : perl-CPAN-Meta-Requirements-2.122-7.el7.noarch                                                                 19/87 
+  Installing : perl-JSON-PP-2.27202-2.el7.noarch                                                                              20/87 
+  Installing : 1:perl-Parse-CPAN-Meta-1.4404-5.el7.noarch                                                                     21/87 
+  Installing : perl-CPAN-Meta-2.120921-5.el7.noarch                                                                           22/87 
+  Installing : perl-Net-LibIDN-0.12-15.el7.x86_64                                                                             23/87 
+  Installing : gdbm-devel-1.10-8.el7.x86_64                                                                                   24/87 
+  Installing : perl-Net-Daemon-0.48-5.el7.noarch                                                                              25/87 
+  Installing : 1:perl-Module-Pluggable-4.8-3.el7.noarch                                                                       26/87 
+  Installing : perl-Net-SSLeay-1.55-4.el7.x86_64                                                                              27/87 
+  Installing : 1:perl-TimeDate-2.30-2.el7.noarch                                                                              28/87 
+  Installing : perl-HTTP-Date-6.02-8.el7.noarch                                                                               29/87 
+  Installing : perl-File-Listing-6.04-7.el7.noarch                                                                            30/87 
+  Installing : perl-IO-HTML-1.00-2.el7.noarch                                                                                 31/87 
+  Installing : systemtap-sdt-devel-3.0-7.el7.x86_64                                                                           32/87 
+  Installing : perl-ExtUtils-MakeMaker-6.68-3.el7.noarch                                                                      33/87 
+  Installing : perl-ExtUtils-Install-1.58-291.el7.noarch                                                                      34/87 
+  Installing : 1:perl-ExtUtils-ParseXS-3.18-2.el7.noarch                                                                      35/87 
+  Installing : 4:perl-devel-5.16.3-291.el7.x86_64                                                                             36/87 
+  Installing : mailcap-2.1.41-2.el7.noarch                                                                                    37/87 
+  Installing : perl-LWP-MediaTypes-6.02-2.el7.noarch                                                                          38/87 
+  Installing : perl-Compress-Raw-Bzip2-2.061-3.el7.x86_64                                                                     39/87 
+  Installing : perl-IO-Compress-2.061-2.el7.noarch                                                                            40/87 
+  Installing : perl-PlRPC-0.2020-14.el7.noarch                                                                                41/87 
+  Installing : perl-DBI-1.627-4.el7.x86_64                                                                                    42/87 
+  Installing : perl-DBD-SQLite-1.39-3.el7.x86_64                                                                              43/87 
+  Installing : perl-Algorithm-Diff-1.1902-17.el7.noarch                                                                       44/87 
+  Installing : perl-Text-Diff-1.41-5.el7.noarch                                                                               45/87 
+  Installing : perl-HTML-Tagset-3.20-15.el7.noarch                                                                            46/87 
+  Installing : perl-File-Remove-1.52-6.el7.noarch                                                                             47/87 
+  Installing : perl-local-lib-1.008010-3.el7.noarch                                                                           48/87 
+  Installing : perl-CPAN-1.9800-291.el7.noarch                                                                                49/87 
+  Installing : perl-Digest-SHA1-2.13-9.el7.x86_64                                                                             50/87 
+  Installing : perl-Business-ISBN-Data-20120719.001-2.el7.noarch                                                              51/87 
+  Installing : perl-Business-ISBN-2.06-2.el7.noarch                                                                           52/87 
+  Installing : perl-URI-1.60-9.el7.noarch                                                                                     53/87 
+  Installing : perl-HTTP-Message-6.06-6.el7.noarch                                                                            54/87 
+  Installing : perl-HTTP-Cookies-6.01-5.el7.noarch                                                                            55/87 
+  Installing : perl-HTML-Parser-3.71-4.el7.x86_64                                                                             56/87 
+  Installing : perl-HTTP-Negotiate-6.01-5.el7.noarch                                                                          57/87 
+  Installing : perl-HTTP-Daemon-6.01-5.el7.noarch                                                                             58/87 
+  Installing : perl-WWW-RobotRules-6.02-5.el7.noarch                                                                          59/87 
+  Installing : 1:perl-Package-Constants-0.02-291.el7.noarch                                                                   60/87 
+  Installing : 1:perl-Module-Loaded-0.08-291.el7.noarch                                                                       61/87 
+  Installing : perl-Locale-Maketext-1.23-3.el7.noarch                                                                         62/87 
+  Installing : 1:perl-Locale-Maketext-Simple-0.21-291.el7.noarch                                                              63/87 
+  Installing : 1:perl-Params-Check-0.38-2.el7.noarch                                                                          64/87 
+  Installing : perl-Module-Load-Conditional-0.54-3.el7.noarch                                                                 65/87 
+  Installing : 1:perl-IPC-Cmd-0.80-4.el7.noarch                                                                               66/87 
+  Installing : 1:perl-Log-Message-0.08-3.el7.noarch                                                                           67/87 
+  Installing : 1:perl-Object-Accessor-0.42-291.el7.noarch                                                                     68/87 
+  Installing : perl-DBIx-Simple-1.35-7.el7.noarch                                                                             69/87 
+  Installing : perl-Log-Message-Simple-0.10-2.el7.noarch                                                                      70/87 
+  Installing : perl-Term-UI-0.36-2.el7.noarch                                                                                 71/87 
+  Installing : 1:perl-ExtUtils-CBuilder-0.28.2.6-291.el7.noarch                                                               72/87 
+  Installing : 2:perl-Module-Build-0.40.05-2.el7.noarch                                                                       73/87 
+  Installing : perl-Module-ScanDeps-1.10-3.el7.noarch                                                                         74/87 
+  Installing : perl-File-Fetch-0.42-2.el7.noarch                                                                              75/87 
+  Installing : 1:perl-Archive-Extract-0.68-3.el7.noarch                                                                       76/87 
+  Installing : perl-CPANPLUS-0.91.38-4.el7.noarch                                                                             77/87 
+  Installing : perl-IO-Socket-IP-0.21-4.el7.noarch                                                                            78/87 
+  Installing : perl-IO-Socket-SSL-1.94-5.el7.noarch                                                                           79/87 
+  Installing : perl-Net-HTTP-6.06-2.el7.noarch                                                                                80/87 
+  Installing : perl-libwww-perl-6.05-2.el7.noarch                                                                             81/87 
+  Installing : perl-Module-Signature-0.73-2.el7.noarch                                                                        82/87 
+  Installing : perl-PAR-Dist-0.49-2.el7.noarch                                                                                83/87 
+  Installing : perl-Module-Install-1.06-4.el7.noarch                                                                          84/87 
+  Updating   : libdb-utils-5.3.21-19.el7.x86_64                                                                               85/87 
+  Cleanup    : libdb-utils-5.3.21-17.el7.x86_64                                                                               86/87 
+  Cleanup    : libdb-5.3.21-17.el7.x86_64                                                                                     87/87 
+  Verifying  : perl-IO-Socket-IP-0.21-4.el7.noarch                                                                             1/87 
+  Verifying  : 1:perl-Digest-SHA-5.85-3.el7.x86_64                                                                             2/87 
+  Verifying  : perl-Module-ScanDeps-1.10-3.el7.noarch                                                                          3/87 
+  Verifying  : perl-Locale-Maketext-1.23-3.el7.noarch                                                                          4/87 
+  Verifying  : 1:perl-Module-Loaded-0.08-291.el7.noarch                                                                        5/87 
+  Verifying  : perl-LWP-MediaTypes-6.02-2.el7.noarch                                                                           6/87 
+  Verifying  : perl-Text-Diff-1.41-5.el7.noarch                                                                                7/87 
+  Verifying  : 4:perl-devel-5.16.3-291.el7.x86_64                                                                              8/87 
+  Verifying  : 1:perl-Package-Constants-0.02-291.el7.noarch                                                                    9/87 
+  Verifying  : perl-Business-ISBN-Data-20120719.001-2.el7.noarch                                                              10/87 
+  Verifying  : perl-DBI-1.627-4.el7.x86_64                                                                                    11/87 
+  Verifying  : perl-Data-Dumper-2.145-3.el7.x86_64                                                                            12/87 
+  Verifying  : 1:perl-Log-Message-0.08-3.el7.noarch                                                                           13/87 
+  Verifying  : perl-Digest-SHA1-2.13-9.el7.x86_64                                                                             14/87 
+  Verifying  : perl-DBIx-Simple-1.35-7.el7.noarch                                                                             15/87 
+  Verifying  : 1:perl-IPC-Cmd-0.80-4.el7.noarch                                                                               16/87 
+  Verifying  : perl-Module-Signature-0.73-2.el7.noarch                                                                        17/87 
+  Verifying  : perl-Net-HTTP-6.06-2.el7.noarch                                                                                18/87 
+  Verifying  : perl-local-lib-1.008010-3.el7.noarch                                                                           19/87 
+  Verifying  : perl-File-Remove-1.52-6.el7.noarch                                                                             20/87 
+  Verifying  : perl-Module-Install-1.06-4.el7.noarch                                                                          21/87 
+  Verifying  : perl-HTML-Tagset-3.20-15.el7.noarch                                                                            22/87 
+  Verifying  : perl-Algorithm-Diff-1.1902-17.el7.noarch                                                                       23/87 
+  Verifying  : 3:perl-version-0.99.07-2.el7.x86_64                                                                            24/87 
+  Verifying  : perl-HTTP-Cookies-6.01-5.el7.noarch                                                                            25/87 
+  Verifying  : perl-JSON-PP-2.27202-2.el7.noarch                                                                              26/87 
+  Verifying  : perl-CPAN-Meta-2.120921-5.el7.noarch                                                                           27/87 
+  Verifying  : libdb-5.3.21-19.el7.x86_64                                                                                     28/87 
+  Verifying  : 2:perl-Module-Build-0.40.05-2.el7.noarch                                                                       29/87 
+  Verifying  : perl-ExtUtils-MakeMaker-6.68-3.el7.noarch                                                                      30/87 
+  Verifying  : perl-Compress-Raw-Bzip2-2.061-3.el7.x86_64                                                                     31/87 
+  Verifying  : 1:perl-Object-Accessor-0.42-291.el7.noarch                                                                     32/87 
+  Verifying  : perl-CPAN-Meta-Requirements-2.122-7.el7.noarch                                                                 33/87 
+  Verifying  : perl-Archive-Zip-1.30-11.el7.noarch                                                                            34/87 
+  Verifying  : 1:perl-Locale-Maketext-Simple-0.21-291.el7.noarch                                                              35/87 
+  Verifying  : 1:perl-ExtUtils-CBuilder-0.28.2.6-291.el7.noarch                                                               36/87 
+  Verifying  : perl-File-Fetch-0.42-2.el7.noarch                                                                              37/87 
+  Verifying  : perl-Digest-1.17-245.el7.noarch                                                                                38/87 
+  Verifying  : perl-Digest-MD5-2.52-3.el7.x86_64                                                                              39/87 
+  Verifying  : perl-URI-1.60-9.el7.noarch                                                                                     40/87 
+  Verifying  : perl-File-Listing-6.04-7.el7.noarch                                                                            41/87 
+  Verifying  : perl-Business-ISBN-2.06-2.el7.noarch                                                                           42/87 
+  Verifying  : mailcap-2.1.41-2.el7.noarch                                                                                    43/87 
+  Verifying  : perl-ExtUtils-Install-1.58-291.el7.noarch                                                                      44/87 
+  Verifying  : systemtap-sdt-devel-3.0-7.el7.x86_64                                                                           45/87 
+  Verifying  : perl-ExtUtils-Manifest-1.61-244.el7.noarch                                                                     46/87 
+  Verifying  : perl-DBD-SQLite-1.39-3.el7.x86_64                                                                              47/87 
+  Verifying  : 1:perl-Module-CoreList-2.76.02-291.el7.noarch                                                                  48/87 
+  Verifying  : perl-CPAN-Meta-YAML-0.008-14.el7.noarch                                                                        49/87 
+  Verifying  : perl-HTML-Parser-3.71-4.el7.x86_64                                                                             50/87 
+  Verifying  : perl-Perl-OSType-1.003-3.el7.noarch                                                                            51/87 
+  Verifying  : perl-Module-Load-Conditional-0.54-3.el7.noarch                                                                 52/87 
+  Verifying  : perl-WWW-RobotRules-6.02-5.el7.noarch                                                                          53/87 
+  Verifying  : perl-Test-Harness-3.28-3.el7.noarch                                                                            54/87 
+  Verifying  : 1:perl-Parse-CPAN-Meta-1.4404-5.el7.noarch                                                                     55/87 
+  Verifying  : perl-HTTP-Message-6.06-6.el7.noarch                                                                            56/87 
+  Verifying  : perl-Log-Message-Simple-0.10-2.el7.noarch                                                                      57/87 
+  Verifying  : perl-CPAN-1.9800-291.el7.noarch                                                                                58/87 
+  Verifying  : perl-HTTP-Negotiate-6.01-5.el7.noarch                                                                          59/87 
+  Verifying  : perl-IO-HTML-1.00-2.el7.noarch                                                                                 60/87 
+  Verifying  : perl-PlRPC-0.2020-14.el7.noarch                                                                                61/87 
+  Verifying  : 1:perl-Module-Load-0.24-3.el7.noarch                                                                           62/87 
+  Verifying  : 1:perl-TimeDate-2.30-2.el7.noarch                                                                              63/87 
+  Verifying  : perl-Net-SSLeay-1.55-4.el7.x86_64                                                                              64/87 
+  Verifying  : perl-Module-Metadata-1.000018-2.el7.noarch                                                                     65/87 
+  Verifying  : 1:perl-Params-Check-0.38-2.el7.noarch                                                                          66/87 
+  Verifying  : 1:perl-Module-Pluggable-4.8-3.el7.noarch                                                                       67/87 
+  Verifying  : 1:perl-Archive-Extract-0.68-3.el7.noarch                                                                       68/87 
+  Verifying  : perl-IO-Compress-2.061-2.el7.noarch                                                                            69/87 
+  Verifying  : perl-Net-Daemon-0.48-5.el7.noarch                                                                              70/87 
+  Verifying  : perl-HTTP-Date-6.02-8.el7.noarch                                                                               71/87 
+  Verifying  : perl-IO-Socket-SSL-1.94-5.el7.noarch                                                                           72/87 
+  Verifying  : perl-Encode-Locale-1.03-5.el7.noarch                                                                           73/87 
+  Verifying  : libdb-devel-5.3.21-19.el7.x86_64                                                                               74/87 
+  Verifying  : perl-YAML-Tiny-1.51-6.el7.noarch                                                                               75/87 
+  Verifying  : perl-Term-UI-0.36-2.el7.noarch                                                                                 76/87 
+  Verifying  : perl-HTTP-Daemon-6.01-5.el7.noarch                                                                             77/87 
+  Verifying  : 1:perl-ExtUtils-ParseXS-3.18-2.el7.noarch                                                                      78/87 
+  Verifying  : 1:perl-Compress-Raw-Zlib-2.061-4.el7.x86_64                                                                    79/87 
+  Verifying  : perl-libwww-perl-6.05-2.el7.noarch                                                                             80/87 
+  Verifying  : perl-CPANPLUS-0.91.38-4.el7.noarch                                                                             81/87 
+  Verifying  : perl-PAR-Dist-0.49-2.el7.noarch                                                                                82/87 
+  Verifying  : gdbm-devel-1.10-8.el7.x86_64                                                                                   83/87 
+  Verifying  : libdb-utils-5.3.21-19.el7.x86_64                                                                               84/87 
+  Verifying  : perl-Net-LibIDN-0.12-15.el7.x86_64                                                                             85/87 
+  Verifying  : libdb-5.3.21-17.el7.x86_64                                                                                     86/87 
+  Verifying  : libdb-utils-5.3.21-17.el7.x86_64                                                                               87/87 
+
+Installed:
+  perl-Module-Install.noarch 0:1.06-4.el7                                                                                           
+
+Dependency Installed:
+  gdbm-devel.x86_64 0:1.10-8.el7                                  libdb-devel.x86_64 0:5.3.21-19.el7                                
+  mailcap.noarch 0:2.1.41-2.el7                                   perl-Algorithm-Diff.noarch 0:1.1902-17.el7                        
+  perl-Archive-Extract.noarch 1:0.68-3.el7                        perl-Archive-Zip.noarch 0:1.30-11.el7                             
+  perl-Business-ISBN.noarch 0:2.06-2.el7                          perl-Business-ISBN-Data.noarch 0:20120719.001-2.el7               
+  perl-CPAN.noarch 0:1.9800-291.el7                               perl-CPAN-Meta.noarch 0:2.120921-5.el7                            
+  perl-CPAN-Meta-Requirements.noarch 0:2.122-7.el7                perl-CPAN-Meta-YAML.noarch 0:0.008-14.el7                         
+  perl-CPANPLUS.noarch 0:0.91.38-4.el7                            perl-Compress-Raw-Bzip2.x86_64 0:2.061-3.el7                      
+  perl-Compress-Raw-Zlib.x86_64 1:2.061-4.el7                     perl-DBD-SQLite.x86_64 0:1.39-3.el7                               
+  perl-DBI.x86_64 0:1.627-4.el7                                   perl-DBIx-Simple.noarch 0:1.35-7.el7                              
+  perl-Data-Dumper.x86_64 0:2.145-3.el7                           perl-Digest.noarch 0:1.17-245.el7                                 
+  perl-Digest-MD5.x86_64 0:2.52-3.el7                             perl-Digest-SHA.x86_64 1:5.85-3.el7                               
+  perl-Digest-SHA1.x86_64 0:2.13-9.el7                            perl-Encode-Locale.noarch 0:1.03-5.el7                            
+  perl-ExtUtils-CBuilder.noarch 1:0.28.2.6-291.el7                perl-ExtUtils-Install.noarch 0:1.58-291.el7                       
+  perl-ExtUtils-MakeMaker.noarch 0:6.68-3.el7                     perl-ExtUtils-Manifest.noarch 0:1.61-244.el7                      
+  perl-ExtUtils-ParseXS.noarch 1:3.18-2.el7                       perl-File-Fetch.noarch 0:0.42-2.el7                               
+  perl-File-Listing.noarch 0:6.04-7.el7                           perl-File-Remove.noarch 0:1.52-6.el7                              
+  perl-HTML-Parser.x86_64 0:3.71-4.el7                            perl-HTML-Tagset.noarch 0:3.20-15.el7                             
+  perl-HTTP-Cookies.noarch 0:6.01-5.el7                           perl-HTTP-Daemon.noarch 0:6.01-5.el7                              
+  perl-HTTP-Date.noarch 0:6.02-8.el7                              perl-HTTP-Message.noarch 0:6.06-6.el7                             
+  perl-HTTP-Negotiate.noarch 0:6.01-5.el7                         perl-IO-Compress.noarch 0:2.061-2.el7                             
+  perl-IO-HTML.noarch 0:1.00-2.el7                                perl-IO-Socket-IP.noarch 0:0.21-4.el7                             
+  perl-IO-Socket-SSL.noarch 0:1.94-5.el7                          perl-IPC-Cmd.noarch 1:0.80-4.el7                                  
+  perl-JSON-PP.noarch 0:2.27202-2.el7                             perl-LWP-MediaTypes.noarch 0:6.02-2.el7                           
+  perl-Locale-Maketext.noarch 0:1.23-3.el7                        perl-Locale-Maketext-Simple.noarch 1:0.21-291.el7                 
+  perl-Log-Message.noarch 1:0.08-3.el7                            perl-Log-Message-Simple.noarch 0:0.10-2.el7                       
+  perl-Module-Build.noarch 2:0.40.05-2.el7                        perl-Module-CoreList.noarch 1:2.76.02-291.el7                     
+  perl-Module-Load.noarch 1:0.24-3.el7                            perl-Module-Load-Conditional.noarch 0:0.54-3.el7                  
+  perl-Module-Loaded.noarch 1:0.08-291.el7                        perl-Module-Metadata.noarch 0:1.000018-2.el7                      
+  perl-Module-Pluggable.noarch 1:4.8-3.el7                        perl-Module-ScanDeps.noarch 0:1.10-3.el7                          
+  perl-Module-Signature.noarch 0:0.73-2.el7                       perl-Net-Daemon.noarch 0:0.48-5.el7                               
+  perl-Net-HTTP.noarch 0:6.06-2.el7                               perl-Net-LibIDN.x86_64 0:0.12-15.el7                              
+  perl-Net-SSLeay.x86_64 0:1.55-4.el7                             perl-Object-Accessor.noarch 1:0.42-291.el7                        
+  perl-PAR-Dist.noarch 0:0.49-2.el7                               perl-Package-Constants.noarch 1:0.02-291.el7                      
+  perl-Params-Check.noarch 1:0.38-2.el7                           perl-Parse-CPAN-Meta.noarch 1:1.4404-5.el7                        
+  perl-Perl-OSType.noarch 0:1.003-3.el7                           perl-PlRPC.noarch 0:0.2020-14.el7                                 
+  perl-Term-UI.noarch 0:0.36-2.el7                                perl-Test-Harness.noarch 0:3.28-3.el7                             
+  perl-Text-Diff.noarch 0:1.41-5.el7                              perl-TimeDate.noarch 1:2.30-2.el7                                 
+  perl-URI.noarch 0:1.60-9.el7                                    perl-WWW-RobotRules.noarch 0:6.02-5.el7                           
+  perl-YAML-Tiny.noarch 0:1.51-6.el7                              perl-devel.x86_64 4:5.16.3-291.el7                                
+  perl-libwww-perl.noarch 0:6.05-2.el7                            perl-local-lib.noarch 0:1.008010-3.el7                            
+  perl-version.x86_64 3:0.99.07-2.el7                             systemtap-sdt-devel.x86_64 0:3.0-7.el7                            
+
+Dependency Updated:
+  libdb.x86_64 0:5.3.21-19.el7                                  libdb-utils.x86_64 0:5.3.21-19.el7                                 
+
+Complete!
+[root@localhost mysql]# service mysql start
+Starting MySQL... ERROR! The server quit without updating PID file (/var/lib/mysql/localhost.localdomain.pid).
+[root@localhost mysql]# mysql_install_db --user=mysql --ldata=/var/lib/mysql/
+Installing MySQL system tables...2017-05-17 07:13:39 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2017-05-17 07:13:39 0 [Note] Ignoring --secure-file-priv value as server is running with --bootstrap.
+2017-05-17 07:13:39 0 [Note] /usr/sbin/mysqld (mysqld 5.6.36) starting as process 12334 ...
+2017-05-17 07:13:39 12334 [Note] InnoDB: Using atomics to ref count buffer pool pages
+2017-05-17 07:13:39 12334 [Note] InnoDB: The InnoDB memory heap is disabled
+2017-05-17 07:13:39 12334 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2017-05-17 07:13:39 12334 [Note] InnoDB: Memory barrier is not used
+2017-05-17 07:13:39 12334 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2017-05-17 07:13:39 12334 [Note] InnoDB: Using Linux native AIO
+2017-05-17 07:13:39 12334 [Note] InnoDB: Using CPU crc32 instructions
+2017-05-17 07:13:39 12334 [Note] InnoDB: Initializing buffer pool, size = 128.0M
+2017-05-17 07:13:40 12334 [Note] InnoDB: Completed initialization of buffer pool
+2017-05-17 07:13:40 12334 [Note] InnoDB: Highest supported file format is Barracuda.
+2017-05-17 07:13:40 12334 [Note] InnoDB: Log scan progressed past the checkpoint lsn 1453993
+2017-05-17 07:13:40 12334 [Note] InnoDB: Database was not shutdown normally!
+2017-05-17 07:13:40 12334 [Note] InnoDB: Starting crash recovery.
+2017-05-17 07:13:40 12334 [Note] InnoDB: Reading tablespace information from the .ibd files...
+2017-05-17 07:13:40 12334 [Note] InnoDB: Restoring possible half-written data pages 
+2017-05-17 07:13:40 12334 [Note] InnoDB: from the doublewrite buffer...
+InnoDB: Doing recovery: scanned up to log sequence number 1600617
+2017-05-17 07:13:40 12334 [Note] InnoDB: Starting an apply batch of log records to the database...
+InnoDB: Progress in percent: 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 
+InnoDB: Apply batch completed
+2017-05-17 07:13:40 12334 [Note] InnoDB: 128 rollback segment(s) are active.
+2017-05-17 07:13:40 12334 [Note] InnoDB: Waiting for purge to start
+2017-05-17 07:13:40 12334 [Note] InnoDB: 5.6.36 started; log sequence number 1600617
+2017-05-17 07:13:40 12334 [Note] Binlog end
+2017-05-17 07:13:40 12334 [Note] InnoDB: FTS optimize thread exiting.
+2017-05-17 07:13:40 12334 [Note] InnoDB: Starting shutdown...
+2017-05-17 07:13:42 12334 [Note] InnoDB: Shutdown completed; log sequence number 1625997
+OK
+
+Filling help tables...2017-05-17 07:13:42 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+2017-05-17 07:13:42 0 [Note] Ignoring --secure-file-priv value as server is running with --bootstrap.
+2017-05-17 07:13:42 0 [Note] /usr/sbin/mysqld (mysqld 5.6.36) starting as process 12358 ...
+2017-05-17 07:13:42 12358 [Note] InnoDB: Using atomics to ref count buffer pool pages
+2017-05-17 07:13:42 12358 [Note] InnoDB: The InnoDB memory heap is disabled
+2017-05-17 07:13:42 12358 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+2017-05-17 07:13:42 12358 [Note] InnoDB: Memory barrier is not used
+2017-05-17 07:13:42 12358 [Note] InnoDB: Compressed tables use zlib 1.2.3
+2017-05-17 07:13:42 12358 [Note] InnoDB: Using Linux native AIO
+2017-05-17 07:13:42 12358 [Note] InnoDB: Using CPU crc32 instructions
+2017-05-17 07:13:42 12358 [Note] InnoDB: Initializing buffer pool, size = 128.0M
+2017-05-17 07:13:42 12358 [Note] InnoDB: Completed initialization of buffer pool
+2017-05-17 07:13:42 12358 [Note] InnoDB: Highest supported file format is Barracuda.
+2017-05-17 07:13:42 12358 [Note] InnoDB: 128 rollback segment(s) are active.
+2017-05-17 07:13:42 12358 [Note] InnoDB: Waiting for purge to start
+2017-05-17 07:13:42 12358 [Note] InnoDB: 5.6.36 started; log sequence number 1625997
+2017-05-17 07:13:42 12358 [Note] Binlog end
+2017-05-17 07:13:42 12358 [Note] InnoDB: FTS optimize thread exiting.
+2017-05-17 07:13:42 12358 [Note] InnoDB: Starting shutdown...
+2017-05-17 07:13:44 12358 [Note] InnoDB: Shutdown completed; log sequence number 1626007
+OK
+
+To start mysqld at boot time you have to copy
+support-files/mysql.server to the right place for your system
+
+PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+To do so, start the server, then issue the following commands:
+
+  /usr/bin/mysqladmin -u root password 'new-password'
+  /usr/bin/mysqladmin -u root -h localhost.localdomain password 'new-password'
+
+Alternatively you can run:
+
+  /usr/bin/mysql_secure_installation
+
+which will also give you the option of removing the test
+databases and anonymous user created by default.  This is
+strongly recommended for production servers.
+
+See the manual for more instructions.
+
+You can start the MySQL daemon with:
+
+  cd /usr ; /usr/bin/mysqld_safe &
+
+You can test the MySQL daemon with mysql-test-run.pl
+
+  cd mysql-test ; perl mysql-test-run.pl
+
+Please report any problems at http://bugs.mysql.com/
+
+The latest information about MySQL is available on the web at
+
+  http://www.mysql.com
+
+Support MySQL by buying support/licenses at http://shop.mysql.com
+
+New default config file was created as /usr/my.cnf and
+will be used by default by the server when you start it.
+You may edit this file to change server settings
+
+[root@localhost mysql]# service mysql start
+Starting MySQL. SUCCESS! 
+[root@localhost mysql]# ^C
+[root@localhost mysql]# 

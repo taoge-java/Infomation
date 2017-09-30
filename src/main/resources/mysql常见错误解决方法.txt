@@ -1,0 +1,11 @@
+关于mysql ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: NO)错误.
+
+解决办法
+
+     /etc/rc.d/init.d/mysql stop
+     mysqld_safe --user=mysql --skip-grant-tables --skip-networking & [2] 9396
+     flush privileges;
+
+mysql 开放3306端口
+     GRANT ALL PRIVILEGES ON *.* TO 'itoffice'@'%' IDENTIFIED BY 'itoffice' WITH GRANT OPTION;
+    （第一个itoffice表示用户名，%表示所有的电脑都可以连接，也可以设置某个ip地址运行连接，第二个itoffice表示密码）。

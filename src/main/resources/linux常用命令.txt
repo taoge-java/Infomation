@@ -1,0 +1,27 @@
+(1) ls命令
+ls -a列出全部文件夹连同隐藏文件一起列出
+ls -h 将文件以易读的方式列出来
+ls -l
+(2) cat命令   查看文本文件的内容
+
+(3)pwd命令  查看当前所在文件夹 
+mysql 修改密码
+update mysql.user set password=PASSWORD('12345678') where user='root';
+mysql创建密码
+mysqladmin -u root password "123456"
+()cp命令
+ -a  将文件的特性一起复制
+ -r  递归持续复制，用于目录的复制行为
+
+nano 文本编辑
+
+ rpm -qa | grep -i mysql  --查看mysql是否安装
+ MySQL-client-5.6.36-1.el6.x86_64
+
+systemctl start sshd.service   /开启ssh服务
+
+systemctl enable sshd.service //设置开机自启
+
+rpm -pql +安装包名称  //查看配置文件
+
+

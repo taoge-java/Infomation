@@ -1,0 +1,16 @@
+http://pms.xpicms.com/www/index.php?m=bug&f=browse
+zengjintao   zjt1qaz
+http://m.haokan666.com/juqingpian/wopengyoudelaojiehanguo/player-0-0.html
+http://94qg.com/VOD01/index.html
+http://www.foxmail.com/
+在centos下用yum install mysql 安装完后，却发现用service mysqld start无法开启
+出现mysqld：unrecognized service，网上别人说用/etc/rc.d/init.d/mysqld start，仍旧没办法解决。
+难道是安装问题？
+卸载掉mysql 在Terminal输入 yum remove mysql 
+然后重新安装yum install mysql还是没办法解决
+接着在网上查找了很多种办法还是没解决。
+很是郁闷·····后来····
+在Terminal下输入rpm -q mysql 查询发现是mysql-server没有安装
+马上在Terminal下输入yum install mysql-server
+安装mysql的server端，然后再输入service mysqld restart
+成功解决问题。
