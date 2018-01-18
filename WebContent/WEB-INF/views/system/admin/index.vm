@@ -8,16 +8,16 @@
     font-size: 18px;
   }
 </style>
-<link rel="stylesheet" href="$BASE_PATH/resource/css/index/pintuer.css">
-<link rel="stylesheet" href="$BASE_PATH/resource/css/index/admin.css">
-<link rel="stylesheet" href="$BASE_PATH/resource/css/index/layui.css"> 
-<link rel="stylesheet" href="$BASE_PATH/resource/js/layui-v1.0.5/layui/css/layui.css"> 
-<script type="text/javascript" src="$BASE_PATH/resource/js/jquery/jquery-3.1.0.min.js"></script>
-<script type="text/javascript" src="$BASE_PATH/resource/js/layer/layer.js"></script>
-<script src="$BASE_PATH/resource/js/global.js"></script>
-<script type="text/javascript" src="$BASE_PATH/resource/js/layui-v1.0.5/layui/layui.js"></script>
-<script type="text/javascript" src="$BASE_PATH/resource/js/My97DatePicker/WdatePicker.js"></script>
-<script src="$BASE_PATH/resource/js/pintuer.js"></script>
+<link rel="stylesheet" href="${BASE_PATH}/resource/css/index/pintuer.css">
+<link rel="stylesheet" href="${BASE_PATH}/resource/css/index/admin.css">
+<link rel="stylesheet" href="${BASE_PATH}/resource/css/index/layui.css"> 
+<link rel="stylesheet" href="${BASE_PATH}/resource/js/layui-v1.0.5/layui/css/layui.css"> 
+<script type="text/javascript" src="${BASE_PATH}/resource/js/jquery/jquery-3.1.0.min.js"></script>
+<script type="text/javascript" src="${BASE_PATH}/resource/js/layer/layer.js"></script>
+<script src="${BASE_PATH}/resource/js/global.js"></script>
+<script type="text/javascript" src="${BASE_PATH}/resource/js/layui-v1.0.5/layui/layui.js"></script>
+<script type="text/javascript" src="${BASE_PATH}/resource/js/My97DatePicker/WdatePicker.js"></script>
+<script src="${BASE_PATH}/resource/js/pintuer.js"></script>
 </head>
 <body>
 <div class="panel admin-panel">
@@ -41,16 +41,16 @@
     	<tbody id="content">
         </tbody>
       </table>
-      <div class="panel-head" id="bottom">
-         <div id="demo"></div>
-    	 <ul id="biuuu_city_list"></ul> 
+      <div class="panel-head" style="width:500px;"id="bottom">
+         <div id="demo" style="position:relative;left:500px"></div>
       </div>
    </form>
 </body>
 <script type="text/javascript">
      var totalPage=${page.totalPage};
-     page("demo",totalPage,5,"$BASE_PATH/system/admin/list","content");
+	 
      $(function(){
+     page("demo",totalPage,5,"${BASE_PATH}/system/admin/list","content");
           adminList();	
 		  $("#search").click(function(){
 		     var index = layer.load(1, {
@@ -58,7 +58,7 @@
              });
 		     if($("#name").val()=="")
 		         layer.tips('请输入管理员名称', '#name');
-		      $.post("$BASE_PATH/system/admin/list",{"name":$("#name").val()},
+		      $.post("${BASE_PATH}/system/admin/list",{"name":$("#name").val()},
 		         function(data){
 		          $("#content").html(data);
 				 layer.close(index);
@@ -68,10 +68,10 @@
   
     function adminList(){
        $.ajax({
-		 url:"$BASE_PATH/system/admin/list",
+		 url:"${BASE_PATH}/system/admin/list",
 	     dataType:"html",
 		 data:{
-				"pageNumber":1
+				"currentPage":1
 		 },
 		 type:"post",
 		 success:function(data){
@@ -84,7 +84,7 @@
 			   layer.confirm('确定删除吗？', {
                   btn: ['删除','取消'] //按钮
                   }, function(index){
-                     $.get("$BASE_PATH/system/admin/deleteById",{"id":id},"json",function(data){
+                     $.get("${BASE_PATH}/system/admin/deleteById",{"id":id},"json",function(data){
 					     if(data.code==1){
 						    layer.alert(data.message, {
 				                 icon: 1,

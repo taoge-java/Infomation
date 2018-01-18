@@ -9,7 +9,7 @@
           <td>$!{dateTools.format("yyyy-MM-hh HH:mm:ss",$!e.last_login_time)}</td>
           <td>
             <div class="button-group"> 
-               <a href="$BASE_PATH/system/admin/alert/${e.id}" name="update" ><span class="icon-pencil-square-o" style="color: blue;"></span></a>&nbsp;&nbsp;
+               <a href="${BASE_PATH}/system/admin/alert/${e.id}" name="update" ><span class="icon-pencil-square-o" style="color: blue;"></span></a>&nbsp;&nbsp;
                <a href="javascript:void(0)" id="del" name="del" value="${e.id}"><span class="icon-trash-o" style="color: red;"></span></a>
              </div>
           </td>
